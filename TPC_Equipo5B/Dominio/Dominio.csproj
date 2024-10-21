@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TipoUsuario.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoEvento.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
