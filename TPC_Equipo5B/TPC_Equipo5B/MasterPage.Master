@@ -45,7 +45,7 @@
                                 <a class="nav-link" href="#">Acerca de</a>
                             </li>
                             <li class="nav-item me-5">
-                                <a class="nav-link" href="#">Eventos</a>
+                                <a class="nav-link" href="Eventos.aspx">Eventos</a>
                             </li>
                             <li class="nav-item me-5">
                                 <a class="nav-link" href="#">Contactos</a>
@@ -78,7 +78,7 @@
             </nav>
 
             <div class="container flex-gorw-1">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
 
@@ -98,7 +98,7 @@
 
             </footer>
 
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
             </asp:ContentPlaceHolder>
         </div>
     </form>
