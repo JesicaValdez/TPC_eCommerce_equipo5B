@@ -15,6 +15,9 @@ namespace Dominio
         public string Apellido {  get; set; }
         public string Email {  get; set; }
         public string Telefono {  get; set; }
+=======
+        public string Telefono { get; set; }
+>>>>>>> Stashed changes
         public string Direccion {  get; set; }
         public string Ciudad {  get; set; }
         public int CodigoPostal {  get; set; }
@@ -26,6 +29,7 @@ namespace Dominio
             Nombre = "";
             Apellido = "";
             Email = "";
+            Telefono = "";
             Direccion = "";
             Ciudad = "";
             CodigoPostal = 0;

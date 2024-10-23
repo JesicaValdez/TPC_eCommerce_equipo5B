@@ -73,7 +73,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid p-0">
-        <div id="carouselExample" class="carousel slide" style="width: 100%; margin-bottom: 30px;">
+        <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="https://www.sala-apolo.com/uploads/media/default/0001/09/thumb_8442_default_wide.jpeg" class="d-block w-100" alt="..." style="width: 100%; max-height: 400px; object-fit: cover;">
@@ -96,7 +96,6 @@
 
     <!-- Sección Categorias por tipos de Eventos -->
     <div class="container mt-5 info-section">
-        <h2 class="text-center title-style">Categorías</h2>
         <div class="card-group">
             <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -139,7 +138,7 @@
         </div>
 
         <!-- Botón -->
-        <div class="text-center mt-3">
+        <div class="text-center mt-5">
             <!--<p class="card-text">Consulta nuestra selección de eventos imperdibles que no querrás perderte.</p> -->
             <a href="Eventos.aspx" class="explore-btn">Explorar Todos los Eventos</a>
         </div>
@@ -148,7 +147,7 @@
 
         <!-- Sección Informativa -->
     <div class="container info-section">
-        <h2 class="text-center title-style">Información Adicional</h2>
+     
         <div class="row">
             <!-- Opciones de Pago -->
             <div class="col-md-4">
