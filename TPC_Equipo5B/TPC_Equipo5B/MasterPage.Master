@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
+        body{
+     background-color : #1e202c;
+     
+        }
+        .bg-encabezado {
+            background-color: #292B36;
+            
+        }
         .icono {
             font-size: 1.5rem; /* Cambia el tamaño del ícono */
             color: black; /* Cambia el color a negro */
@@ -27,11 +35,11 @@
     <form id="form1" runat="server">
         <div class="d-flex flex-column min-vh-100">
 
-            <header class="container-fluid bg-body-tertiary d-flex justify-content-center">
+            <header class="container-fluid bg-encabezado d-flex justify-content-center">
                 <p class="text-dark mb-0 p-2 fs-5">TuTiket</p>
             </header>
 
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar navbar-expand-lg bg-encabezado">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
