@@ -78,7 +78,7 @@
                                 <a class="nav-link active" aria-current="page" href="Default.aspx" style="color: #F4F4F4;">Hogar</a>
                             </li>
                             <li class="nav-item me-5">
-                                <a class="nav-link" href="#" style="color: #F4F4F4;">Acerca de</a>
+                                <a class="nav-link" href="AcercaDe.aspx" style="color: #F4F4F4;">Acerca de</a>
                             </li>
                             <li class="nav-item me-5">
                                 <a class="nav-link" href="Eventos.aspx" style="color: #F4F4F4;">Eventos</a>
@@ -121,7 +121,7 @@
 
             <footer class="text-center py-3 mt-auto" style="background-color: #292B36;">
                 <div class="container d-flex justify-content-between align-items-center">
-                    <p class="fs-5 px-3 pt-3" style="color: #F4F4F4;">TuTicket. &copy; Todos Los Derechos Reservados 2024</p>
+                    <p class="fs-6 px-3 pt-3" style="color: #F4F4F4;">TuTicket. &copy; Todos Los Derechos Reservados 2024</p>
                     <a href="#">
                         <i class="bi bi-facebook icono_f"></i>
                     </a>

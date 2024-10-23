@@ -6,8 +6,8 @@
             background-color: #e0a800;
             cursor: pointer;
         }
-        h3
-        {
+
+        h3 {
             text-align: center;
         }
     </style>
@@ -62,13 +62,88 @@
                 <!-- Vista de Editar Cuenta -->
                 <asp:View ID="ViewEditarCuenta" runat="server">
                     <h3 style="color: #F4F4F4; margin-top: 10px;">Editar Cuenta</h3>
-                    <p>Aquí puedes editar tu cuenta.</p>
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+
+                            <div class="mb-3">
+                                <label for="txtdni" class="form-label" style="color: #F4F4F4;">DNI</label>
+                                <asp:TextBox runat="server" ID="txtdni" CssClass="form-control" placeholder="Ingrese Dni" />
+                                <asp:Label ID="lblResultado" runat="server"></asp:Label>
+                            </div>
+
+                            <div class="row mb-3">
+
+                                <div class="col">
+                                    <label for="txtNombre" class="form-label" style="color: #F4F4F4;">Nombre</label>
+                                    <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Ingrese Nombre" />
+                                </div>
+
+                                <div class="col">
+                                    <label for="txtApellido" class="form-label" style="color: #F4F4F4;">Apellido</label>
+                                    <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" placeholder="Ingrese Apellido" />
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtEmail" class="form-label" style="color: #F4F4F4;">Email</label>
+                                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Ingrese Email" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txtTelefono" class="form-label" style="color: #F4F4F4;">Telefono</label>
+                                <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Ingrese Telefono" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="txtDireccion" class="form-label" style="color: #F4F4F4;">Dirección</label>
+                                    <asp:TextBox runat="server" ID="txtDireccion" CssClass="form-control" placeholder="Ingrese Direccion" />
+                                </div>
+
+                                <div class="col">
+                                    <label for="txtCiudad" class="form-label" style="color: #F4F4F4;">Ciudad</label>
+                                    <asp:TextBox runat="server" ID="txtCiudad" CssClass="form-control" placeholder="Ingrese Ciudad" />
+                                </div>
+
+                                <div class="col">
+                                    <label for="txtCP" class="form-label" style="color: #F4F4F4;">CP</label>
+                                    <asp:TextBox runat="server" ID="txtCP" CssClass="form-control" placeholder="Ingrese CP" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <asp:Button ID="btn_Editar" runat="server" Text="Editar" class="btn btn-warning mt-4" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </asp:View>
 
                 <!-- Vista de Cambiar Contraseña -->
                 <asp:View ID="ViewCambiarContrasena" runat="server">
                     <h3 style="color: #F4F4F4; margin-top: 10px;">Cambiar Contraseña</h3>
-                    <p>Aquí puedes cambiar tu contraseña.</p>
+
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <div class="mb-3">
+                                <label for="txt_PassAnterior" class="form-label" style="color: #F4F4F4;">Contraseña Actual</label>
+                                <asp:TextBox runat="server" ID="txt_PassAnterior" CssClass="form-control" placeholder="Ingrese Contraseña Actual" TextMode="Password" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txt_PassNuevo" class="form-label" style="color: #F4F4F4;">Contraseña Nueva</label>
+                                <asp:TextBox runat="server" ID="txt_Pass" CssClass="form-control" placeholder="Ingrese Contraseña Nueva" TextMode="Password" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txt_PassNuevoRepetir" class="form-label" style="color: #F4F4F4;">Confirmar Contraseña Nueva</label>
+                                <asp:TextBox runat="server" ID="txt_PassNuevoRepetir" CssClass="form-control" placeholder="Confirmar Contaseña Nueva" TextMode="Password" />
+                            </div>
+
+                            <div class="d-grid">
+                                <asp:Button ID="btn_login" runat="server" Text="Cambiar Contaseña" class="btn btn-warning mt-3" />
+                            </div>
+
+                        </div>
+                    </div>
                 </asp:View>
             </asp:MultiView>
         </div>
