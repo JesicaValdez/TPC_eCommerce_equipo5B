@@ -44,5 +44,10 @@ namespace TPC_Equipo5B
             rptArticulos.DataSource = lista;
             rptArticulos.DataBind();
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Carrito.aspx");
+        }
     }
 }
