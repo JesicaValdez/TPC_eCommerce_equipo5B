@@ -13,5 +13,24 @@ namespace TPC_Equipo5B
         {
 
         }
+        protected void MostrarMisTikets(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0; // Mostrar vista de Mis Tikets
+        }
+
+        protected void MostrarEditarCuenta(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 1; // Mostrar vista de Editar Cuenta
+        }
+
+        protected void MostrarCambiarContrasena(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 2; // Mostrar vista de Cambiar Contraseña
+        }
+
+        protected void Desconectarse(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

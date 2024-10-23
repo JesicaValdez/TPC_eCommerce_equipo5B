@@ -64,7 +64,7 @@
         <div class="d-flex flex-column min-vh-100">
 
             <header class="container-fluid bg-encabezado d-flex justify-content-center">
-                <p class="text-dark mb-0 p-2 fs-5">TuTiket</p>
+                <p class="text-dark mb-0 p-2 fs-5">TuTicket</p>
             </header>
 
             <nav class="navbar navbar-expand-lg bg-encabezado">
@@ -75,7 +75,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item me-5">
-                                <a class="nav-link active" aria-current="page" href="#" style="color: #F4F4F4;">Hogar</a>
+                                <a class="nav-link active" aria-current="page" href="Default.aspx" style="color: #F4F4F4;">Hogar</a>
                             </li>
                             <li class="nav-item me-5">
                                 <a class="nav-link" href="#" style="color: #F4F4F4;">Acerca de</a>
@@ -93,16 +93,16 @@
                                     <i class="fas fa-ticket-alt" style="color: #F4F4F4;"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Tikets</a></li>
+                                    <li><a class="dropdown-item" href="#">Tickets</a></li>
                                 </ul>
                             </li>
 
                             <!-- Usuario -->
-                            <li class="nav-item dropdown me-5">
-                                <a href="#">
-                                    <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%; border-color: #F4F4F4;" border="1px" runat="server" />
+                            <li class="nav-item dropdown me-5">                                 
+                                <a href="Usuario.aspx" style="text-decoration: none;">
+                                    <asp:Image ID="imgAvatar" style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />                                 
                                 </a>
-                                <asp:Label ID="lblUser" runat="server" Text="User" CssClass="text-white h-100" Style="color: #F4F4F4;"></asp:Label>
+                                 <asp:Label ID="lblUser" runat="server" Text="User" CssClass="text-white h-100" Style="color: #F4F4F4;"></asp:Label>
                             </li>
 
                         </ul>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="d-flex ms-1 me-1">
                     <a href="Login.aspx" class="btn me-2" style="color: #F4F4F4; border-color: #F4F4F4;">Login</a>
-                    <a href="Registro.aspx" class="btn" style="color: #e0a800; border-color: #e0a800;">Registrarse</a>
+                    <a href="Registrarse.aspx" class="btn" style="color: #e0a800; border-color: #e0a800;">Registrarse</a>
                 </div>
             </nav>
 
@@ -121,7 +121,7 @@
 
             <footer class="text-center py-3 mt-auto" style="background-color: #292B36;">
                 <div class="container d-flex justify-content-between align-items-center">
-                    <p class="fs-5 px-3 pt-3" style="color: #F4F4F4;">TuTiket. &copy; Todos Los Derechos Reservados 2024</p>
+                    <p class="fs-5 px-3 pt-3" style="color: #F4F4F4;">TuTicket. &copy; Todos Los Derechos Reservados 2024</p>
                     <a href="#">
                         <i class="bi bi-facebook icono_f"></i>
                     </a>
