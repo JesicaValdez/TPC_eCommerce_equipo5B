@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class Carrito
+    internal class Carrito : Entrada
     {
         List<Entrada> listaEntradas;
 

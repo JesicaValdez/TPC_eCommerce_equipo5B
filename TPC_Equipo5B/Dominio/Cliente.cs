@@ -19,6 +19,14 @@ namespace Dominio
         public string Ciudad {  get; set; }
         public int CodigoPostal {  get; set; }
 
+        internal Carrito Carrito
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public Cliente()
         {
             Id = 0;

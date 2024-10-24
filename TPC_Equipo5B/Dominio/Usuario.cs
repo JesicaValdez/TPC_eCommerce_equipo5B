@@ -6,13 +6,29 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Usuario
+    public class Usuario : Cliente
     {
         public int IdUsuario { get; set; }
         public string NombreUsuario { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
+
+        public TipoUsuario TipoUsuario1
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Evento Evento
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public Usuario()
         {

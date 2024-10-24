@@ -12,5 +12,13 @@ namespace Dominio
         public Evento evento { get; set; }
         public Cliente cliente { get; set; }
         public DateTime fechaCompra { get; set; }
+
+        public Evento Evento
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

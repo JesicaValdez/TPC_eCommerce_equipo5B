@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Dominio.Usuario">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAACAAAAAAAAAgAAAAAgAAAAACAIAAAAAAAAA=</HashCode>
+      <FileName>Usuario.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TipoUsuario1" />
+      <Property Name="Evento" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Dominio.TipoUsuario">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TipoUsuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dominio.Evento">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAAASAQAAAACAAAEAAAAAAAAAAAAAAAAAAgAAIAA=</HashCode>
+      <FileName>Evento.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TipoEvento" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Dominio.TipoEvento">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>TipoEvento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dominio.Cliente">
+    <Position X="3.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAECAAAAACAAAAAEACAAgAgAAAQAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Cliente.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Carrito" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Dominio.Carrito">
+    <Position X="6" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Carrito.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dominio.Entrada">
+    <Position X="8.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAIAAAAAggAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Entrada.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Evento" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

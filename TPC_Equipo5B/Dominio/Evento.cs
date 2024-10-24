@@ -18,5 +18,12 @@ namespace Dominio
         public DateTime fecha { get; set; }
         public string imagenurl { get; set; }
 
+        public TipoEvento TipoEvento
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }
