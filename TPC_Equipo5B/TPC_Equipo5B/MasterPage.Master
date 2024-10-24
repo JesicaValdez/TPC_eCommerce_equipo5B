@@ -15,6 +15,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
+        /* Estilo Logo */
+        .logo-style {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            color: #FFB700;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo-style {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
         body {
             background-color: #1e202c;
         }
@@ -57,8 +75,12 @@
     <form id="form1" runat="server">
         <div class="d-flex flex-column min-vh-100">
 
+            <!--logo-->
             <header class="container-fluid bg-encabezado d-flex justify-content-center">
-                <p class="text-dark mb-0 p-2 fs-5">TuTicket</p>
+                <p class="text-dark mb-0 p-2 logo-style">
+                <i class="bi bi-ticket-perforated text-logo" style="font-size: 4rem; color: #FFB700;"></i>
+                    <span class="text-white">Tu</span><span class="text-logo" style="color: #FFB700;">Ticket</span>
+                    </p>
             </header>
 
             <nav class="navbar navbar-expand-lg bg-encabezado">
@@ -78,7 +100,7 @@
                                 <a class="nav-link" href="Eventos.aspx" style="color: #F4F4F4;">Eventos</a>
                             </li>
                             <li class="nav-item me-5">
-                                <a class="nav-link" href="#" style="color: #F4F4F4;">Contactos</a>
+                                <a class="nav-link" href="Contact.aspx" style="color: #F4F4F4;">Contactos</a>
                             </li>
 
                             <!-- Ícono de tikets -->

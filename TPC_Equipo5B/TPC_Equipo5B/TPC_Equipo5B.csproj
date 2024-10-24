@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="AcercaDe.aspx" />
     <Content Include="Carrito.aspx" />
+    <Content Include="Contact.aspx" />
     <Content Include="Content\Css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Eventos.aspx" />
@@ -93,6 +94,13 @@
     </Compile>
     <Compile Include="Carrito.aspx.designer.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

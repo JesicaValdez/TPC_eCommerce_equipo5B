@@ -19,7 +19,7 @@ namespace Negocio
 
         public AccesoDB()
         {
-            conexion = new SqlConnection("server=DESKTOP-TI2DHGA\\SQLEXPRESS; database=ENTRADAS_DB; integrated security=true");
+            conexion = new SqlConnection("Server=localhost; Database=ENTRADAS_DB; User Id=sa; Password=TuNuevaContraseñaFuerte2;");
             comando = new SqlCommand();
         }
 
@@ -27,12 +27,6 @@ namespace Negocio
         {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
-        }
-
-        public void setearProcedimiento(string procedimiento)
-        {
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.CommandText = procedimiento;
         }
 
         public void ejecutarLectura()
