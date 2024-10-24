@@ -12,7 +12,7 @@ namespace Negocio
     public class EventoNegocio
     {
         private List<Evento> listaEventos = new List<Evento>();
-        private List<Evento> ListaCategorias = new List<Evento>();
+        
         AccesoDB datos = new AccesoDB();
 
         public EventoNegocio()

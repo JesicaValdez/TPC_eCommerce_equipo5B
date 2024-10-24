@@ -79,6 +79,7 @@
     <Content Include="Usuario.aspx" />
     <Content Include="VerDetalle.aspx" />
     <Content Include="Web.config" />
+    <Content Include="MisEntradas.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcercaDe.aspx.cs">
@@ -154,6 +155,13 @@
     </Compile>
     <Compile Include="VerDetalle.aspx.designer.cs">
       <DependentUpon>VerDetalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MisEntradas.aspx.cs">
+      <DependentUpon>MisEntradas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisEntradas.aspx.designer.cs">
+      <DependentUpon>MisEntradas.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
