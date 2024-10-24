@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Carrito.aspx.cs" Inherits="TPC_Equipo5B.Carrito" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Pago.aspx.cs" Inherits="TPC_Equipo5B.Carrito" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 class="title-style" style="color: #F4F4F4;">Mi Carrito</h1>
+    <h1 class="title-style" style="color: #F4F4F4;">PAGO</h1>
     <div class="row row-cols-1 row-cols-md-1 g-4">
         <asp:Repeater ID="rptArticulos" runat="server">
             <ItemTemplate>

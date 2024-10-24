@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 class="title-style" style="color: #F4F4F4; padding: 20px;">Mis Entradas</h1>
+    <h1 class="title-style" style="color: #F4F4F4; padding: 20px;">Eventos Favoritos</h1>
     <div class="row row-cols-1 row-cols-md-2 g-4">
     <asp:Repeater ID="rptArticulos" runat="server">
         <ItemTemplate>
