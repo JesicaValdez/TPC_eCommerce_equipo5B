@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDB.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="ImagenNegocio.cs" />
     <Compile Include="EntradaNegocio.cs" />
     <Compile Include="EventoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +53,9 @@
       <Project>{dfe12486-ba58-4245-b54a-409de0b9a8d3}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ENTRADAS_DB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

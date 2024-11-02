@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Entrada
     {
+        public int IdEntrada { get; set; }
         public int codigo { get; set; }
         public Evento evento { get; set; }
         public Cliente cliente { get; set; }

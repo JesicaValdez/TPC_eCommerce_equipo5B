@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Dominio
 {
     public class Evento
     {
+        public int id { get; set; }
         public string codigo { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
@@ -16,14 +13,19 @@ namespace Dominio
         public decimal precioEntrada { get; set; }
         public int entradasDisponibles { get; set; }
         public DateTime fecha { get; set; }
-        public string imagenurl { get; set; }
+        public List<Imagen> imagenes { get; set; }  // Lista de imágenes
 
-        public TipoEvento TipoEvento
+        public Evento()
         {
-            get => default;
-            set
-            {
-            }
+            id = 0;
+            codigo = string.Empty;
+            nombre = string.Empty;
+            descripcion = string.Empty;
+            tipoEvento = new TipoEvento();
+            precioEntrada = 0;
+            entradasDisponibles = 0;
+            fecha = DateTime.MinValue;
+            imagenes = new List<Imagen>(); // Inicializar la lista
         }
     }
 }

@@ -8,13 +8,13 @@ namespace Dominio
 {
     public class Imagen
     {
-        public string CodigoEvento { get; set; }
+        public int IdEvento { get; set; }
         public string Url { get; set; }
         
         public Imagen()
         {
-            CodigoEvento = "";
-            Url = "";
+            IdEvento = 0;
+            Url = string.Empty;
         }
     }
 }

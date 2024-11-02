@@ -68,9 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AcercaDe.aspx" />
+    <Content Include="CSS\Style.css" />
     <Content Include="Pago.aspx" />
     <Content Include="Contact.aspx" />
-    <Content Include="Content\Css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Eventos.aspx" />
     <Content Include="Global.asax" />

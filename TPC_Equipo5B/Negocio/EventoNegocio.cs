@@ -6,79 +6,77 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using Dominio;
+using System.Collections;
 
 namespace Negocio
 {
     public class EventoNegocio
     {
-        private List<Evento> listaEventos = new List<Evento>();
-        
-        AccesoDB datos = new AccesoDB();
-
-        public EventoNegocio()
-        {
-            datos = new AccesoDB();
-        }
+        private AccesoDB datos = new AccesoDB();
 
         public List<Evento> listarEventos()
         {
-            List<Evento> lista = new List<Evento>();
-
+            List<Evento> listaEventos= new List<Evento>();
+            
             try
             {
-                datos.setearConsulta("select Codigo, Nombre, e.Descripcion, te.Descripcion as TipoEvento, Fecha, PrecioEntrada, CantidadEntradas from Eventos e inner join TiposEvento te on e.IdTipoEvento = te.Id order by Fecha asc");
+                datos.setearConsulta("SELECT e.Id, e.Codigo, e.Nombre, e.Descripcion, te.Id AS TipoEventoId, te.Descripcion, e.Fecha, e.PrecioEntrada, e.CantidadEntradas, i.ImagenUrl FROM Eventos e INNER JOIN TiposEvento te ON e.IdTipoEvento = te.Id LEFT JOIN Imagenes i ON e.Id = i.IdEvento ORDER BY e.Fecha ASC;\r\n");
                 datos.ejecutarLectura();
 
-                if (datos.Lector == null)
-                {
-                    throw new Exception("El lector no se inicializó.");
-                }
-
-                if (!datos.Lector.HasRows)
+                if (datos.Lector == null || !datos.Lector.HasRows)
                 {
                     throw new Exception("No hay filas para leer.");
                 }
-
+                
                 while (datos.Lector.Read())
                 {
-                    Evento aux = new Evento();
-                    aux.codigo = (string)datos.Lector["Codigo"];
-                    aux.nombre = (string)datos.Lector["Nombre"];
-                    aux.descripcion = (string)datos.Lector["Descripcion"];
-                    aux.tipoEvento = new TipoEvento();
-                    aux.tipoEvento.descripcion = (string)datos.Lector["TipoEvento"];
-                    aux.fecha = (DateTime)datos.Lector["Fecha"];
-                    aux.precioEntrada = (decimal)datos.Lector["PrecioEntrada"];
-                    aux.entradasDisponibles = (int)datos.Lector["CantidadEntradas"];
-                    aux.imagenurl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRCZVKWKAUmqHUszu8_M3CoepdRNIXk9SvZQ&s";
-                    
-                    lista.Add(aux);
+                    int eventoId = (int)datos.Lector["Id"];
+                    Evento aux = listaEventos.FirstOrDefault(e => e.id == eventoId);
+
+                    if (aux == null)
+                    {
+                        aux = new Evento
+                        {
+                            id = (int)datos.Lector["Id"],
+                            codigo = (string)datos.Lector["Codigo"],
+                            nombre = (string)datos.Lector["Nombre"],
+                            descripcion = (string)datos.Lector["Descripcion"],
+                            tipoEvento = new TipoEvento
+                            {
+                                id = (int)datos.Lector["TipoEventoId"], // Asignar el ID
+                                descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
+                            },
+                            fecha = (DateTime)datos.Lector["Fecha"],
+                            precioEntrada = (decimal)datos.Lector["PrecioEntrada"],
+                            entradasDisponibles = (int)datos.Lector["CantidadEntradas"]
+                        };
+
+                    listaEventos.Add(aux);
+                    }
+                    if (datos.Lector["ImagenUrl"] != DBNull.Value)
+                    {
+                        aux.imagenes.Add(new Imagen { IdEvento = aux.id, Url = (string)datos.Lector["ImagenUrl"] });
+                    }
                 }
-                return lista;
+                return listaEventos;
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Error al listar eventos: " + ex.Message);
             }
             finally
             {
                 datos.cerrarConexion();
             }
         }
-
-        public List<Evento> filtrarportipo(string tipo)
+        
+        public List<Evento> filtrarportipo(int idTipoEvento)
         {
-            EventoNegocio negocio = new EventoNegocio();
-            List<Evento> lista1 = negocio.listarEventos();
-            List<Evento> lista2 = new List<Evento>();
-            foreach (Evento art in lista1)
-            {
-                if (art.tipoEvento.descripcion == tipo)
-                {
-                    lista2.Add(art);
-                }
-            }
-            return lista2;
+            List<Evento> listaEventos = listarEventos(); // Obtenemos todos los eventos
+            List<Evento> listaFiltrada = listaEventos.Where(e => e.tipoEvento.id == idTipoEvento).ToList();
+            return listaFiltrada;
         }
+
     }
 }
+

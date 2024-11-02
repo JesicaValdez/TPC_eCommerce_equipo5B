@@ -1,0 +1,103 @@
+﻿/* Estilo de Texto */
+.text-style {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #f4f4f4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    text-align: justify;
+    margin-left: 20px;
+}
+
+/* Títulos Generales */
+.title-style {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para Títulos Específicos */
+.info-title {
+    font-size: 1.4rem; 
+    font-weight: bold;
+    color: #f4f4f4;
+    margin-top: 15px;
+}
+
+/* Estilos para las Secciones de Información */
+.info-section {
+    text-align: center;
+    margin: 80px auto;
+    padding-bottom: 20px;
+}
+
+.info-card {
+    padding: 20px;
+    border: none;
+    background-color: transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilos de Iconos */
+.info-icon,
+.info-icon-page {
+    color: #ffb700;
+}
+
+.info-icon {
+    font-size: 50px;
+}
+
+.info-icon-page {
+    font-size: 70px;
+}
+
+/* Estilo para Botón */
+.explore-btn {
+    background-color: #ffb700;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    font-size: 1.1rem; /* Aumentado para proporción con el label */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .explore-btn:hover {
+        background-color: #e0a800;
+        transform: scale(1.05);
+    }
+
+/* Tarjetas de Categoría (Category Card) */
+.category-card {
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Label del filtro */
+.filter-container-label {
+    font-size: 2rem;
+    color: #f4f4f4;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Tarjetas de Eventos */
+.card-title {
+    font-size: 1.25rem; 
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem; 
+    color: #333; 
+}
+
+.event-date {
+    color: #ffb700; 
+    font-weight: bold;
+    margin: 10px 0;
+}
