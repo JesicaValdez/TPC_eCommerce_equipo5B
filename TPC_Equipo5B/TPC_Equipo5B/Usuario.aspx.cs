@@ -11,8 +11,29 @@ namespace TPC_Equipo5B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                calendarioUser.Visible = false;
+            }
         }
+
+        protected void selecChangedUser(object sender, EventArgs e)
+        {
+            txtCalendario.Text = calendarioUser.SelectedDate.ToShortDateString();
+        }
+
+        protected void calendarClickUser(object sender, EventArgs e)
+        {
+            if (calendarioUser.Visible)
+            {
+                calendarioUser.Visible = false;
+            }
+            else
+            {
+                calendarioUser.Visible = true;
+            }
+        }
+
         protected void MostrarMisTikets(object sender, EventArgs e)
         {
             MultiView1.ActiveViewIndex = 0; // Mostrar vista de Mis Tikets

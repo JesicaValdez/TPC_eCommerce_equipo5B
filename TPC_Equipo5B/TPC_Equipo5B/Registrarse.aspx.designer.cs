@@ -51,13 +51,31 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
 
         /// <summary>
-        /// txtEmail control.
+        /// ImageButton1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+
+        /// <summary>
+        /// txtCalendarioFN control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCalendarioFN;
+
+        /// <summary>
+        /// calendarioFN control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calendarioFN;
 
         /// <summary>
         /// txtTelefono control.
@@ -69,31 +87,31 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
 
         /// <summary>
-        /// txtDireccion control.
+        /// txtEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// txtCiudad control.
+        /// txtUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCiudad;
+        protected global::System.Web.UI.WebControls.TextBox txtUser;
 
         /// <summary>
-        /// txtCP control.
+        /// txtPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCP;
+        protected global::System.Web.UI.WebControls.TextBox txtPass;
 
         /// <summary>
         /// btn_registrar control.

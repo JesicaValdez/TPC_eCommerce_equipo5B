@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
+    public enum TipoUsuario
+    {
+        ADMIN = 1,
+        CLIENTE = 2
+    }
     public class Usuario : Cliente
     {
         public int IdUsuario { get; set; }
         public string NombreUsuario { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string Pass { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
 
-        public TipoUsuario TipoUsuario1
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         public Evento Evento
         {
@@ -32,20 +30,14 @@ namespace Dominio
 
         public Usuario()
         {
-            IdUsuario = 0;
-            NombreUsuario = string.Empty;
-            Email = string.Empty;
-            Password = string.Empty;
-            TipoUsuario = new TipoUsuario();
         }
 
-        public Usuario(int idUsuario, string nombreUsuario, string apellido, string email, string password, TipoUsuario tipoUsuario)
+        public Usuario(string usuario, string password, bool admin)
         {
-            IdUsuario = idUsuario;
-            NombreUsuario = nombreUsuario;
-            Email = email;
-            Password = password;
-            TipoUsuario = tipoUsuario;
+            NombreUsuario = usuario;
+            Pass = password;
+
+            TipoUsuario = admin ? TipoUsuario.ADMIN : TipoUsuario.CLIENTE;
         }
     }
 }

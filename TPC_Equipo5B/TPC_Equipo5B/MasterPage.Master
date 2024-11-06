@@ -109,7 +109,7 @@
                                     <i class="fas fa-ticket-alt" style="color: #F4F4F4;"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="">Eventos Favoritos</a></li>
+                                    <li><a class="dropdown-item" href="#">Eventos Favoritos</a></li>
                                     <li><a class="dropdown-item" href="MisEntradas.aspx">Carrito</a></li>
                                 </ul>
                             </li>

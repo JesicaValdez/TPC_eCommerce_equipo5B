@@ -11,7 +11,29 @@ namespace TPC_Equipo5B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                calendarioFN.Visible = false;
+            }
 
         }
+
+        protected void calendarioSChanged(object sender, EventArgs e) 
+        {
+            txtCalendarioFN.Text = calendarioFN.SelectedDate.ToShortDateString();
+        }
+
+        protected void calendarClick(object sender, EventArgs e) 
+        {
+            if (calendarioFN.Visible) 
+            {
+                calendarioFN.Visible = false;
+            }
+            else
+            {
+                calendarioFN.Visible = true;
+            }
+        }
+
     }
 }

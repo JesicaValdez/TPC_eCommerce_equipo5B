@@ -13,5 +13,18 @@ namespace TPC_Equipo5B
         {
 
         }
+
+        protected void Ingresar(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

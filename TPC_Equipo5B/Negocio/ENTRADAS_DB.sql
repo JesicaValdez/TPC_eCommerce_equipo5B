@@ -33,18 +33,13 @@ GO
 ALTER TABLE [dbo].[Eventos] CHECK CONSTRAINT [FK_Eventos_TiposEvento]
 GO
 
-CREATE TABLE TiposUsuario (
-    IDTipoUsuario INT PRIMARY KEY IDENTITY(1,1),
-    TipoUsuario NVARCHAR(50) NOT NULL
-)
 
 CREATE TABLE Usuarios (
     IDUsuario INT PRIMARY KEY IDENTITY(1,1),
     NombreUsuario NVARCHAR(100) NOT NULL,
     Email VARCHAR(50) NOT NULL,
-    Password NVARCHAR(8) NOT NULL,
-    IDTipoUsuario INT NOT NULL,
-    FOREIGN KEY (IDTipoUsuario) REFERENCES TiposUsuario(IDTipoUsuario)
+    Pass VARCHAR(50) NOT NULL,
+    TipoUsuario INT NOT NULL,
 )
 
 CREATE TABLE Clientes(
@@ -53,10 +48,9 @@ CREATE TABLE Clientes(
     DNI VARCHAR(8) NOT NULL,
     Nombre VARCHAR(30) NOT NULL,
     Apellido VARCHAR(20) NOT NULL,
+    fechaNacimiento DATETIME NOT NULL,
     Telefono VARCHAR(20) NOT NULL,
-    Direccion VARCHAR(50) NOT NULL,
-    Ciudad VARCHAR(20) NOT NULL,
-    CodigoPostal INT NOT NULL,
+    EmailPropio VARCHAR(50) NOT NULL
     FOREIGN KEY (IDUsuario) REFERENCES Usuarios(IDUsuario)
 )
 
@@ -164,3 +158,8 @@ VALUES
 (10, 'https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,q_75,w_1200/v1/crm/fortwayne/coe_Disney-on-Ice-Let-s-Dance_647D4D5B-BE06-019E-161075E0AE8EB701_6484c66c-acbf-4156-2e4188b68ccdc98b.jpg'),
 (10, 'https://i.ytimg.com/vi/vEfnrTub_RQ/sddefault.jpg'),
 (10, 'https://i.ytimg.com/vi/BwW--F4agjw/maxresdefault.jpg');
+
+-- Usuarios
+INSERT INTO Usuarios (NombreUsuario, Email, Pass, TipoUsuario)
+VALUES
+    ('Admin', 'admin@example.com', 'admin', 1)

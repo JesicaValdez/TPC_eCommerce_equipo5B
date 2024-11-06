@@ -17,7 +17,6 @@
             </div>
 
             <div class="row mb-3">
-
                 <div class="col">
                     <label for="txtNombre" class="form-label" style="color: #F4F4F4;">Nombre</label>
                     <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Ingrese Nombre" />
@@ -28,36 +27,41 @@
                     <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" placeholder="Ingrese Apellido" />
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="txtEmail" class="form-label" style="color: #F4F4F4;">Email</label>
-                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Ingrese Email" />
+
+            <label for="txtCalendarioFN" class="form-label" style="color: #F4F4F4;">Fecha de Nacimiento</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">
+                    <asp:ImageButton ID="ImageButton1" runat="server" OnClick="calendarClick" />
+                </span>
+                <asp:TextBox runat="server" ID="txtCalendarioFN" CssClass="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
             </div>
+
+            <asp:Calendar ID="calendarioFN" runat="server" CssClass="custom-calendar" OnSelectionChanged="calendarioSChanged"></asp:Calendar>
 
             <div class="mb-3">
                 <label for="txtTelefono" class="form-label" style="color: #F4F4F4;">Telefono</label>
                 <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Ingrese Telefono" />
             </div>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="txtDireccion" class="form-label" style="color: #F4F4F4;">Dirección</label>
-                    <asp:TextBox runat="server" ID="txtDireccion" CssClass="form-control" placeholder="Ingrese Direccion" />
-                </div>
-
-                <div class="col">
-                    <label for="txtCiudad" class="form-label" style="color: #F4F4F4;">Ciudad</label>
-                    <asp:TextBox runat="server" ID="txtCiudad" CssClass="form-control" placeholder="Ingrese Ciudad" />
-                </div>
-
-                <div class="col">
-                    <label for="txtCP" class="form-label" style="color: #F4F4F4;">CP</label>
-                    <asp:TextBox runat="server" ID="txtCP" CssClass="form-control" placeholder="Ingrese CP" />
-                </div>
-
-                <div class="mb-3">
-                    <asp:Button ID="btn_registrar" runat="server" Text="Registrar" class="btn btn-warning mt-4" />
-                </div>
+            <div class="mb-3">
+                <label for="txtEmail" class="form-label" style="color: #F4F4F4;">Email</label>
+                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Ingrese Email" />
             </div>
+
+            <div class="mb-3">
+                <label for="txtUser" class="form-label" style="color: #F4F4F4;">Usuario</label>
+                <asp:TextBox runat="server" ID="txtUser" CssClass="form-control" placeholder="Ingrese Usuario" aria-describedby="emailHelp" />
+            </div>
+
+            <div class="mb-3">
+                <label for="txtPass" class="form-label" style="color: #F4F4F4;">Contraseña</label>
+                <asp:TextBox runat="server" ID="txtPass" CssClass="form-control" placeholder="Ingrese Contraseña" />
+            </div>
+
+            <div class="mb-3">
+                <asp:Button ID="btn_registrar" runat="server" Text="Registrarse" class="btn btn-warning mt-3" />
+            </div>
+
         </div>
     </div>
 

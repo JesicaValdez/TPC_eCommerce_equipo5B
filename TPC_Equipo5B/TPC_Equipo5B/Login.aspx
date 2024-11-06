@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col-5"> 
             <div class="mb-3">
-                <label for="txt_Email" class="form-label" style="color: #F4F4F4;">Email o Usuario</label>
+                <label for="txt_Email" class="form-label" style="color: #F4F4F4;">Usuario</label>
                 <asp:TextBox runat="server" ID="txt_Email" CssClass="form-control" placeholder="Ingrese Email o Usuario" />
             </div>
 
@@ -20,10 +20,10 @@
             <div id="Recuperar" class="form-text text-center"><a href="#" style="color: #F4F4F4;">¿Olvidaste tu contraseña?</a></div>
 
              <div class="d-grid"> 
-                <asp:Button ID="btn_login" runat="server" Text="Entrar" class="btn btn-warning mt-3"/>
+                <asp:Button ID="btn_login" runat="server" Text="Entrar" class="btn btn-warning mt-3" OnClick="Ingresar"/>
             </div>
 
-            <div id="Crear" class="form-text text-center mt-4"><a href="#" style="color: #F4F4F4;">¿No tienes cuenta? Regístrate</a></div>
+            <div id="Crear" class="form-text text-center mt-4"><a href="Registrarse.aspx" style="color: #F4F4F4;">¿No tienes cuenta? Regístrate</a></div>
 
         </div>
     </div>

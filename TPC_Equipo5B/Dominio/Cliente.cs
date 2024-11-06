@@ -13,11 +13,8 @@ namespace Dominio
         public string Dni {  get; set; }
         public string Nombre { get; set; }
         public string Apellido {  get; set; }
-        public string Email {  get; set; }
+        public DateTime fechaNacimiento { get; set; }
         public string Telefono {  get; set; }
-        public string Direccion {  get; set; }
-        public string Ciudad {  get; set; }
-        public int CodigoPostal {  get; set; }
 
         internal Carrito Carrito
         {
@@ -33,11 +30,8 @@ namespace Dominio
             Dni = "";
             Nombre = "";
             Apellido = "";
-            Email = "";
+            fechaNacimiento = DateTime.MinValue;
             Telefono = "";
-            Direccion = "";
-            Ciudad = "";
-            CodigoPostal = 0;
         }
     }
 }
