@@ -77,6 +77,34 @@ namespace Negocio
             return listaFiltrada;
         }
 
+        public List<Evento> carrito(List<int> lista)
+        {
+            List<Evento> listaEventos = listarEventos();
+            List<Evento> carrito = new List<Evento>();
+            bool b;
+            foreach (Evento evt in listaEventos)
+            {
+                b = false;
+                foreach (int id in lista)
+                {
+                    if (evt.id == id)
+                    {
+                        foreach (Evento fav in carrito)
+                        {
+                            if (fav.id == id)
+                            {
+                                b = true;
+                            }
+                        }
+                        if(b == false)
+                            carrito.Add(evt);
+                    }
+                }
+                
+            }
+            return carrito;
+        }
+
     }
 }
 

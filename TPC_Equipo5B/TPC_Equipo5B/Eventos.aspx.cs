@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
@@ -14,6 +15,7 @@ namespace TPC_Equipo5B
         {
             if (!IsPostBack)
             {
+                
                 CargarEventos();
                 CargarTiposEventos();
             }
@@ -121,13 +123,25 @@ namespace TPC_Equipo5B
         protected void ButtonFavorite_Click(object sender, EventArgs e)
         {
             LinkButton btnFavorite = (LinkButton)sender;
-            string eventId = btnFavorite.CommandArgument;
-            AgregarEventoAFavoritos(eventId);
+            int eventId = Int32.Parse(btnFavorite.CommandArgument);
+            AgregarEventoAlCarrito(eventId);
         }
 
-        private void AgregarEventoAFavoritos(string eventId)
+        private void AgregarEventoAlCarrito(int eventId)
         {
-            Response.Redirect("MisEntradas.aspx?eventId=" + eventId);
+            List<int> carrito = new List<int>();
+            if ((List<int>)Session["var"] == null)
+            {
+                carrito.Add(eventId);
+                Session["var"] = carrito;
+            }
+            else
+            {
+                carrito = (List<int>)Session["var"];
+                carrito.Add(eventId);
+                Session["var"] = carrito;
+            }
+            //Response.Redirect("MisEntradas.aspx?eventId=" + eventId);
         }
 
     }
