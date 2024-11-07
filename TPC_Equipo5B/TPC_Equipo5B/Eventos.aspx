@@ -38,10 +38,10 @@
                 </div>
                <div class="card-footer text-center"> 
                     <asp:LinkButton ID="Button2" runat="server" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning" OnClick="Button2_Click">
-                        <i class="bi bi-file-plus"></i> Favorito
+                        <i class="bi bi-file-plus"></i> Ver Detalles del Evento
                     </asp:LinkButton>
                    <asp:LinkButton ID="ButtonFavorite" runat="server" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning" OnClick="ButtonFavorite_Click">
-                        <i class="bi bi-heart"></i> Agregar al carrito
+                        <i class="bi bi-heart"></i> Favorito
                     </asp:LinkButton>
                 </div>
             </div>

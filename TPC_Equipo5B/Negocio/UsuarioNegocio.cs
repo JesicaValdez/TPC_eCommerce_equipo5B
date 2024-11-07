@@ -14,7 +14,7 @@ namespace Negocio
             AccesoDB dato = new AccesoDB();
 
             try
-            {
+        {
                 dato.setearConsulta("SELECT IDUsuario,  Email, TipoUsuario FROM Usuarios Where NombreUsuario = @user and Pass = @pass");
                 dato.setearParametro("@user", usuario.NombreUsuario);
                 dato.setearParametro("@pass", usuario.Pass);
@@ -68,13 +68,13 @@ namespace Negocio
                 throw ex;
             }
             finally
-            {
+                {
                 dato.cerrarConexion();
             }
-        }
+                }
 
         public void eliminarUser(int id)
-        {
+                {
             AccesoDB dato = new AccesoDB ();
 
             try

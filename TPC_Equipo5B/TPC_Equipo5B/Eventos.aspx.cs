@@ -117,7 +117,7 @@ namespace TPC_Equipo5B
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Carrito.aspx");
+            Response.Redirect("VerDetalle.aspx");
         }
 
         protected void ButtonFavorite_Click(object sender, EventArgs e)
