@@ -178,7 +178,7 @@ INSERT INTO Usuarios (NombreUsuario, Email, Pass, TipoUsuario)
 VALUES
     ('Admin', 'admin@example.com', 'admin', 1)
 
-insert into TiposEntradas(TipoEntrada) values ('Entrada General')
+insert into TiposEntradas(TipoEntrada) values ('Entrada General') 
 
 insert into PreciosEntradas(IdEvento, IDTipoEntrada, Precio) values
 (1, 1, 50000),
@@ -190,4 +190,4 @@ insert into PreciosEntradas(IdEvento, IDTipoEntrada, Precio) values
 (7, 1, 80000),
 (8, 1, 85000),
 (9, 1, 90000),
-(10, 1, 95000);
+(10, 1, 95000)
