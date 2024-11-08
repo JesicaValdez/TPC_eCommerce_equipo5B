@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 class="title-style" style="color: #F4F4F4; padding: 20px;">Eventos Favoritos</h1>
+    <h1 class="title-style" style="color: #F4F4F4; padding: 20px;">Mi Carrito</h1>
     <div class="row row-cols-1 row-cols-md-1 g-4">
     <asp:Repeater ID="rptArticulos" runat="server">
         <ItemTemplate>
@@ -20,6 +20,7 @@
                             <p class="card-text"><%# Eval("descripcion") %></p>
                             <p class="card-text"><%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></p>
                             <p class="card-text">Cantidad: <%# cantidad( Eval("id")) %></p>
+                            <p class="card-text">Precio: <%# precio(Eval("id")) %></p>
                             <asp:LinkButton ID="Button1" runat="server" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning" OnClick="Button1_Click">
                                 <i class="bi bi-file-plus"></i> Sacar del carrito
                             </asp:LinkButton>
@@ -32,4 +33,11 @@
         </ItemTemplate>
     </asp:Repeater>
 </div>
+    <div style="color: #F4F4F4; text-align: center; font-size: larger">
+        <asp:Label ID="Label2" runat="server" Text="Subtotal:"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    </div>
+    <div style="text-align: center">
+        <asp:Button ID="Button2" class="btn btn-light" runat="server" Text="Ir a Pagar" OnClick="Button2_Click" />
+    </div>
 </asp:Content>

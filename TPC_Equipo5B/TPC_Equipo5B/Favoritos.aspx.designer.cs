@@ -11,16 +11,16 @@ namespace TPC_Equipo5B
 {
 
 
-    public partial class VerDetalle
+    public partial class Favoritos
     {
 
         /// <summary>
-        /// Control detalle.
+        /// Control rptArticulos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater detalle;
+        protected global::System.Web.UI.WebControls.Repeater rptArticulos;
     }
 }

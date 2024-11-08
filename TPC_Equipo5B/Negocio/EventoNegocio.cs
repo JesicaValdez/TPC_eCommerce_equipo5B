@@ -20,7 +20,7 @@ namespace Negocio
             
             try
             {
-                datos.setearConsulta("SELECT e.Id, e.Codigo, e.Nombre, e.Descripcion, te.Id AS TipoEventoId, te.Descripcion, e.Fecha, e.PrecioEntrada, e.CantidadEntradas, i.ImagenUrl FROM Eventos e INNER JOIN TiposEvento te ON e.IdTipoEvento = te.Id LEFT JOIN Imagenes i ON e.Id = i.IdEvento ORDER BY e.Fecha ASC;\r\n");
+                datos.setearConsulta("SELECT e.Id, e.Codigo, e.Nombre, e.Descripcion, te.Id AS TipoEventoId, te.Descripcion, e.Fecha, e.CantidadEntradas, i.ImagenUrl FROM Eventos e INNER JOIN TiposEvento te ON e.IdTipoEvento = te.Id LEFT JOIN Imagenes i ON e.Id = i.IdEvento ORDER BY e.Fecha ASC;\r\n");
                 datos.ejecutarLectura();
 
                 if (datos.Lector == null || !datos.Lector.HasRows)
@@ -47,7 +47,7 @@ namespace Negocio
                                 descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
                             },
                             fecha = (DateTime)datos.Lector["Fecha"],
-                            precioEntrada = (decimal)datos.Lector["PrecioEntrada"],
+                            //precioEntrada = (decimal)datos.Lector["PrecioEntrada"],
                             entradasDisponibles = (int)datos.Lector["CantidadEntradas"]
                         };
 
@@ -77,6 +77,27 @@ namespace Negocio
             return listaFiltrada;
         }
 
+        public Evento buscarEvento(int id)
+        {
+            try
+            {
+                Evento evento = new Evento();
+                List<Evento> listaEventos = listarEventos();
+                foreach (Evento evt in listaEventos)
+                {
+                    if (evt.id == id)
+                    {
+                        evento = evt;
+                    }
+                }
+                return evento;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        } 
+
         public List<Evento> carrito(List<int> lista)
         {
             List<Evento> listaEventos = listarEventos();
@@ -105,6 +126,100 @@ namespace Negocio
             return carrito;
         }
 
+        public decimal buscarPrecio(int idevento, int idtipo)
+        {
+            decimal precio = 0;
+            try
+            {
+                datos.setearConsulta("SELECT Precio FROM PreciosEntradas where IdEvento = @idevt and IdTipoEntrada = @idtipo");
+                datos.setearParametro("@idevt", idevento);
+                datos.setearParametro("@idtipo", idtipo);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    precio = (decimal)datos.Lector["Precio"];
+                }
+                return precio;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Evento> listarFavoritos(int idusuario)
+        {
+            try
+            {
+                List<Evento> listaEventos = listarEventos();
+                List<Evento> favoritos = new List<Evento>();
+                datos.setearConsulta("SELECT IdEvento from Favoritos where IdUsuario = @idusu");
+                datos.setearParametro("@idusu", idusuario);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Evento aux = buscarEvento((int)datos.Lector["IdEvento"]);
+                    favoritos.Add(aux);
+                }
+                return favoritos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregarFavorito(int idusuario, int idevento)
+        {
+            AccesoDB datos = new AccesoDB();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO Favoritos (IdUsuario, IdEvento) VALUES (@idusu, @idevt)");
+
+                datos.setearParametro("@idusu", idusuario);
+                datos.setearParametro("@idevt", idevento);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarFavorito(int idusuario, int idevento)
+        {
+            AccesoDB datos = new AccesoDB();
+
+            try
+            {
+                datos.setearConsulta("DELETE FROM Favoritos WHERE IdUsuario = @idusu and IdEvento = @idevt");
+                datos.setearParametro("@idusu", idusuario);
+                datos.setearParametro("@idevt", idevento);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 

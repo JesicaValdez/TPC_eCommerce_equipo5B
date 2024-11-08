@@ -70,6 +70,7 @@
     <Content Include="AcercaDe.aspx" />
     <Content Include="Admin.aspx" />
     <Content Include="CSS\Style.css" />
+    <Content Include="Favoritos.aspx" />
     <Content Include="Pago.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Default.aspx" />
@@ -96,6 +97,13 @@
     </Compile>
     <Compile Include="Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Favoritos.aspx.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Favoritos.aspx.designer.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pago.aspx.cs">
       <DependentUpon>Pago.aspx</DependentUpon>

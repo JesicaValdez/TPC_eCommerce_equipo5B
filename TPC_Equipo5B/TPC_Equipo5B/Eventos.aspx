@@ -27,27 +27,26 @@
     <!--Repeater para generar las tarjetas-->
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <asp:Repeater ID="rptArticulos" runat="server">
-    <ItemTemplate>
-        <div class="col">
-            <div class="card h-100">
-                <img class="card-img-top" src="<%# Eval("imagenes[0].Url") %>" alt="Imagen del evento" />
-                <div class="card-body">
-                    <h5 class="card-title"><%# Eval("nombre") %></h5>
-                    <p class="card-text event-date"><i class="bi bi-calendar-check"></i> <%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></p>
-                    <p class="card-text"><%# Eval("descripcion") %></p>
+            <ItemTemplate>
+                <div class="col">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="<%# Eval("imagenes[0].Url") %>" alt="Imagen del evento" />
+                        <div class="card-body">
+                            <h5 class="card-title"><%# Eval("nombre") %></h5>
+                            <p class="card-text event-date"><i class="bi bi-calendar-check"></i> <%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></p>
+                            <p class="card-text"><%# Eval("descripcion") %></p>
+                        </div>
+                        <div class="card-footer text-center"> 
+                            <asp:LinkButton ID="Button2" runat="server" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning" OnClick="Button2_Click">
+                                <i class="bi bi-file-plus"></i> Ver Detalles del Evento
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="ButtonFavorite" runat="server" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning" OnClick="ButtonFavorite_Click">
+                                <i class="bi bi-heart"></i> Favorito
+                            </asp:LinkButton>
+                        </div>
+                    </div>
                 </div>
-               <div class="card-footer text-center"> 
-                    <asp:LinkButton ID="Button2" runat="server" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning" OnClick="Button2_Click">
-                        <i class="bi bi-file-plus"></i> Ver Detalles del Evento
-                    </asp:LinkButton>
-                   <asp:LinkButton ID="ButtonFavorite" runat="server" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning" OnClick="ButtonFavorite_Click">
-                        <i class="bi bi-heart"></i> Favorito
-                    </asp:LinkButton>
-                </div>
-            </div>
-        </div>
-    </ItemTemplate>
-</asp:Repeater>
-
+            </ItemTemplate>
+        </asp:Repeater>
     </div>
 </asp:Content>

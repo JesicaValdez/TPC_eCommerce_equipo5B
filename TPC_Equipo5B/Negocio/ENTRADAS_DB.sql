@@ -19,7 +19,6 @@ CREATE TABLE [dbo].[Eventos](
 	[Descripcion] [varchar](150) NOT NULL,
 	[Fecha] [DateTime] NOT NULL,
 	[IdTipoEvento] [int] NOT NULL,
-	[PrecioEntrada] [money] NOT NULL,
 	[CantidadEntradas] [int] NOT NULL,
  CONSTRAINT [PK_Eventos] PRIMARY KEY CLUSTERED 
 (
@@ -88,28 +87,43 @@ CREATE TABLE Entrada (
     FOREIGN KEY (IdEvento) REFERENCES Eventos(Id)
 )
 
+CREATE TABLE PreciosEntradas (
+    IDTipoEntrada INT NOT NULL,
+    IdEvento INT NOT NULL,
+    Precio MONEY NOT NULL
+    FOREIGN KEY (IdTipoEntrada) REFERENCES TiposEntradas(IdTipoEntrada),
+    FOREIGN KEY (IdEvento) REFERENCES Eventos(Id)
+)
+
+CREATE TABLE Favoritos (
+    IdUsuario INT NOT NULL,
+    IdEvento INT NOT NULL
+    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IDUsuario),
+    FOREIGN KEY (IdEvento) REFERENCES Eventos(Id)
+)
+
 DELETE FROM Eventos
 Delete from TiposEvento
 ALTER TABLE Eventos 
 ALTER COLUMN Descripcion VARCHAR(1000); 
 
 INSERT INTO TiposEvento VALUES ('Recital'), ('Teatro'), ('Shows')
-INSERT INTO Eventos (Codigo, Nombre, Descripcion, Fecha, IdTipoEvento, PrecioEntrada, CantidadEntradas) VALUES
+INSERT INTO Eventos (Codigo, Nombre, Descripcion, Fecha, IdTipoEvento, CantidadEntradas) VALUES
 -- Recitales
-('RC01', 'Queen en Concierto', 'Queen se presenta en el estadio principal', DATEADD(day, 10, GETDATE()), 1, 95000, 600),
-('RC02', 'COLDPLAY Music of the Spheres', 'World Tour de Coldplay, Live Buenos Aires', DATEADD(day, 25, GETDATE()), 1, 88000, 450),
-('RC03', 'Maria Becerra', 'Concierto de Maria Becerra en el estadio Monumental River Plate', DATEADD(day, 25, GETDATE()), 1, 88000, 600),
-('RC04', 'The Rolling Stones Live', 'Concierto de The Rolling Stones', DATEADD(day, 50, GETDATE()), 1, 105000, 400),
+('RC01', 'Queen en Concierto', 'Queen se presenta en el estadio principal', DATEADD(day, 10, GETDATE()), 1, 600),
+('RC02', 'COLDPLAY Music of the Spheres', 'World Tour de Coldplay, Live Buenos Aires', DATEADD(day, 25, GETDATE()), 1, 450),
+('RC03', 'Maria Becerra', 'Concierto de Maria Becerra en el estadio Monumental River Plate', DATEADD(day, 25, GETDATE()), 1, 600),
+('RC04', 'The Rolling Stones Live', 'Concierto de The Rolling Stones', DATEADD(day, 50, GETDATE()), 1, 400),
 
 -- Obras Teatrales
-('OT01', 'Hamlet', 'Obra teatral de Shakespeare. La obra transcurre en Dinamarca, y trata de los acontecimientos posteriores al asesinato del rey Hamlet (padre del príncipe Hamlet), a manos de su hermano Claudio. El fantasma del rey pide a su hijo que se vengue de su asesino. La obra discurre vívidamente alrededor de la locura, y de la transformación del profundo dolor en desmesurada ira. Además de explorar temas como la traición, la venganza, el incesto y la corrupción moral.', DATEADD(day, 15, GETDATE()), 2, 30000, 200),
-('OT02', 'Escape Room', 'Obra de teatro con una combinación de comedia y suspenso intrigante. Cuatro personajes en una sala de escape ambientada en la segunda guerra mundial, un desafío que cumplir y superar y una serie de eventos muy extraños que empiezan a suceder que no parecen ser propios del escape room. Suspenso, risas y un final inesperado te esperan en una de las obras de teatro de Buenos Aires más populares de la temporada.', DATEADD(day, 30, GETDATE()), 2, 28000, 250),
-('OT03', 'El Fantasma de la Ópera', 'Musical internacional en teatro. La obra está inspirada en hechos reales y en la novela Trilby de George du Maurier, y combina elementos de romance, terror, drama, misterio y tragedia. La historia trata sobre un ser misterioso que aterroriza la Ópera de París para atraer la atención de una joven vocalista a la que ama.', DATEADD(day, 45, GETDATE()), 2, 45000, 180),
-('OT04', 'Tootsie', 'es la versión teatral de la hiper conocida película protagonizada por Dustin Hoffman que cuenta la historia de un actor arrogante quien no logra conseguir trabajo debido a su egocentrismo. Decide entonces presentarse a un casting para actrices y logra el co-protagónico femenino, pero el gran problema surge cuando se enamora de su compañera de reparto, y entonces tiene que encontrar la forma de develar su mentira, con el agravante que él ha sido mejor hombre como mujer, de lo que era como hombre con las mujeres.', DATEADD(day, 60, GETDATE()), 2, 50000, 220),
+('OT01', 'Hamlet', 'Obra teatral de Shakespeare. La obra transcurre en Dinamarca, y trata de los acontecimientos posteriores al asesinato del rey Hamlet (padre del príncipe Hamlet), a manos de su hermano Claudio. El fantasma del rey pide a su hijo que se vengue de su asesino. La obra discurre vívidamente alrededor de la locura, y de la transformación del profundo dolor en desmesurada ira. Además de explorar temas como la traición, la venganza, el incesto y la corrupción moral.', DATEADD(day, 15, GETDATE()), 2, 200),
+('OT02', 'Escape Room', 'Obra de teatro con una combinación de comedia y suspenso intrigante. Cuatro personajes en una sala de escape ambientada en la segunda guerra mundial, un desafío que cumplir y superar y una serie de eventos muy extraños que empiezan a suceder que no parecen ser propios del escape room. Suspenso, risas y un final inesperado te esperan en una de las obras de teatro de Buenos Aires más populares de la temporada.', DATEADD(day, 30, GETDATE()), 2, 250),
+('OT03', 'El Fantasma de la Ópera', 'Musical internacional en teatro. La obra está inspirada en hechos reales y en la novela Trilby de George du Maurier, y combina elementos de romance, terror, drama, misterio y tragedia. La historia trata sobre un ser misterioso que aterroriza la Ópera de París para atraer la atención de una joven vocalista a la que ama.', DATEADD(day, 45, GETDATE()), 2, 180),
+('OT04', 'Tootsie', 'es la versión teatral de la hiper conocida película protagonizada por Dustin Hoffman que cuenta la historia de un actor arrogante quien no logra conseguir trabajo debido a su egocentrismo. Decide entonces presentarse a un casting para actrices y logra el co-protagónico femenino, pero el gran problema surge cuando se enamora de su compañera de reparto, y entonces tiene que encontrar la forma de develar su mentira, con el agravante que él ha sido mejor hombre como mujer, de lo que era como hombre con las mujeres.', DATEADD(day, 60, GETDATE()), 2, 220),
 
 -- Shows
-('SH01', 'Cirque du Soleil', 'Espectáculo acrobático del Cirque du Soleil', DATEADD(day, 20, GETDATE()), 3, 75000, 300),
-('SH02', 'Disney on Ice', 'Show de Disney en hielo', DATEADD(day, 40, GETDATE()), 3, 65000, 350);
+('SH01', 'Cirque du Soleil', 'Espectáculo acrobático del Cirque du Soleil', DATEADD(day, 20, GETDATE()), 3, 300),
+('SH02', 'Disney on Ice', 'Show de Disney en hielo', DATEADD(day, 40, GETDATE()), 3, 350);
 
 SELECT * FROM Eventos
 
@@ -163,3 +177,17 @@ VALUES
 INSERT INTO Usuarios (NombreUsuario, Email, Pass, TipoUsuario)
 VALUES
     ('Admin', 'admin@example.com', 'admin', 1)
+
+insert into TiposEntradas(TipoEntrada) values ('Entrada General')
+
+insert into PreciosEntradas(IdEvento, IDTipoEntrada, Precio) values
+(1, 1, 50000),
+(2, 1, 55000),
+(3, 1, 60000),
+(4, 1, 65000),
+(5, 1, 70000),
+(6, 1, 75000),
+(7, 1, 80000),
+(8, 1, 85000),
+(9, 1, 90000),
+(10, 1, 95000);

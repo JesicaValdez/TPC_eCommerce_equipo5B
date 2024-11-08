@@ -117,32 +117,18 @@ namespace TPC_Equipo5B
 
         protected void Button2_Click(object sender, EventArgs e)
         {
+            LinkButton btn2 = (LinkButton)sender;
+            Session.Add("id", Int32.Parse(btn2.CommandArgument));
             Response.Redirect("VerDetalle.aspx");
         }
 
         protected void ButtonFavorite_Click(object sender, EventArgs e)
         {
-            LinkButton btnFavorite = (LinkButton)sender;
-            int eventId = Int32.Parse(btnFavorite.CommandArgument);
-            AgregarEventoAlCarrito(eventId);
+
+            
         }
 
-        private void AgregarEventoAlCarrito(int eventId)
-        {
-            List<int> carrito = new List<int>();
-            if ((List<int>)Session["var"] == null)
-            {
-                carrito.Add(eventId);
-                Session["var"] = carrito;
-            }
-            else
-            {
-                carrito = (List<int>)Session["var"];
-                carrito.Add(eventId);
-                Session["var"] = carrito;
-            }
-            //Response.Redirect("MisEntradas.aspx?eventId=" + eventId);
-        }
+        
 
     }
 }

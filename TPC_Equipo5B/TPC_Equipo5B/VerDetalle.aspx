@@ -74,25 +74,34 @@
 <!--Contenedor del evento -->
 <div class="card mb-3">
   <div class="row g-0">
-    <!-- Imagen del evento -->
-    <div class="col-md-4">
-      <img src="https://www.sala-apolo.com/uploads/media/default/0001/09/thumb_8442_default_wide.jpeg" class="img-fluid rounded-start" alt="...">
-    </div>
-    <!-- Información del evento -->
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Nombre</h5>
-        <p class="card-text"><i class="bi bi-ticket-perforated-fill"></i> Descripción detallada del evento, explicando el contexto, los detalles del artista o del show.</p>
-        <p class="card-text"><small class="text-body-secondary"><i class="bi bi-calendar-check"></i> Fecha</small></p>
-        <p class="card-text"><small class="text-body-secondary"><i class="bi bi-map"></i> Lugar</small></p>
-        <p class="card-text"><small class="text-body-secondary"><i class="bi bi-bag-check"></i> Asegura tu lugar en este evento comprando tu entrada</small></p>
-        <a href="Carrito.aspx" class="explore-btn">Obtené Tu Ticket</a>
-      </div>
-    </div>
+      <asp:Repeater ID="detalle" runat="server">
+        <ItemTemplate>
+            <!-- Imagen del evento -->
+            <div class="col-md-4">
+              <img class="card-img-top" src="<%# Eval("imagenes[0].Url") %>">
+            </div>
+            <!-- Información del evento -->
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%# Eval("nombre") %></h5>
+                <p class="card-text"><i class="bi bi-ticket-perforated-fill"></i><%# Eval("descripcion") %></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="bi bi-file-plus"></i>Precio de las entradas</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="bi bi-map"></i> Lugar</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="bi bi-bag-check"></i> Asegura tu lugar en este evento comprando tu entrada</small></p>
+                  <asp:DropDownList ID="ddlEntradas" runat="server" CssClass="btn explore-btn dropdown-toggle"></asp:DropDownList>
+                <asp:LinkButton ID="Button1" runat="server" CommandArgument=' <%# Eval("id") %>' CssClass="btn btn-warning" OnClick="Button1_Click">
+                    <i class="bi bi-file-plus"></i> Obtene tu Ticket
+                </asp:LinkButton>
+                
+              </div>
+            </div>
+            <asp:Label ID="lblFechaHora" runat="server" CssClass="fecha-hora-evento"> <i class="bi bi-clock"></i><%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></asp:Label>
+        </ItemTemplate>
+      </asp:Repeater>
   </div>
 </div>
 
     <!-- Fecha y hora del evento-->
-  <asp:Label ID="lblFechaHora" runat="server" CssClass="fecha-hora-evento"> <i class="bi bi-clock"></i> Fecha y Hora del Evento</asp:Label>
+  
 
 </asp:Content>

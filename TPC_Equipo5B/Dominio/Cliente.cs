@@ -15,6 +15,7 @@ namespace Dominio
         public string Apellido {  get; set; }
         public DateTime fechaNacimiento { get; set; }
         public string Telefono {  get; set; }
+        public string EmailPropio { get; set; }
 
         internal Carrito Carrito
         {
