@@ -127,6 +127,7 @@
                             <a href="Login.aspx" class="btn me-2" style="color: #F4F4F4; border-color: #F4F4F4;">Login</a>
                             <a href="Registrarse.aspx" class="btn" style="color: #e0a800; border-color: #e0a800;">Registrarse</a>
                         </div>
+                            <a href="Admin.aspx" class="btn" style="color: #e0a800; border-color: #e0a800;">Panel Admin</a>
                     </div>
                 </div>
             </nav>

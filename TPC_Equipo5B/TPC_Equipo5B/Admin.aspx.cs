@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Negocio;
 
 namespace TPC_Equipo5B
 {
@@ -15,9 +16,82 @@ namespace TPC_Equipo5B
             {
                 // Inicializamos la vista activa en Listado de Usuarios
                 MultiViewAdmin.ActiveViewIndex = 0;
+                
+                    CargarUsuarios();
+                    MostrarMensaje("Usuarios cargados correctamente.", true);
             }
 
         }
+
+        // usuario
+        protected void CargarUsuarios()
+        {
+            try
+            {
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                dgvUsuarios.DataSource = usuarioNegocio.listar();
+                dgvUsuarios.DataBind();
+                MostrarMensaje("Usuarios cargados correctamente.", true);
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al cargar usuarios: " + ex.Message, false);
+            }
+        }
+
+        public void btnAgregarUsuario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarUsuario.aspx");
+        }
+
+        public void btnModificarUsuario_Click(object sender, EventArgs e)
+        {
+            if (dgvUsuarios.SelectedDataKey != null)
+            {
+                int idUsuario = (int)dgvUsuarios.SelectedDataKey.Value;
+                Response.Redirect($"ModificarUsuario.aspx?id={idUsuario}");
+            }
+            else
+            {
+                MostrarMensaje("Seleccione un usuario para modificar.", false);
+            }
+
+        }
+
+        protected void btnEliminarUsuario_Click(object sender, EventArgs e)
+        {
+            if (dgvUsuarios.SelectedDataKey != null)
+            {
+                int idUsuario = (int)dgvUsuarios.SelectedDataKey.Value;
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                usuarioNegocio.eliminarUser(idUsuario);
+                CargarUsuarios(); // Refresca la lista después de eliminar
+                MostrarMensaje("Usuario eliminado correctamente.", true);
+            }
+            else
+            {
+                MostrarMensaje("Seleccione un usuario para eliminar.", false);
+            }
+        }
+
+        protected void dgvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idUsuario = (int)dgvUsuarios.SelectedDataKey.Value;
+            Response.Redirect($"ModificarUsuario.aspx?id={idUsuario}");
+        }
+
+        protected void btnBuscarUsuario_Click(object sender, EventArgs e)
+        {
+            string criterio = txtBuscarUsuario.Text;
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+
+            List<Dominio.Usuario> usuarios = usuarioNegocio.buscarUsuario(criterio);
+
+
+            dgvUsuarios.DataSource = usuarios;
+            dgvUsuarios.DataBind();
+        }
+
 
         protected void VerListadoUsuarios(object sender, EventArgs e)
         {
@@ -36,16 +110,34 @@ namespace TPC_Equipo5B
 
         // Método para ver usuarios dados de alta en el sistema
         protected void ListadoCLientes(object sender, EventArgs e)
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int actionSelected = int.Parse(DropDownList2.SelectedValue);
 
             Response.Redirect("VerListado.aspx");
         }
+            switch (actionSelected)
+            {
+                case 1: 
+                    Response.Redirect("CrearEvento.aspx");
+                    break;
 
         // Método para agregar un nuevo evento
         protected void AgregarEvento(object sender, EventArgs e)
         {
+                case 2: 
+                    Response.Redirect("ModificarEvento.aspx");
+                    break;
+
+                case 3: 
+                    Response.Redirect("EliminarEvento.aspx");
+                    break;
 
             Response.Redirect("CrearEvento.aspx");
+                default:
+                    MostrarMensaje("Acción no válida.", false);
+                    break;
+            }
         }
 
         // Método para generar reportes
@@ -69,6 +161,15 @@ namespace TPC_Equipo5B
         {
             Session.Abandon();
             Response.Redirect("Login.aspx"); // Redirige a la página de inicio de sesión
+            Session.Clear();
+            Response.Redirect("Login.aspx");
+        }
+
+        private void MostrarMensaje(string mensaje, bool exito)
+        {
+            panelMessage.Visible = true;
+            panelMessage.CssClass = exito ? "alert-success" : "alert-danger";
+            panelMessage.Controls.Add(new LiteralControl(mensaje));
         }
     }
 }

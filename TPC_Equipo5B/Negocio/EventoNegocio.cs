@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using Dominio;
 using System.Collections;
+using System.Data.SqlClient;
 
 namespace Negocio
 {
@@ -97,6 +98,50 @@ namespace Negocio
                 throw ex;
             }
         } 
+
+        public void agregar(Evento evento)
+        {
+            try
+            {
+                datos.setearConsulta("INSERT INTO Eventos (Codigo, Nombre, Descripcion, IdTipoEvento, Fecha, CantidadEntradas) VALUES (@Codigo, @Nombre, @Descripcion, @IdTipoEvento, @Fecha, @PrecioEntrada, @CantidadEntradas)");
+                datos.setearParametro("@Codigo", evento.codigo);
+                datos.setearParametro("@Nombre", evento.nombre);
+                datos.setearParametro("@Descripcion", evento.descripcion);
+                datos.setearParametro("@IdTipoEvento", evento.tipoEvento.id);
+                datos.setearParametro("@Fecha", evento.fecha);
+            
+                datos.setearParametro("@CantidadEntradas", evento.entradasDisponibles);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al agregar evento: " + ex.Message);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarEvento(int id)
+        {
+            AccesoDB dato = new AccesoDB();
+
+            try
+            {
+                dato.setearConsulta("DELETE FROM Eventos WHERE Id = @id");
+                dato.setearParametro("@id", id);
+                dato.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dato.cerrarConexion();
+            }
+        }
 
         public List<Evento> carrito(List<int> lista)
         {

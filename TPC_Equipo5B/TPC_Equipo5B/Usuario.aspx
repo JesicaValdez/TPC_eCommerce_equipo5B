@@ -83,17 +83,17 @@
                                     <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" placeholder="Ingrese Apellido" />
                                 </div>
                             </div>
-                            
+
                             <label for="txtCalendario" class="form-label" style="color: #F4F4F4;">Fecha de Nacimiento</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">
-                                    <asp:ImageButton ID="ImageButton1" runat="server" OnClick="calendarClickUser"/>
+                                    <asp:ImageButton ID="ImageButton1" runat="server" OnClick="calendarClickUser" />
                                 </span>
                                 <asp:TextBox runat="server" ID="txtCalendario" CssClass="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
                             </div>
 
-                            <asp:Calendar ID="calendarioUser" runat="server" CssClass="custom-calendar" OnSelectionChanged="selecChangedUser" ></asp:Calendar>
-                                                
+                            <asp:Calendar ID="calendarioUser" runat="server" CssClass="custom-calendar" OnSelectionChanged="selecChangedUser"></asp:Calendar>
+
                             <div class="mb-3">
                                 <label for="txtTelefono" class="form-label" style="color: #F4F4F4;">Telefono</label>
                                 <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Ingrese Telefono" />
