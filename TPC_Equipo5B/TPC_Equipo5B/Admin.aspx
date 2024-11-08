@@ -53,12 +53,10 @@
             <!-- Sidebar de administración -->
             <div class="col-md-3 bg-dark text-light p-3">
                 <i class="bi bi-person-fill-gear"></i>
-                <h4 class="text-center mb-4">Panel de Administración</h4>
                 <h4 class="text-center mb-4">Panel</h4>
                 <div class="list-group">
                     <!-- Opciones de administración -->
                     <asp:LinkButton ID="lnkVerUsuarios" runat="server" CssClass="list-group-item admin-menu-item" OnClick="VerListadoUsuarios">
-                        <i class="bi bi-people-fill"></i> Ver Listado de Usuarios 
                         <i class="bi bi-people-fill"></i> Gestión de Usuarios 
                     </asp:LinkButton>
                     <asp:LinkButton ID="lnkGestionEventos" runat="server" CssClass="list-group-item admin-menu-item" OnClick="MostrarGestionEventos">
@@ -92,10 +90,6 @@
                         <!-- Vista de Gestión de Usuarios -->
                         <asp:View ID="ViewGestionUsuarios" runat="server">
                             <h3>Listado de Usuarios</h3>
-                            <p>Listado de Clientes dados de alta en el sistema.</p>
-                            <asp:Button ID="btnVerListado" runat="server" Text="Ver Listado" CssClass="btn btn-warning mb-3" OnClick="ListadoCLientes" />
-                            <asp:GridView ID="gvUsuarios" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="False"
-                                EmptyDataText="No hay usuarios disponibles en el sistema.">
                             <p>Desde este lugar podes, agregar, modificar o eliminar usuarios.</p>
 
                             <!--Boton para buscar usuario-->
@@ -104,10 +98,6 @@
 
                             <asp:GridView ID="dgvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="IdUsuario" OnSelectedIndexChanged="dgvUsuarios_SelectedIndexChanged">
                                 <Columns>
-                                    <asp:BoundField DataField="IdUsuario" HeaderText="ID" />
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                                    <asp:BoundField DataField="Email" HeaderText="Correo Electrónico" />
-                                    <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
                                     <asp:BoundField DataField="NombreUsuario" HeaderText="Nombre de Usuario" />
                                     <asp:BoundField DataField="Email" HeaderText="Email" />
                                     <asp:BoundField DataField="TipoUsuario" HeaderText="Tipo de Usuario" />
@@ -125,8 +115,6 @@
                         <!-- Vista de Gestión de Eventos -->
                         <asp:View ID="ViewGestionEventos" runat="server">
                             <h3>Gestión de Eventos</h3>
-                            <p>Aquí puedes gestionar los eventos del sistema, incluyendo la creación, edición y eliminación de eventos.</p>
-                            <asp:Button ID="btnAgregarEvento" runat="server" Text="Agregar Evento" CssClass="btn btn-warning mb-3" OnClick="AgregarEvento" />
                             <p>Aquí podes gestionar los eventos del sistema, incluyendo la creación, edición y eliminación de eventos.</p>
 
                             <asp:DropDownList ID="DropDownList2" runat="server" CssClass="form-select mb-3" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged" AutoPostBack="true">
@@ -183,7 +171,6 @@
                                 <!-- Aquí se mostrarán los datos del reporte -->
                             </asp:Panel>
                         </asp:View>
-
                     </asp:MultiView>
                 </div>
             </div>

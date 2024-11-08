@@ -108,23 +108,17 @@ namespace TPC_Equipo5B
             MultiViewAdmin.ActiveViewIndex = 2;
         }
 
-        // Método para ver usuarios dados de alta en el sistema
-        protected void ListadoCLientes(object sender, EventArgs e)
+        // Botón de gestión de eventos
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
             int actionSelected = int.Parse(DropDownList2.SelectedValue);
 
-            Response.Redirect("VerListado.aspx");
-        }
             switch (actionSelected)
             {
                 case 1: 
                     Response.Redirect("CrearEvento.aspx");
                     break;
 
-        // Método para agregar un nuevo evento
-        protected void AgregarEvento(object sender, EventArgs e)
-        {
                 case 2: 
                     Response.Redirect("ModificarEvento.aspx");
                     break;
@@ -133,12 +127,12 @@ namespace TPC_Equipo5B
                     Response.Redirect("EliminarEvento.aspx");
                     break;
 
-            Response.Redirect("CrearEvento.aspx");
                 default:
                     MostrarMensaje("Acción no válida.", false);
                     break;
             }
         }
+
 
         // Método para generar reportes
         protected void GenerarReporte(object sender, EventArgs e)
@@ -159,8 +153,6 @@ namespace TPC_Equipo5B
         // Método para cerrar sesión
         protected void CerrarSesion(object sender, EventArgs e)
         {
-            Session.Abandon();
-            Response.Redirect("Login.aspx"); // Redirige a la página de inicio de sesión
             Session.Clear();
             Response.Redirect("Login.aspx");
         }
