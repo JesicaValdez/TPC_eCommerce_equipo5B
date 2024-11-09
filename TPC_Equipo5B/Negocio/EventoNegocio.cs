@@ -21,7 +21,7 @@ namespace Negocio
             
             try
             {
-                datos.setearConsulta("SELECT e.Id, e.Codigo, e.Nombre, e.Descripcion, te.Id AS TipoEventoId, te.Descripcion, e.Fecha, e.CantidadEntradas, i.ImagenUrl FROM Eventos e INNER JOIN TiposEvento te ON e.IdTipoEvento = te.Id LEFT JOIN Imagenes i ON e.Id = i.IdEvento ORDER BY e.Fecha ASC;\r\n");
+                datos.setearConsulta("SELECT e.Id, e.Codigo, e.Nombre, e.Descripcion, e.Lugar, e.Direccion, te.Id AS TipoEventoId, te.Descripcion, e.Fecha, e.CantidadEntradas, i.ImagenUrl \r\nFROM Eventos e \r\nINNER JOIN TiposEvento te ON e.IdTipoEvento = te.Id \r\nLEFT JOIN Imagenes i ON e.Id = i.IdEvento \r\nORDER BY e.Fecha ASC");
                 datos.ejecutarLectura();
 
                 if (datos.Lector == null || !datos.Lector.HasRows)
@@ -42,6 +42,8 @@ namespace Negocio
                             codigo = (string)datos.Lector["Codigo"],
                             nombre = (string)datos.Lector["Nombre"],
                             descripcion = (string)datos.Lector["Descripcion"],
+                            lugar = (string)datos.Lector["Lugar"],
+                            direccion = (string)datos.Lector["Direccion"],
                             tipoEvento = new TipoEvento
                             {
                                 id = (int)datos.Lector["TipoEventoId"], // Asignar el ID

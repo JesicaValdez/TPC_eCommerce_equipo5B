@@ -34,7 +34,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><%# Eval("nombre") %></h5>
                             <p class="card-text event-date"><i class="bi bi-calendar-check"></i> <%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></p>
-                            <p class="card-text"><%# Eval("descripcion") %></p>
+                            <p class="card-text"><%# Eval("lugar") %></p>
                         </div>
                         <div class="card-footer text-center"> 
                             <asp:LinkButton ID="Button2" runat="server" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning" OnClick="Button2_Click">

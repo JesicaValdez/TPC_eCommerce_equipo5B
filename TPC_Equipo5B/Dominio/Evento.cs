@@ -9,8 +9,9 @@ namespace Dominio
         public string codigo { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
+        public string lugar { get; set; }
+        public string direccion { get; set; }
         public TipoEvento tipoEvento { get; set; }
-        //public decimal precioEntrada { get; set; }
         public int entradasDisponibles { get; set; }
         public DateTime fecha { get; set; }
         public List<Imagen> imagenes { get; set; }  // Lista de imágenes
@@ -21,6 +22,8 @@ namespace Dominio
             codigo = string.Empty;
             nombre = string.Empty;
             descripcion = string.Empty;
+            lugar = string.Empty;
+            direccion = string.Empty;
             tipoEvento = new TipoEvento();
             //precioEntrada = 0;
             entradasDisponibles = 0;
