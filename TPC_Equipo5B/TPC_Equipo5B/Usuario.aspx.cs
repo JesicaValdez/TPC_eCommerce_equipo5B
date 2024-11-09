@@ -49,6 +49,11 @@ namespace TPC_Equipo5B
             MultiView1.ActiveViewIndex = 2; // Mostrar vista de Cambiar Contraseña
         }
 
+        protected void MostrarEliminarCuenta(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 3; // Mostrar vista de Elimiar Cuenta
+        }
+
         protected void Desconectarse(object sender, EventArgs e)
         {
             

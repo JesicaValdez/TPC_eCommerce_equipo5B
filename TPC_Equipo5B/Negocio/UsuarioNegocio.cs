@@ -74,7 +74,7 @@ namespace Negocio
             }
         }
 
-        public void agregarUsuario(Usuario nuevoUsuario)
+        public int agregarUsuario(Usuario nuevoUsuario)
         {
 
             try
@@ -82,18 +82,13 @@ namespace Negocio
                 AccesoDB dato = new AccesoDB();
 
                 {
-                    dato.setearConsulta("INSERT INTO Usuarios (NombreUsuario, Email, Pass, TipoUsuario) VALUES (@NombreUsuario, @Email, @Pass, @TipoUsuario");
-                    dato.ejecutarLectura();
+                    dato.setearProcedimiento("SP_INSERTAR_USER");
 
-                    while (dato.Lector.Read())
-                    {
-                        dato.setearParametro("@NombreUsuario", nuevoUsuario.NombreUsuario);
-                        dato.setearParametro("@Email", nuevoUsuario.Email);
-                        dato.setearParametro("@Pass", nuevoUsuario.Pass);
-                        dato.setearParametro("@TipoUsuario", nuevoUsuario.TipoUsuario);
+                    dato.setearParametro("@NombreUsuario", nuevoUsuario.NombreUsuario);
+                    dato.setearParametro("@Email", nuevoUsuario.Email);
+                    dato.setearParametro("@Pass", nuevoUsuario.Pass);
 
-                        cmd.ExecuteNonQuery();
-                    }
+                    return dato.ejecutarScalar();                                        
                 }
             }
             catch (Exception ex)
@@ -102,7 +97,6 @@ namespace Negocio
             }
         }
 
-        public void eliminarUser(int id)
         public List<Usuario> buscarUsuario(string criterio)
         {
             AccesoDB dato = new AccesoDB();
@@ -138,6 +132,7 @@ namespace Negocio
             }
         }
 
+        public void eliminarUser(int id) { 
             AccesoDB dato = new AccesoDB ();
 
             try

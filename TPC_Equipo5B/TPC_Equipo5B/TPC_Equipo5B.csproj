@@ -73,6 +73,7 @@
     <Content Include="CrearEvento.aspx" />
     <Content Include="CSS\Style.css" />
     <Content Include="Favoritos.aspx" />
+    <Content Include="icons8-calendar-24.png" />
     <Content Include="Pago.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Default.aspx" />

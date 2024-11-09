@@ -12,7 +12,7 @@ namespace TPC_Equipo5B
 {
     public partial class CrearEvento : System.Web.UI.Page
     {
-        private List<Sector> Sectores = new List<Sector>();
+        //private List<Sector> Sectores = new List<Sector>();
 
         protected void Page_Load(object sender, EventArgs e)
         {

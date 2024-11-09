@@ -62,7 +62,7 @@
 
         <!-- Botón -->
         <div class="text-center mt-5">
-            <a href="Eventos.aspx" class="explore-btn">Explorar Todos los Eventos</a>
+            <a href="Eventos.aspx" class="explore-btn" style="text-decoration: none;">Explorar Todos los Eventos</a>
         </div>
     </div>
 

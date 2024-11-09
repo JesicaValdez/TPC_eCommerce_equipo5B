@@ -28,15 +28,22 @@
                 </div>
             </div>
 
-            <label for="txtCalendarioFN" class="form-label" style="color: #F4F4F4;">Fecha de Nacimiento</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <asp:ImageButton ID="ImageButton1" runat="server" OnClick="calendarClick" />
-                </span>
-                <asp:TextBox runat="server" ID="txtCalendarioFN" CssClass="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
-            </div>
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-            <asp:Calendar ID="calendarioFN" runat="server" CssClass="custom-calendar" OnSelectionChanged="calendarioSChanged"></asp:Calendar>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <label for="txtCalendarioFN" class="form-label" style="color: #F4F4F4;">Fecha de Nacimiento</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">
+                            <asp:ImageButton ID="ImageButton1" runat="server" OnClick="calendarClick" ImageUrl="~/icons8-calendar-24.png" />
+                        </span>
+                        <asp:TextBox runat="server" ID="txtCalendarioFN" CssClass="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
+                    </div>
+
+                    <asp:Calendar ID="calendarioFN" runat="server" CssClass="custom-calendar" OnSelectionChanged="calendarioSChanged"></asp:Calendar>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
 
             <div class="mb-3">
                 <label for="txtTelefono" class="form-label" style="color: #F4F4F4;">Telefono</label>
@@ -59,7 +66,7 @@
             </div>
 
             <div class="mb-3">
-                <asp:Button ID="btn_registrar" runat="server" Text="Registrarse" class="btn btn-warning mt-3" />
+                <asp:Button ID="btn_registrar" runat="server" Text="Registrarse" class="btn btn-warning mt-3 w-100"/>
             </div>
 
         </div>

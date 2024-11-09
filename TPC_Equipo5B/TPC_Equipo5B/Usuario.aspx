@@ -41,6 +41,9 @@
                         <asp:LinkButton ID="lnkCambiarContrasena" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="MostrarCambiarContrasena">
                             <i class="bi bi-unlock-fill"></i> Cambiar Contraseña
                         </asp:LinkButton>
+                        <asp:LinkButton ID="lnkEliminarCuenta" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="MostrarEliminarCuenta">
+                            <i class="bi bi-trash-fill"></i> Eliminar Cuenta
+                        </asp:LinkButton>
                         <asp:LinkButton ID="link_Desconectar" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="Desconectarse">
                             <i class="bi bi-box-arrow-right"></i>Desconectarse
                         </asp:LinkButton>
@@ -84,15 +87,22 @@
                                 </div>
                             </div>
 
-                            <label for="txtCalendario" class="form-label" style="color: #F4F4F4;">Fecha de Nacimiento</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">
-                                    <asp:ImageButton ID="ImageButton1" runat="server" OnClick="calendarClickUser" />
-                                </span>
-                                <asp:TextBox runat="server" ID="txtCalendario" CssClass="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
-                            </div>
+                            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-                            <asp:Calendar ID="calendarioUser" runat="server" CssClass="custom-calendar" OnSelectionChanged="selecChangedUser"></asp:Calendar>
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+                                    <label for="txtCalendario" class="form-label" style="color: #F4F4F4;">Fecha de Nacimiento</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">
+                                            <asp:ImageButton ID="ImageButton1" runat="server" OnClick="calendarClickUser" ImageUrl="~/icons8-calendar-24.png" />
+                                        </span>
+                                        <asp:TextBox runat="server" ID="txtCalendario" CssClass="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
+                                    </div>
+
+                                    <asp:Calendar ID="calendarioUser" runat="server" CssClass="custom-calendar" OnSelectionChanged="selecChangedUser"></asp:Calendar>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
 
                             <div class="mb-3">
                                 <label for="txtTelefono" class="form-label" style="color: #F4F4F4;">Telefono</label>
@@ -100,7 +110,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <asp:Button ID="btn_Editar" runat="server" Text="Editar" class="btn btn-warning mt-4" />
+                                <asp:Button ID="btn_Editar" runat="server" Text="Editar" class="btn btn-warning mt-4 w-100" />
                             </div>
 
                         </div>
@@ -135,6 +145,18 @@
                         </div>
                     </div>
                 </asp:View>
+
+                <!-- Nueva Vista de Eliminar Cuenta -->
+                <asp:View ID="ViewEliminarCuenta" runat="server">
+                    <h3 style="color: #F4F4F4; margin-top: 10px;">Eliminar Cuenta</h3>
+                    <p style="text-align: center; color: #F4F4F4;">
+                        Esta acción es irreversible. Si eliminas tu cuenta, perderás toda la información asociada.
+                    </p>
+                    <div class="d-grid col-6 mx-auto">
+                        <asp:Button ID="btnEliminarCuenta" runat="server" Text="Eliminar Cuenta" CssClass="btn btn-danger"/>
+                    </div>
+                </asp:View>
+
             </asp:MultiView>
         </div>
     </div>
