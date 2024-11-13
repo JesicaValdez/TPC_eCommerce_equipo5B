@@ -15,13 +15,22 @@ namespace TPC_Equipo5B
     {
 
         /// <summary>
-        /// txt_Email control.
+        /// txt_User control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Email;
+        protected global::System.Web.UI.WebControls.TextBox txt_User;
+
+        /// <summary>
+        /// lbl_errorU control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_errorU;
 
         /// <summary>
         /// txt_Pass control.
@@ -31,6 +40,15 @@ namespace TPC_Equipo5B
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_Pass;
+
+        /// <summary>
+        /// lbl_errorP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_errorP;
 
         /// <summary>
         /// btn_login control.

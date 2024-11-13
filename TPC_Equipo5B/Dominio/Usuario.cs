@@ -30,14 +30,20 @@ namespace Dominio
 
         public Usuario()
         {
-        }
-
-        public Usuario(string usuario, string password, bool admin)
+        }        
+        public Usuario(string usuario, string password, int user)
         {
             NombreUsuario = usuario;
             Pass = password;
 
-            TipoUsuario = admin ? TipoUsuario.ADMIN : TipoUsuario.CLIENTE;
+            if (user == 1)
+            {
+                TipoUsuario = TipoUsuario.ADMIN;
+            }
+            else if (user == 2)
+            {
+                TipoUsuario = TipoUsuario.CLIENTE;
+            }
         }
     }
 }

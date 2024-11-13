@@ -13,60 +13,62 @@
             <div class="mb-3">
                 <label for="txtdni" class="form-label" style="color: #F4F4F4;">DNI</label>
                 <asp:TextBox runat="server" ID="txtdni" CssClass="form-control" placeholder="Ingrese Dni" />
-                <asp:Label ID="lblResultado" runat="server"></asp:Label>
+                <asp:Label ID="lbl_Dni" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
 
             <div class="row mb-3">
                 <div class="col">
                     <label for="txtNombre" class="form-label" style="color: #F4F4F4;">Nombre</label>
                     <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Ingrese Nombre" />
+                    <asp:Label ID="lbl_Nombre" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
                 </div>
 
                 <div class="col">
                     <label for="txtApellido" class="form-label" style="color: #F4F4F4;">Apellido</label>
                     <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" placeholder="Ingrese Apellido" />
+                    <asp:Label ID="lbl_Apellido" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
                 </div>
             </div>
 
-            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <ContentTemplate>
-                    <label for="txtCalendarioFN" class="form-label" style="color: #F4F4F4;">Fecha de Nacimiento</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">
-                            <asp:ImageButton ID="ImageButton1" runat="server" OnClick="calendarClick" ImageUrl="~/icons8-calendar-24.png" />
-                        </span>
-                        <asp:TextBox runat="server" ID="txtCalendarioFN" CssClass="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
-                    </div>
-
-                    <asp:Calendar ID="calendarioFN" runat="server" CssClass="custom-calendar" OnSelectionChanged="calendarioSChanged"></asp:Calendar>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
-
+            <label for="txtCalendarioFN" class="form-label" style="color: #F4F4F4;">Fecha de Nacimiento</label>
+            <div class="mb-3">
+                <asp:TextBox runat="server" ID="txtCalendarioFN" CssClass="form-control" TextMode="Date" />
+                <asp:Label ID="lbl_FechaN" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+            </div>
+            
             <div class="mb-3">
                 <label for="txtTelefono" class="form-label" style="color: #F4F4F4;">Telefono</label>
                 <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Ingrese Telefono" />
+                <asp:Label ID="lbl_tel" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
 
             <div class="mb-3">
                 <label for="txtEmail" class="form-label" style="color: #F4F4F4;">Email</label>
-                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Ingrese Email" />
+                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Ingrese Email"/>
+                <asp:Label ID="lbl_Email" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
 
             <div class="mb-3">
                 <label for="txtUser" class="form-label" style="color: #F4F4F4;">Usuario</label>
                 <asp:TextBox runat="server" ID="txtUser" CssClass="form-control" placeholder="Ingrese Usuario" aria-describedby="emailHelp" />
+                <asp:Label ID="lbl_Usuario" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
 
             <div class="mb-3">
                 <label for="txtPass" class="form-label" style="color: #F4F4F4;">Contraseña</label>
-                <asp:TextBox runat="server" ID="txtPass" CssClass="form-control" placeholder="Ingrese Contraseña" />
+                <asp:TextBox runat="server" ID="txtPass" CssClass="form-control" placeholder="Ingrese Contraseña" TextMode="Password" />
+                <asp:Label ID="lbl_Pass" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
 
+            <div class="form-check">
+                <asp:CheckBox ID="checkCondiciones" class="form-check-label" runat="server" />
+                <label for="check_TC" class="form-check-label" style="color: #F4F4F4;">Acepto los términos y condiciones</label>               
+            </div>
+             <asp:Label runat="server" ID="lbl_Chek" Text="" Visible="false" ForeColor="Red"/>
+            <br />
+
             <div class="mb-3">
-                <asp:Button ID="btn_registrar" runat="server" Text="Registrarse" class="btn btn-warning mt-3 w-100"/>
+                <asp:Button ID="btn_registrar" runat="server" Text="Registrarse" class="btn btn-warning mt-3 w-100" OnClick="btn_clickRegistro" />
             </div>
 
         </div>

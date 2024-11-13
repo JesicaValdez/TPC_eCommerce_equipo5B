@@ -42,13 +42,31 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.Image imgAvatar;
 
         /// <summary>
-        /// lblUser control.
+        /// lblnombreU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUser;
+        protected global::System.Web.UI.WebControls.Label lblnombreU;
+
+        /// <summary>
+        /// btnLog control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLog;
+
+        /// <summary>
+        /// btnRegistrarse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegistrarse;
 
         /// <summary>
         /// ContentPlaceHolder1 control.

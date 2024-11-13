@@ -20,7 +20,7 @@
         }
 
         .info-section .title-style {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #f4f4f4;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

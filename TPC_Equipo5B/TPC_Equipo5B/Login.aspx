@@ -8,13 +8,15 @@
     <div class="row justify-content-center">
         <div class="col-5"> 
             <div class="mb-3">
-                <label for="txt_Email" class="form-label" style="color: #F4F4F4;">Usuario</label>
-                <asp:TextBox runat="server" ID="txt_Email" CssClass="form-control" placeholder="Ingrese Email o Usuario" />
+                <label for="txt_User" class="form-label" style="color: #F4F4F4;">Usuario</label>
+                <asp:TextBox runat="server" ID="txt_User" CssClass="form-control" placeholder="Ingrese Usuario" />
+                <asp:Label ID="lbl_errorU" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
 
             <div class="mb-3">
                 <label for="txt_Pass" class="form-label" style="color: #F4F4F4;">Password</label> 
                 <asp:TextBox runat="server" ID="txt_Pass" CssClass="form-control" placeholder="Ingrese Password" TextMode="Password" />
+                <asp:Label ID="lbl_errorP" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
 
             <div id="Recuperar" class="form-text text-center"><a href="#" style="color: #F4F4F4;">¿Olvidaste tu contraseña?</a></div>

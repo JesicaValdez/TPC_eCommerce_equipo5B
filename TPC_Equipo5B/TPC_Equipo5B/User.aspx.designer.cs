@@ -24,13 +24,13 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.Image img_Usuario;
 
         /// <summary>
-        /// lbl_NomyApe control.
+        /// lblemailU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_NomyApe;
+        protected global::System.Web.UI.WebControls.Label lblemailU;
 
         /// <summary>
         /// lnkMisTikets control.
@@ -105,94 +105,94 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.View ViewEditarCuenta;
 
         /// <summary>
-        /// txtdni control.
+        /// txtb_dni control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdni;
+        protected global::System.Web.UI.WebControls.TextBox txtb_dni;
 
         /// <summary>
-        /// lblResultado control.
+        /// lblDni control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResultado;
+        protected global::System.Web.UI.WebControls.Label lblDni;
 
         /// <summary>
-        /// txtNombre control.
+        /// txtb_Nombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+        protected global::System.Web.UI.WebControls.TextBox txtb_Nombre;
 
         /// <summary>
-        /// txtApellido control.
+        /// lblNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApellido;
+        protected global::System.Web.UI.WebControls.Label lblNombre;
 
         /// <summary>
-        /// ScriptManager1 control.
+        /// txtb_Apellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.TextBox txtb_Apellido;
 
         /// <summary>
-        /// UpdatePanel1 control.
+        /// lblApellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.Label lblApellido;
 
         /// <summary>
-        /// ImageButton1 control.
+        /// txtb_FechaNacimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.TextBox txtb_FechaNacimiento;
 
         /// <summary>
-        /// txtCalendario control.
+        /// lblfechaN control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCalendario;
+        protected global::System.Web.UI.WebControls.Label lblfechaN;
 
         /// <summary>
-        /// calendarioUser control.
+        /// txtb_Telefono control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar calendarioUser;
+        protected global::System.Web.UI.WebControls.TextBox txtb_Telefono;
 
         /// <summary>
-        /// txtTelefono control.
+        /// lblTel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.Label lblTel;
 
         /// <summary>
         /// btn_Editar control.
@@ -213,31 +213,40 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.View ViewCambiarContrasena;
 
         /// <summary>
-        /// txt_PassAnterior control.
+        /// txt_PassNuevo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_PassAnterior;
+        protected global::System.Web.UI.WebControls.TextBox txt_PassNuevo;
 
         /// <summary>
-        /// txt_Pass control.
+        /// lbl_passNuevo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Pass;
+        protected global::System.Web.UI.WebControls.Label lbl_passNuevo;
 
         /// <summary>
-        /// txt_PassNuevoRepetir control.
+        /// txt_PassNuevoConfirmar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_PassNuevoRepetir;
+        protected global::System.Web.UI.WebControls.TextBox txt_PassNuevoConfirmar;
+
+        /// <summary>
+        /// lbl_passNuevoConfirmar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_passNuevoConfirmar;
 
         /// <summary>
         /// btn_login control.

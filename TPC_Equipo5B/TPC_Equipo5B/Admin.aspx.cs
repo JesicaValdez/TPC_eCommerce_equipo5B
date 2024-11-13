@@ -12,13 +12,19 @@ namespace TPC_Equipo5B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "No tenes permiso para ingresar a esta pantalla.");
+                Response.Redirect("Error.aspx", false);
+            }
+
             if (!IsPostBack)
             {
-                // Inicializamos la vista activa en Listado de Usuarios
-                MultiViewAdmin.ActiveViewIndex = 0;
+             // Inicializamos la vista activa en Listado de Usuarios
+             MultiViewAdmin.ActiveViewIndex = 0;
                 
-                    CargarUsuarios();
-                    MostrarMensaje("Usuarios cargados correctamente.", true);
+             CargarUsuarios();
+             MostrarMensaje("Usuarios cargados correctamente.", true);
             }
 
         }

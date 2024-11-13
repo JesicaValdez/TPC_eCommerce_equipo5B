@@ -72,8 +72,10 @@
     <Content Include="AgregarUsuario.aspx" />
     <Content Include="CrearEvento.aspx" />
     <Content Include="CSS\Style.css" />
+    <Content Include="Error.aspx" />
     <Content Include="Favoritos.aspx" />
     <Content Include="icons8-calendar-24.png" />
+    <Content Include="icons8-user-48.png" />
     <Content Include="Pago.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Default.aspx" />
@@ -81,7 +83,7 @@
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Registrarse.aspx" />
-    <Content Include="Usuario.aspx" />
+    <Content Include="User.aspx" />
     <Content Include="VerDetalle.aspx" />
     <Content Include="Web.config" />
     <Content Include="MisEntradas.aspx" />
@@ -100,6 +102,13 @@
     </Compile>
     <Compile Include="Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Favoritos.aspx.cs">
       <DependentUpon>Favoritos.aspx</DependentUpon>
@@ -175,12 +184,12 @@
     <Compile Include="Registrarse.aspx.designer.cs">
       <DependentUpon>Registrarse.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuario.aspx.cs">
-      <DependentUpon>Usuario.aspx</DependentUpon>
+    <Compile Include="User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuario.aspx.designer.cs">
-      <DependentUpon>Usuario.aspx</DependentUpon>
+    <Compile Include="User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerDetalle.aspx.cs">
       <DependentUpon>VerDetalle.aspx</DependentUpon>

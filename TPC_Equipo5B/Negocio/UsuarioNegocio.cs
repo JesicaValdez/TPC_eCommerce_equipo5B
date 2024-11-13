@@ -15,7 +15,7 @@ namespace Negocio
             AccesoDB dato = new AccesoDB();
 
             try
-        {
+            {
                 dato.setearConsulta("SELECT IDUsuario,  Email, TipoUsuario FROM Usuarios Where NombreUsuario = @user and Pass = @pass");
                 dato.setearParametro("@user", usuario.NombreUsuario);
                 dato.setearParametro("@pass", usuario.Pass);
@@ -25,6 +25,7 @@ namespace Negocio
                 while (dato.Lector.Read())
                 {
                     usuario.IdUsuario = (int)dato.Lector["IDUsuario"];
+                    usuario.Email = (string)dato.Lector["Email"];
                     usuario.TipoUsuario = (int)(dato.Lector["TipoUsuario"]) == 1 ? TipoUsuario.ADMIN : TipoUsuario.CLIENTE;
                     return true;
                 }
@@ -42,7 +43,7 @@ namespace Negocio
         public List<Usuario> listar()
         {
             AccesoDB dato = new AccesoDB();
-            List<Usuario> lista = new List<Usuario> ();
+            List<Usuario> lista = new List<Usuario>();
 
             try
             {
@@ -51,7 +52,7 @@ namespace Negocio
 
                 while (dato.Lector.Read())
                 {
-                    Usuario aux = new Usuario ();
+                    Usuario aux = new Usuario();
 
                     aux.IdUsuario = (int)dato.Lector["IDUsuario"];
                     aux.NombreUsuario = (string)dato.Lector["NombreUsuario"];
@@ -69,7 +70,7 @@ namespace Negocio
                 throw ex;
             }
             finally
-                {
+            {
                 dato.cerrarConexion();
             }
         }
@@ -88,7 +89,7 @@ namespace Negocio
                     dato.setearParametro("@Email", nuevoUsuario.Email);
                     dato.setearParametro("@Pass", nuevoUsuario.Pass);
 
-                    return dato.ejecutarScalar();                                        
+                    return dato.ejecutarScalar();
                 }
             }
             catch (Exception ex)
@@ -132,13 +133,65 @@ namespace Negocio
             }
         }
 
-        public void eliminarUser(int id) { 
-            AccesoDB dato = new AccesoDB ();
+        public void eliminarUser(int id)
+        {
+            AccesoDB dato = new AccesoDB();
 
             try
             {
                 dato.setearConsulta("DELETE FROM Usuarios WHERE IDUsuario = @id");
                 dato.setearParametro("@id", id);
+                dato.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dato.cerrarConexion();
+            }
+        }
+
+        public bool UsuarioExistente(string user)
+        {
+            AccesoDB dato = new AccesoDB();
+
+            try
+            {
+                dato.setearConsulta("SELECT COUNT(*) FROM Usuarios WHERE NombreUsuario = @NombreUsuario");
+                dato.setearParametro("@NombreUsuario", user);
+
+                dato.ejecutarLectura();
+
+                if (dato.Lector.Read())
+                {
+                    int cant = Convert.ToInt32(dato.Lector[0]);
+                    return cant > 0;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dato.cerrarConexion();
+            }
+        }
+
+        public void ModificarPass(Usuario usuario, int id) 
+        {
+            AccesoDB dato = new AccesoDB();
+
+            try
+            {
+                dato.setearConsulta("UPDATE Usuarios SET Pass = @Pass WHERE IDUsuario = @IDUsuario");
+                dato.setearParametro("@Pass", usuario.Pass);
+                dato.setearParametro("@IDUsuario", id);
+
                 dato.ejecutarAccion();
             }
             catch (Exception ex)

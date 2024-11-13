@@ -116,18 +116,21 @@
 
                             <!-- Usuario -->
                             <li class="nav-item dropdown me-5">
-                                <a href="Usuario.aspx" style="text-decoration: none;">
-                                    <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
+                                <a href="User.aspx" style="text-decoration: none;">
+                                    <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" ImageUrl="~/icons8-user-48.png"/>
                                 </a>
-                                <asp:Label ID="lblUser" runat="server" Text="User" CssClass="text-white h-100" Style="color: #F4F4F4;"></asp:Label>
+                                <asp:Label ID="lblnombreU" runat="server" Text="User" CssClass="text-white h-100" Style="color: #F4F4F4;"></asp:Label>
                             </li>
 
                         </ul>
                         <div class="d-flex ms-1 me-1">
-                            <a href="Login.aspx" class="btn me-2" style="color: #F4F4F4; border-color: #F4F4F4;">Login</a>
-                            <a href="Registrarse.aspx" class="btn" style="color: #e0a800; border-color: #e0a800;">Registrarse</a>
+                            <asp:Button ID="btnLog" runat="server" Text="Button" class="btn me-2" BorderColor="#F4F4F4" ForeColor="#F4F4F4" OnClick="EntrarSalir"/>
+                            <asp:Button ID="btnRegistrarse" runat="server" Text="Registrarse" class="btn" ForeColor="#e0a800" BorderColor="#e0a800" OnClick="Registro"/>                       
                         </div>
-                            <a href="Admin.aspx" class="btn" style="color: #e0a800; border-color: #e0a800;">Panel Admin</a>
+
+                            <%if (Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN) { %>
+                                    <a href="Admin.aspx" class="btn" style="color: #e0a800; border-color: #e0a800;">Panel Admin</a>
+                          <%  } %>
                     </div>
                 </div>
             </nav>
