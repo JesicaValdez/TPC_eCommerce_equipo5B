@@ -16,17 +16,18 @@ namespace TPC_Equipo5B
         ClienteNegocio negocio = new ClienteNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] == null)
+            if (!IsPostBack) 
             {
-                Session.Add("error", "Debes loguearte para ingresar");
-                Response.Redirect("Error.aspx");
+                
             }
-            else if(!IsPostBack)
+
+            if (Session["usuario"] != null)
             {
                 lblemailU.Text = Session["email"].ToString().ToUpper();
-                
+
+                //campos autocompletados modificar
                 int id = (int)Session["IdUsuario"];
-               
+
                 Cliente cliente = negocio.obtenerCliente(id);
 
                 if (cliente != null)
@@ -37,7 +38,13 @@ namespace TPC_Equipo5B
                     txtb_FechaNacimiento.Text = cliente.fechaNacimiento.ToString("yyyy-MM-dd");
                     txtb_Telefono.Text = cliente.Telefono;
                 }
-            }                   
+
+            }
+            else
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx");
+            }
         }
 
         protected void btn_clickEditar(object sener, EventArgs e)
