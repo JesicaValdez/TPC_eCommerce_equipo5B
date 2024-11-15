@@ -74,11 +74,12 @@
 <!--Contenedor del evento -->
 <div class="card mb-3">
   <div class="row g-0">
-      <asp:Repeater ID="detalle" runat="server">
+      /<asp:Repeater ID="detalle" runat="server">
         <ItemTemplate>
             <!-- Imagen del evento -->
-            <div class="col-md-4">
-              <img class="card-img-top" src="<%# Eval("imagenes[0].Url") %>">
+            <div id="carousel" class="col-md-4">
+         <img class="card-img-top" src='<%# (Eval("imagenes") != null && ((List<Dominio.Imagen>)Eval("imagenes")).Count > 0) ? ((List<Dominio.Imagen>)Eval("imagenes"))[0].Url : "defaultImageUrl" %>'>
+
             </div>
             <!-- Información del evento -->
             <div class="col-md-8">

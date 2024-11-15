@@ -29,7 +29,7 @@ namespace TPC_Equipo5B
                 for (int i = 0; i < listaEventos.Count; i++)
                 {
                     var evento = listaEventos[i];
-                    string imagenUrl = evento.imagenes.Count > 0 ? evento.imagenes[0].Url : "ruta/imagen_por_defecto.jpg";
+                    string imagenUrl = (evento.imagenes != null && evento.imagenes.Count > 0) ? evento.imagenes[0].Url : "ruta/imagen_por_defecto.jpg";
                     string nombreEvento = evento.nombre;
                     string fechaEvento = evento.fecha.ToString("dddd, dd 'de' MMMM 'de' yyyy", System.Globalization.CultureInfo.InvariantCulture);
 

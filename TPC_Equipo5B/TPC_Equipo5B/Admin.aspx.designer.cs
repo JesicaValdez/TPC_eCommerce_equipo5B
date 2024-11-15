@@ -24,6 +24,15 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.LinkButton lnkVerUsuarios;
 
         /// <summary>
+        /// Control LinkButton1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+
+        /// <summary>
         /// Control lnkGestionEventos.
         /// </summary>
         /// <remarks>
@@ -114,31 +123,40 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.GridView dgvUsuarios;
 
         /// <summary>
-        /// Control btnAgregarUsuario.
+        /// Control View1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarUsuario;
+        protected global::System.Web.UI.WebControls.View View1;
 
         /// <summary>
-        /// Control btnModificarUsuario.
+        /// Control txtClientes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarUsuario;
+        protected global::System.Web.UI.WebControls.TextBox txtClientes;
 
         /// <summary>
-        /// Control btnEliminarUsuario.
+        /// Control btnBuscarCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminarUsuario;
+        protected global::System.Web.UI.WebControls.Button btnBuscarCliente;
+
+        /// <summary>
+        /// Control dgvClientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvClientes;
 
         /// <summary>
         /// Control ViewGestionEventos.
@@ -150,49 +168,31 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.View ViewGestionEventos;
 
         /// <summary>
-        /// Control DropDownList2.
+        /// Control txtBuscarEvento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarEvento;
 
         /// <summary>
-        /// Control gvEventos.
+        /// Control BtnBuscarEvento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEventos;
+        protected global::System.Web.UI.WebControls.Button BtnBuscarEvento;
 
         /// <summary>
-        /// Control View1.
+        /// Control dgvEventos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View View1;
-
-        /// <summary>
-        /// Control DropDownList3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList3;
-
-        /// <summary>
-        /// Control GridViewCompras.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewCompras;
+        protected global::System.Web.UI.WebControls.GridView dgvEventos;
 
         /// <summary>
         /// Control ViewReportes.

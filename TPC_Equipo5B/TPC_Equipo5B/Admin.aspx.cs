@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
 using Negocio;
 
 namespace TPC_Equipo5B
@@ -27,9 +29,19 @@ namespace TPC_Equipo5B
              MostrarMensaje("Usuarios cargados correctamente.", true);
             }
 
+            if (Request.QueryString["id"] != null)
+            {
+                int id = int.Parse(Request.QueryString["id"].ToString());
+                List<Evento> eventoTemp = (List<Evento>) Session["eventos"];
+                Evento seleccionado = eventoTemp.Find(x => x.id == id);
+                //textId.Text = seleccionado.id.ToString();
+                //txtId.ReadOnly = true;
+
+            }
+
         }
 
-        // usuario
+        // Usuario
         protected void CargarUsuarios()
         {
             try
@@ -37,7 +49,7 @@ namespace TPC_Equipo5B
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 dgvUsuarios.DataSource = usuarioNegocio.listar();
                 dgvUsuarios.DataBind();
-                MostrarMensaje("Usuarios cargados correctamente.", true);
+                
             }
             catch (Exception ex)
             {
@@ -45,100 +57,176 @@ namespace TPC_Equipo5B
             }
         }
 
-        public void btnAgregarUsuario_Click(object sender, EventArgs e)
+        //Cliente
+        protected void CargarClientes()
         {
-            Response.Redirect("AgregarUsuario.aspx");
-        }
-
-        public void btnModificarUsuario_Click(object sender, EventArgs e)
-        {
-            if (dgvUsuarios.SelectedDataKey != null)
+            try
             {
-                int idUsuario = (int)dgvUsuarios.SelectedDataKey.Value;
-                Response.Redirect($"ModificarUsuario.aspx?id={idUsuario}");
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                dgvClientes.DataSource = clienteNegocio.listar();
+                dgvClientes.DataBind();
+                MostrarMensaje("Clientes cargados correctamente.", true);
             }
-            else
+            catch (Exception ex)
             {
-                MostrarMensaje("Seleccione un usuario para modificar.", false);
-            }
-
-        }
-
-        protected void btnEliminarUsuario_Click(object sender, EventArgs e)
-        {
-            if (dgvUsuarios.SelectedDataKey != null)
-            {
-                int idUsuario = (int)dgvUsuarios.SelectedDataKey.Value;
-                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                usuarioNegocio.eliminarUser(idUsuario);
-                CargarUsuarios(); // Refresca la lista después de eliminar
-                MostrarMensaje("Usuario eliminado correctamente.", true);
-            }
-            else
-            {
-                MostrarMensaje("Seleccione un usuario para eliminar.", false);
+                MostrarMensaje("Error al cargar clientes: " + ex.Message, false);
             }
         }
 
-        protected void dgvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        //Botones de Busqueda
+        public void btnBuscarUsuario_Click(object sender, EventArgs e)
         {
-            int idUsuario = (int)dgvUsuarios.SelectedDataKey.Value;
-            Response.Redirect($"ModificarUsuario.aspx?id={idUsuario}");
-        }
-
-        protected void btnBuscarUsuario_Click(object sender, EventArgs e)
-        {
-            string criterio = txtBuscarUsuario.Text;
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            Usuario usuarioBuscado = null;
 
-            List<Dominio.Usuario> usuarios = usuarioNegocio.buscarUsuario(criterio);
+            string usuario = txtBuscarUsuario.Text;
+            List<Dominio.Usuario> usuariosBuscados = usuarioNegocio.buscarUsuario(usuario);
 
+            if (usuarioBuscado != null && usuariosBuscados.Count > 0)
+            {
+                List<Usuario> listaUsuarios = new List<Usuario>();
+                listaUsuarios.Add(usuarioBuscado);
+                dgvUsuarios.DataSource = listaUsuarios;
+                dgvUsuarios.DataBind();
+                MostrarMensaje("Usuario encontrado.", true);
+            }
+            else
+            {
+                MostrarMensaje("Por favor, ingrese un nombre de usuario válido.", false);
+            }
 
-            dgvUsuarios.DataSource = usuarios;
-            dgvUsuarios.DataBind();
         }
 
+        protected void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                Cliente clienteBuscado = new Cliente();
 
+                int cliente = int.Parse(txtClientes.Text);
+                clienteBuscado = clienteNegocio.buscarCliente(cliente);
+
+                if (clienteBuscado != null && clienteBuscado.IdCliente != 0)
+                {
+                    List<Cliente> listaClientes = new List<Cliente>();
+                    listaClientes.Add(clienteBuscado);
+                    dgvUsuarios.DataSource = listaClientes;
+                    dgvUsuarios.DataBind();
+                    MostrarMensaje("Usuario encontrado.", true);
+                }
+                else
+                {
+                    MostrarMensaje("Por favor, ingrese un ID de cliente válido.", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al buscar Cliente: " + ex.Message, false);
+            }
+        }
+
+        public void btnBuscarEvento_Click(object sender, EventArgs e)
+        {
+            //busqueda de evento por codigo
+            try
+            {
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                Evento eventoBuscado = new Evento();
+
+                int codigoEvento = int.Parse(txtBuscarEvento.Text);
+                eventoBuscado = eventoNegocio.EventoBuscar(codigoEvento);
+
+                if (eventoBuscado != null && eventoBuscado.id != 0)
+                {
+                    List<Evento> listaEventos = new List<Evento>();
+                    listaEventos.Add(eventoBuscado);
+                    dgvEventos.DataSource = listaEventos;
+                    dgvEventos.DataBind();
+                    MostrarMensaje("Evento encontrado.", true);
+                }
+                else
+                {
+                    MostrarMensaje ("Por favor, ingrese un ID de evento válido.", false);
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al buscar evento: " + ex.Message, false);
+            }
+        }
+
+        // Evento
+        protected void CargarEventos()
+        {
+            try
+            {
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                dgvEventos.DataSource = eventoNegocio.listarEventos();
+                dgvEventos.DataBind();
+                MostrarMensaje("Eventos cargados correctamente.", true);
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al cargar eventos: " + ex.Message, false);
+            }
+        }
+
+        protected void ButtonM_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                   string id = ((Button)sender).CommandArgument;
+                   Session.Add("EventoID");
+                   Response.Redirect("CrearEvento.aspx");
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error: " + ex.ToString());
+            }
+
+            
+        }
+
+        protected void dgvEventos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var obtenerDato = dgvEventos.SelectedRow.Cells[0].Text;
+            var id = dgvEventos.SelectedDataKey.Value.ToString();
+            Response.Redirect("CrearEvento.aspx?id=" + id);
+        }
+
+        //VENTANAS
         protected void VerListadoUsuarios(object sender, EventArgs e)
         {
             MultiViewAdmin.ActiveViewIndex = 0;
         }
+        protected void VerListadoClientes(object sender, EventArgs e)
+        {
+            MultiViewAdmin.ActiveViewIndex = 1;
+            CargarClientes();
+        }
 
         protected void MostrarGestionEventos(object sender, EventArgs e)
         {
-            MultiViewAdmin.ActiveViewIndex = 1;
+            MultiViewAdmin.ActiveViewIndex = 2;
+            CargarEventos();
         }
 
         protected void MostrarReportes(object sender, EventArgs e)
         {
-            MultiViewAdmin.ActiveViewIndex = 2;
+            MultiViewAdmin.ActiveViewIndex = 3;
         }
 
         // Botón de gestión de eventos
-        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+
+        protected void btnModificar_Click (object sender, EventArgs e)
         {
-            int actionSelected = int.Parse(DropDownList2.SelectedValue);
-
-            switch (actionSelected)
-            {
-                case 1: 
-                    Response.Redirect("CrearEvento.aspx");
-                    break;
-
-                case 2: 
-                    Response.Redirect("ModificarEvento.aspx");
-                    break;
-
-                case 3: 
-                    Response.Redirect("EliminarEvento.aspx");
-                    break;
-
-                default:
-                    MostrarMensaje("Acción no válida.", false);
-                    break;
-            }
+            //Modificar el evento con el idEvento
+            Response.Redirect("CrearEvento.aspx");
+            
         }
-
 
         // Método para generar reportes
         protected void GenerarReporte(object sender, EventArgs e)

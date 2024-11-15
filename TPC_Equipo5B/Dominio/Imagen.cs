@@ -14,7 +14,7 @@ namespace Dominio
         public Imagen()
         {
             IdEvento = 0;
-            Url = string.Empty;
+            Url = "";
         }
     }
 }

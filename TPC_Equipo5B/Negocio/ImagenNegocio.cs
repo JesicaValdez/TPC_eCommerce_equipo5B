@@ -40,19 +40,45 @@ namespace Negocio
             }
         }
 
-        public void agregarImagen(Imagen nuevo)
+        public void agregarImagen(Evento nuevo)
+        {
+            AccesoDB datos = new AccesoDB();
+            EventoNegocio eventoNegocio = new EventoNegocio();
+
+            try
+            {
+                Evento evento = eventoNegocio.listarEventos().Last();
+                int idEvento = evento.id;
+
+                datos.setearConsulta("insert into IMAGENES (IdEvento, ImagenUrl) \r\n values (@IdEvento, @ImagenUrl)");
+                datos.setearParametro("@IdEvento", idEvento);
+                datos.setearParametro("@ImagenUrl", nuevo.imagenUrl);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificarImagen(Evento modificado)
         {
             AccesoDB datos = new AccesoDB();
 
             try
             {
-                datos.setearConsulta("insert into IMAGENES (IdEvento, ImagenUrl) \r\n values (@IdEvento, @ImagenUrl)");
-                datos.setearParametro("@IdEvento", nuevo.IdEvento);
-                datos.setearParametro("@ImagenUrl", nuevo.Url);
+                datos.setearConsulta("UPDATE INTO IMAGENES(ImagenUrl WHERE @IdEvento = IdEvento)");
+                datos.setearParametro("@ImagenUrl", modificado.imagenUrl);
                 datos.ejecutarAccion();
+
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Error: " + ex.Message);
                 throw ex;
             }
             finally

@@ -17,8 +17,11 @@ namespace Negocio
 
         public List<Evento> listarEventos()
         {
-            List<Evento> listaEventos= new List<Evento>();
-            
+            List<Evento> listaEventos = new List<Evento>();
+
+            //prueba
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+
             try
             {
                 datos.setearConsulta("SELECT e.Id, e.Codigo, e.Nombre, e.Descripcion, e.Lugar, e.Direccion, te.Id AS TipoEventoId, te.Descripcion, e.Fecha, e.CantidadEntradas, i.ImagenUrl \r\nFROM Eventos e \r\nINNER JOIN TiposEvento te ON e.IdTipoEvento = te.Id \r\nLEFT JOIN Imagenes i ON e.Id = i.IdEvento \r\nORDER BY e.Fecha ASC");
@@ -28,7 +31,7 @@ namespace Negocio
                 {
                     throw new Exception("No hay filas para leer.");
                 }
-                
+
                 while (datos.Lector.Read())
                 {
                     int eventoId = (int)datos.Lector["Id"];
@@ -51,15 +54,23 @@ namespace Negocio
                             },
                             fecha = (DateTime)datos.Lector["Fecha"],
                             //precioEntrada = (decimal)datos.Lector["PrecioEntrada"],
-                            entradasDisponibles = (int)datos.Lector["CantidadEntradas"]
+                            entradasDisponibles = (int)datos.Lector["CantidadEntradas"],
+                            imagenes = new List<Imagen>()
+
                         };
 
-                    listaEventos.Add(aux);
+                        listaEventos.Add(aux);
                     }
                     if (datos.Lector["ImagenUrl"] != DBNull.Value)
                     {
+                        if (aux.imagenes == null)
+                        {
+                            aux.imagenes = new List<Imagen>();
+                        }
                         aux.imagenes.Add(new Imagen { IdEvento = aux.id, Url = (string)datos.Lector["ImagenUrl"] });
+
                     }
+
                 }
                 return listaEventos;
             }
@@ -72,7 +83,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        
+
         public List<Evento> filtrarportipo(int idTipoEvento)
         {
             List<Evento> listaEventos = listarEventos(); // Obtenemos todos los eventos
@@ -80,7 +91,7 @@ namespace Negocio
             return listaFiltrada;
         }
 
-        public Evento buscarEvento(int id)
+        public Evento EventoBuscar(int id)
         {
             try
             {
@@ -99,25 +110,71 @@ namespace Negocio
             {
                 throw ex;
             }
-        } 
+        }
 
+       
+
+        //ABM Eventos
         public void agregar(Evento evento)
         {
+            AccesoDB datos = new AccesoDB();
             try
             {
-                datos.setearConsulta("INSERT INTO Eventos (Codigo, Nombre, Descripcion, IdTipoEvento, Fecha, CantidadEntradas) VALUES (@Codigo, @Nombre, @Descripcion, @IdTipoEvento, @Fecha, @PrecioEntrada, @CantidadEntradas)");
+                // Inserta el evento en la tabla Eventos
+                datos.setearConsulta("INSERT INTO Eventos (Codigo, Nombre, Descripcion, Lugar, Direccion, IdTipoEvento, CantidadEntradas, Fecha) " +
+                                     "VALUES (@Codigo, @Nombre, @Descripcion, @Lugar, @Direccion, @IdTipoEvento, @CantidadEntradas, @Fecha); " +
+                                     "SELECT SCOPE_IDENTITY();");
+
                 datos.setearParametro("@Codigo", evento.codigo);
                 datos.setearParametro("@Nombre", evento.nombre);
                 datos.setearParametro("@Descripcion", evento.descripcion);
+                datos.setearParametro("@Lugar", evento.lugar);
+                datos.setearParametro("@Direccion", evento.direccion);
                 datos.setearParametro("@IdTipoEvento", evento.tipoEvento.id);
-                datos.setearParametro("@Fecha", evento.fecha);
-            
                 datos.setearParametro("@CantidadEntradas", evento.entradasDisponibles);
+                datos.setearParametro("@Fecha", evento.fecha);
+
+                // Ejecutar el primer INSERT y obtener el ID del evento generado
+                int idEvento = datos.ejecutarScalar(); // Esta función debe devolver el ID generado
+
+                // Ahora inserta la imagen en la tabla Imagenes usando el ID del evento
+                datos.setearConsulta("INSERT INTO Imagenes (IdEvento, ImagenUrl) VALUES (@IdEvento, @ImagenUrl)");
+                datos.setearParametro("@IdEvento", idEvento);
+                datos.setearParametro("@ImagenUrl", evento.imagenUrl);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al agregar evento: " + ex.Message);
+                throw new Exception("Error al agregar el evento: " + ex.Message);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public void ModificarEvento(Evento evento)
+        {
+            AccesoDB datos = new AccesoDB();
+            try
+            {
+                datos.setearConsulta("UPDATE Eventos SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Lugar = @Lugar, Direccion = @Direccion, IdTipoEvento = @IdTipoEvento, CantidadEntradas = @CantidadEntradas, Fecha = @Fecha WHERE Id = @Id");
+                datos.setearParametro("@Codigo", evento.codigo);
+                datos.setearParametro("@Nombre", evento.nombre);
+                datos.setearParametro("@Descripcion", evento.descripcion);
+                datos.setearParametro("@Lugar", evento.lugar);
+                datos.setearParametro("@Direccion", evento.direccion);
+                datos.setearParametro("@IdTipoEvento", evento.tipoEvento.id);
+                datos.setearParametro("@CantidadEntradas", evento.entradasDisponibles);
+                datos.setearParametro("@Fecha", evento.fecha);
+                datos.setearParametro("@Id", evento.id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al modificar evento: " + ex.Message);
             }
             finally
             {
@@ -145,6 +202,30 @@ namespace Negocio
             }
         }
 
+        public bool CodigoEventoExistente(string codigo)
+        {
+            AccesoDB datos = new AccesoDB();
+            try
+            {
+                datos.setearConsulta("SELECT COUNT(*) FROM Eventos WHERE Codigo = @codigo");
+                datos.setearParametro("@codigo", codigo);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read() && (int)datos.Lector[0] >0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al verificar el código de evento: " + ex.Message);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public List<Evento> carrito(List<int> lista)
         {
             List<Evento> listaEventos = listarEventos();
@@ -164,15 +245,16 @@ namespace Negocio
                                 b = true;
                             }
                         }
-                        if(b == false)
+                        if (b == false)
                             carrito.Add(evt);
                     }
                 }
-                
+
             }
             return carrito;
         }
 
+        //Precios
         public decimal buscarPrecio(int idevento, int idtipo)
         {
             decimal precio = 0;
@@ -199,6 +281,7 @@ namespace Negocio
             }
         }
 
+        //Favoritos
         public List<Evento> listarFavoritos(int idusuario)
         {
             try
@@ -210,7 +293,7 @@ namespace Negocio
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                    Evento aux = buscarEvento((int)datos.Lector["IdEvento"]);
+                   Evento aux = EventoBuscar((int)datos.Lector["IdEvento"]);
                     favoritos.Add(aux);
                 }
                 return favoritos;

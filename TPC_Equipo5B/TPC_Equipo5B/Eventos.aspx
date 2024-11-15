@@ -30,7 +30,9 @@
             <ItemTemplate>
                 <div class="col">
                     <div class="card h-100">
-                        <img class="card-img-top" src="<%# Eval("imagenes[0].Url") %>" alt="Imagen del evento" />
+                        <div class="carousel-inner">
+                                <%# GenerarImagenes(Eval("id")) %> <!-- Llama a la función del code-behind para generar imágenes -->
+                            </div>
                         <div class="card-body">
                             <h5 class="card-title"><%# Eval("nombre") %></h5>
                             <p class="card-text event-date"><i class="bi bi-calendar-check"></i> <%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></p>

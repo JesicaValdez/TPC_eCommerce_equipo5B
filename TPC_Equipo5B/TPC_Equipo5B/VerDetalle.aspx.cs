@@ -12,13 +12,14 @@ namespace TPC_Equipo5B
 {
     public partial class VerDetalle : System.Web.UI.Page
     {
+        public ImagenNegocio negocioImagen = new ImagenNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["id"] != null)
             {
                 EventoNegocio eventoNegocio = new EventoNegocio();
                 List<Evento> evento = new List<Evento>();
-                evento.Add(eventoNegocio.buscarEvento((int)Session["id"]));
+                evento.Add(eventoNegocio.EventoBuscar((int)Session["id"]));
                 detalle.DataSource = evento;
                 detalle.DataBind();
 

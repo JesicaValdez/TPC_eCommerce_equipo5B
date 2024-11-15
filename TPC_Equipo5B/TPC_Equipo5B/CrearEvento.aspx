@@ -1,86 +1,124 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="CrearEvento.aspx.cs" Inherits="TPC_Equipo5B.CrearEvento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <!-- Aquí puedes agregar metas, estilos adicionales o scripts -->
+    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <!-- Agregar ScriptManager antes de UpdatePanel -->
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+
+    <!-- Título de la página -->
     <h1 class="text-center" style="color: #F4F4F4;">Crear Evento</h1>
 
+    <!-- Mensaje de ayuda -->
     <div id="Crear" class="form-text text-center m-4" style="color: #F4F4F4;">
         Completa los campos para crear un nuevo evento
     </div>
 
-    <div class="row justify-content-center">
+
+    <!-- Formulario de Crear Evento -->
+    <div class="row">
         <div class="col-6">
 
             <!-- Código del Evento -->
             <div class="mb-3">
-                <label for="txtCodigoEvento" class="form-label" style="color: #F4F4F4;">Código del Evento</label>
+                <label for="txtCodigoEvento" class="form-label" style="color: #F4F4F4;">Código:</label>
                 <asp:TextBox runat="server" ID="txtCodigoEvento" CssClass="form-control" placeholder="Ingrese código único del evento" />
             </div>
 
             <!-- Nombre del Evento -->
             <div class="mb-3">
-                <label for="txtNombreEvento" class="form-label" style="color: #F4F4F4;">Nombre del Evento</label>
+                <label for="txtNombreEvento" class="form-label" style="color: #F4F4F4;">Nombre:</label>
                 <asp:TextBox runat="server" ID="txtNombreEvento" CssClass="form-control" placeholder="Ingrese nombre del evento" />
             </div>
 
-            <!-- Descripción del Evento -->
+            <!-- Lugar del Evento -->
             <div class="mb-3">
-                <label for="txtDescripcionEvento" class="form-label" style="color: #F4F4F4;">Descripción</label>
-                <asp:TextBox runat="server" ID="txtDescripcionEvento" CssClass="form-control" TextMode="MultiLine" Rows="4" placeholder="Ingrese una descripción del evento" />
+                <label for="txtLugarEvento" class="form-label" style="color: #F4F4F4;">Lugar:</label>
+                <asp:TextBox runat="server" ID="txtLugarEvento" CssClass="form-control" placeholder="Ingrese lugar del evento" />
+            </div>
+
+            <!-- Dirección del Evento -->
+            <div class="mb-3">
+                <label for="txDireccionEvento" class="form-label" style="color: #F4F4F4;">Dirección:</label>
+                <asp:TextBox runat="server" ID="txtDireccionEvento" CssClass="form-control" placeholder="Ingrese dirección del evento" />
             </div>
 
             <!-- Fecha del Evento -->
             <div class="mb-3">
-                <label for="txtFechaEvento" class="form-label
-                    " style="color: #F4F4F4;">Fecha del Evento</label>
-                <asp:TextBox runat="server" ID="txtFechaEvento" CssClass="form-control" placeholder="Ingrese fecha del evento" />
-                </div>
+                <label for="txtFechaEvento" class="form-label" style="color: #F4F4F4;">Fecha:</label>
+                <asp:TextBox runat="server" ID="txtFechaEvento" CssClass="form-control" TextMode="Date"></asp:TextBox>
+            </div>
 
-            <!-- URL Imagenes del Evento -->
+            <!-- Cantidad de Entradas-->
             <div class="mb-3">
-                <label for="txtImagenEvento" class="form-label
-                    " style="color: #F4F4F4;">URL Imagenes del Evento</label>
-                <asp:TextBox runat="server" ID="txtImagenEvento" CssClass="form-control" placeholder="Ingrese URL de la imagen del evento" />
-                </div>
-
-            <!-- Tipo de Evento -->
-            <div class="mb-3">
-                <label for="ddlTipoEvento" class="form-label
-                    " style="color: #F4F4F4;">Tipo de Evento</label>
-                <asp:DropDownList runat="server" ID="ddlTipoEvento" CssClass="form-control">
-                    <asp:ListItem Text="Seleccionar Tipo de Evento" />
-                    <asp:ListItem Text="Recital" Value="Recital" />
-                    <asp:ListItem Text="Obra de Teatro" Value="Obra de Teatro" />
-                    <asp:ListItem Text="Show" Value="Show" />
-                    </asp:DropDownList>
-                </div>
-
-            <!-- Lugar del Evento -->
-            <div class="mb-3">
-                <label for="txtLugarEvento" class="form-label
-                    " style="color: #F4F4F4;">Lugar del Evento</label>
-                <asp:TextBox runat="server" ID="txtLugarEvento" CssClass="form-control" placeholder="Ingrese lugar del evento" />
-                </div>
-
-            <!-- Entradas Disponibles -->
-            <div class="mb-3">
-                <label for="txtEntradasDisponibles" class="form-label
-                    " style="color: #F4F4F4;">Entradas Disponibles</label>
-                <asp:TextBox runat="server" ID="txtEntradasDisponibles" CssClass="form-control" placeholder="Ingrese cantidad de entradas disponibles" />
-                </div>
-
-            <!-- Precio del Evento -->
-
-
+                <label for="txtCantEntradas" class="form-label" style="color: #F4F4F4;">Cantidad Entradas:</label>
+                <asp:TextBox runat="server" ID="txtCantEntradas" CssClass="form-control" placeholder="Ingrese cantidad de entradas" />
+            </div>
 
             <!-- Botón de Crear Evento -->
-            <asp:Button runat="server" ID="btnCrearEvento" Text="Crear Evento" class="btn btn-success mt-3" OnClick="btnCrearEvento_Click" />
+            <div class="mb-3">
+                <asp:Button runat="server" ID="btnCrearEvento" Text="Crear Evento" class="btn btn-success mt-3" OnClick="btnCrearEvento_Click" />
+                <a href="Admin.aspx">Cancelar</a>
+            </div>
 
-            <asp:Label runat="server" ID="lblResultado" CssClass="form-text text-center" />
 
+            <!-- Mensaje de Resultado -->
+            <div class="mb-3">
+                <asp:Label runat="server" ID="lblResultado" CssClass="form-text text-center" />
+            </div>
+        </div>
+
+        <!-- Tipo de Evento -->
+        <div class="col-6">
+            <div class="mb-3">
+                <label for="ddlTipoEvento" class="form-label" style="color: #F4F4F4;">Tipo de Evento: </label>
+                <asp:DropDownList runat="server" ID="ddlTipoEvento" CssClass="btn btn-secondary dropdown-toggle form-select">
+                </asp:DropDownList>
+            </div>
+
+            <!-- Descripción del Evento -->
+            <div class="mb-3">
+                <label for="txtDescripcionEvento" class="form-label" style="color: #F4F4F4;">Descripción:</label>
+                <asp:TextBox runat="server" ID="txtDescripcionEvento" CssClass="form-control" TextMode="MultiLine" Rows="4" placeholder="Ingrese una descripción del evento" />
+            </div>
+
+            <!-- URL Imagenes del Evento -->
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <!-- Contenido dentro del UpdatePanel -->
+                    <div class="mb-3">
+                        <label for="txtImagenEvento" class="form-label" style="color: #F4F4F4;">Url Imagen</label>
+                        <asp:TextBox runat="server" ID="txtImagenEvento" CssClass="form-control" placeholder="Ingrese URL de la imagen del evento"
+                            AutoPostBack="true" OnTextChanged="txtImagenEvento_TextChanged" />
+                    </div>
+                    <asp:Image ImageUrl="https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png"
+                        runat="server" ID="imgEvento" Width="60%" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>
+                    <div class="mb-3">
+                        <asp:Button Text="Eliminar" ID="btnEliminar" CssClass="btn btn-danger" OnClick="btnEliminar_Click" runat="server" />
+                    </div>
+
+                    <%if (ConfirmaEliminacion)
+                        {%>
+                    <div class="mb-3">
+                        <asp:CheckBox ID="chkConfirmaEliminacion" runat="server" Text="Confirmar eliminación del Evento" />
+                        <asp:Button Text="Eliminar" ID="btnConfirmaEliminar" CssClass="btn btn-outline-danger" OnClick="btnConfirmarEliminacion_Click" runat="server" />
+                    </div>
+                    <% }%>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </div>
 </asp:Content>

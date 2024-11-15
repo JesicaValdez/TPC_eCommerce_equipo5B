@@ -71,6 +71,104 @@
         transform: scale(1.05);
     }
 
+/*Estilo para Botón de Busqueda*/
+.btn-buscar {
+    background-color: #ffb700;
+    color:#333;
+    border: none;
+    transition: background-color: 0.3s ease;
+}
+
+.btn-buscar:hover {
+    background-color: #e0a800;
+    color: #fff;
+}
+
+/*Opciones de MENU Panel Admin*/
+.admin-menu-item {
+    color: #f4f4f4;
+    transition: background-color 0.3s, color 0.3s;
+    padding: 10px;
+    border: none;
+    text-align: left;
+}
+
+.admin-menu-item:hover {
+    background-color: #e0a800;
+    color: 333;
+    text-decoration: none;
+}
+
+/* Mensaje en el Panel de Administración */
+.alert-custom {
+    background-color: #17a2b8;
+    color: #f4f4f4;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+/* Estilo para el Contenedor Principal */
+.container-fluid {
+    padding: 0;
+}
+
+/* Encabezado del Panel de Administración */
+.admin-header {
+    padding: 20px;
+    background-color: #343a40;
+    color: #f4f4f4;
+    border-bottom: 1px solid #ffb700;
+}
+
+    .admin-header h2 {
+        font-size: 2rem;
+        margin: 0;
+    }
+
+/* Contenido del Panel de Administración */
+.admin-content {
+    padding: 20px;
+    background-color: #212529;
+    color: #f4f4f4;
+}
+
+/* Estilo de Tabla en el Panel de Administración */
+.table-dark {
+    background-color: #343a40;
+    color: #f4f4f4;
+}
+
+    .table-dark th, .table-dark td {
+        border-color: #495057;
+    }
+
+/* Dropdown de Reportes */
+.form-select {
+    background-color: #343a40;
+    color: #f4f4f4;
+    border: 1px solid #ffb700;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+ .form-select option {
+        background-color: #343a40;
+        color: #f4f4f4;
+    }
+
+/* Botón de Generar Reporte */
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+}
+
+    .btn-success:hover {
+        background-color: #218838;
+        color: #f4f4f4;
+    }
+
 /* Tarjetas de Categoría (Category Card) */
 .category-card {
     border-radius: 10px;

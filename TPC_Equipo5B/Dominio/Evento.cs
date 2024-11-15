@@ -11,10 +11,13 @@ namespace Dominio
         public string descripcion { get; set; }
         public string lugar { get; set; }
         public string direccion { get; set; }
+        //public decimal precios { get; set; }  
         public TipoEvento tipoEvento { get; set; }
         public int entradasDisponibles { get; set; }
         public DateTime fecha { get; set; }
         public List<Imagen> imagenes { get; set; }  // Lista de imágenes
+        public string imagenUrl { get; set; }
+
 
         public Evento()
         {
@@ -25,10 +28,12 @@ namespace Dominio
             lugar = string.Empty;
             direccion = string.Empty;
             tipoEvento = new TipoEvento();
-            //precioEntrada = 0;
+            //precio = 0;
             entradasDisponibles = 0;
             fecha = DateTime.MinValue;
-            imagenes = new List<Imagen>(); // Inicializar la lista
+            imagenUrl= string.Empty;
+            imagenes = new List<Imagen>();
         }
+
     }
 }
