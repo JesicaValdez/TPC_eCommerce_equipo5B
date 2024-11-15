@@ -11,23 +11,23 @@
             <!-- Sidebar de administración -->
             <div class="col-md-3 bg-dark text-light p-3">
                 <i class="bi bi-person-fill-gear info-icon-page"></i>
-                <h4 class="text-center mb-4 title-style">Panel</h4>
+                <h4 class="text-center mb-4 title-style">Menú</h4>
                 <div class="list-group">
                     <!-- Opciones de administración -->
                     <asp:LinkButton ID="lnkVerUsuarios" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="VerListadoUsuarios">
-                        <i class="bi bi-people-fill info-icon"></i> Listado de Usuarios 
+                        <i class="bi bi-people-fill"></i> Listado de Usuarios 
                     </asp:LinkButton>
                     <asp:LinkButton ID="LinkButton1" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="VerListadoClientes">
-                      <i class="bi bi-people-fill info-icon"></i> Listado de Clientes 
+                      <i class="bi bi-people-fill"></i> Listado de Clientes 
                     </asp:LinkButton>
                     <asp:LinkButton ID="lnkGestionEventos" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="MostrarGestionEventos">
-                        <i class="bi bi-calendar-event-fill info-icon"></i> Gestión de Eventos
+                        <i class="bi bi-calendar-event-fill "></i> Gestión de Eventos
                     </asp:LinkButton>
                     <asp:LinkButton ID="lnkReportes" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="MostrarReportes">
-                        <i class="bi bi-graph-up info-icon"></i> Reportes y Análisis
+                        <i class="bi bi-graph-up"></i> Reportes y Análisis
                     </asp:LinkButton>
-                    <asp:LinkButton ID="lnkCerrarSesion" runat="server" CssClass="list-group-item admin-menu-item" OnClick="CerrarSesion">
-                        <i class="bi bi-box-arrow-right info-icon"></i> Cerrar Sesión
+                    <asp:LinkButton ID="lnkCerrarSesion" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="CerrarSesion">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
                     </asp:LinkButton>
                 </div>
             </div>
@@ -49,8 +49,13 @@
                         <!-- Vista de Usuarios -->
                         <asp:View ID="ViewGestionUsuarios" runat="server">
                             <h3 class="info-title">Lista de Usuarios</h3>
-                            <asp:TextBox ID="txtBuscarUsuario" runat="server" Placeholder="Buscar usuario..." CssClass="form-control mb-2 text-style"></asp:TextBox>
-                            <asp:Button ID="btnBuscarUsuario" runat="server" Text="Buscar" OnClick="btnBuscarUsuario_Click" CssClass="btn btn-secondary mb-3 explore-btn" />
+
+                            <div class="form-group">
+                                <label for="txtBuscarEvento" class="filter-container-label">ID del Usuario:</label>
+                                <asp:TextBox ID="txtBuscarUsuario" runat="server" Placeholder="Buscar usuario..." CssClass="form-control mb-2 text-style"></asp:TextBox>
+                                <asp:Button ID="btnBuscarUsuario" runat="server" Text="Buscar" OnClick="btnBuscarUsuario_Click" CssClass="btn btn-secondary mb-3 explore-btn" />
+                            </div>
+
                             <asp:GridView ID="dgvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="IdUsuario" CssClass="table table-dark table-striped category-card">
                                 <Columns>
                                     <asp:BoundField DataField="NombreUsuario" HeaderText="Nombre de Usuario" />
@@ -73,7 +78,7 @@
                                     <asp:BoundField DataField="Apellido" HeaderText="Apellido de Cliente" />
                                     <asp:BoundField DataField="fechaNacimiento" HeaderText="Fecha de Nacimiento" />
                                     <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
-                                    
+
                                 </Columns>
                             </asp:GridView>
                         </asp:View>
@@ -82,10 +87,14 @@
                         <asp:View ID="ViewGestionEventos" runat="server">
                             <h3 class="info-title">Gestión de Eventos</h3>
                             <p class="text-style">Aquí puedes gestionar los eventos del sistema.</p>
-                            <asp:TextBox ID="txtBuscarEvento" runat="server" Text="Ingresa el ID del Evento:" CssClass="filter-container-label"></asp:TextBox>
-                            <asp:Button ID="BtnBuscarEvento" runat="server" Text="Buscar" OnClick="btnBuscarEvento_Click" CssClass="btn btn-secondary explore-btn" />
 
-                            <asp:GridView ID="dgvEventos" runat="server" CssClass="table table-dark table-striped category-card" AutoGenerateColumns="false">
+                            <div class="form-group">
+                                <label for="txtBuscarEvento" class="filter-container-label">ID del Evento:</label>
+                                <asp:TextBox ID="txtBuscarEvento" runat="server" CssClass="form-control mb-2 text-style" placeholder="Ingresar el ID..." />
+                                <asp:Button ID="BtnBuscarEvento" runat="server" Text="Buscar" OnClick="btnBuscarEvento_Click" CssClass="btn btn-secondary explore-btn" />
+                            </div>
+
+                            <asp:GridView ID="dgvEventos" runat="server" CssClass="table table-dark table-striped category-card" AutoGenerateColumns="false" DataKeyNames="id">
                                 <Columns>
                                     <asp:BoundField DataField="id" HeaderText="ID" />
                                     <asp:BoundField DataField="codigo" HeaderText="Codigo" />
@@ -96,12 +105,12 @@
                                     <asp:BoundField DataField="fecha" HeaderText="Fecha" />
                                     <asp:TemplateField HeaderText="Modificar">
                                         <ItemTemplate>
-                                            <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-warning explore-btn" CommandName="Modificar" CommandArgument='<%# Eval("id") %>' OnClick="btnModificar_Click"/>
+                                            <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-warning explore-btn" CommandName="Modificar" CommandArgument='<%# Eval("id") %>' OnClick="btnModificar_Click" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Eliminar">
                                         <ItemTemplate>
-                                            <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger explore-btn" CommandName="Eliminar" CommandArgument='<%# Eval("id") %>'/>
+                                            <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger explore-btn" CommandName="Eliminar" CommandArgument='<%# Eval("id") %>' OnClick="btnEliminarEvento_Click" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

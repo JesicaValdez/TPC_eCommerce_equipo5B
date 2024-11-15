@@ -74,7 +74,6 @@
     <Content Include="CSS\Style.css" />
     <Content Include="Error.aspx" />
     <Content Include="Favoritos.aspx" />
-    <Content Include="icons8-calendar-24.png" />
     <Content Include="icons8-user-48.png" />
     <Content Include="Pago.aspx" />
     <Content Include="Contact.aspx" />

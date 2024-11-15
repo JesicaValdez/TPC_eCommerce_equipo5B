@@ -19,6 +19,7 @@ namespace TPC_Equipo5B
 
         protected void Ingresar(object sender, EventArgs e)
         {
+
             Dominio.Usuario usuario;
             UsuarioNegocio negocio = new UsuarioNegocio();
 
@@ -61,7 +62,6 @@ namespace TPC_Equipo5B
                         Response.Redirect("Error.aspx", false);
                     }
                 }
-
             }
             catch (Exception ex)
             {

@@ -92,7 +92,7 @@ namespace TPC_Equipo5B
             }
             else
             {
-                MostrarMensaje("Por favor, ingrese un nombre de usuario válido.", false);
+                MostrarMensaje("Por favor, ingrese un Id de usuario válido.", false);
             }
 
         }
@@ -178,7 +178,8 @@ namespace TPC_Equipo5B
             try
             {
                    string id = ((Button)sender).CommandArgument;
-                   Session.Add("EventoID");
+                
+                   Session.Add("EventoID", id);
                    Response.Redirect("CrearEvento.aspx");
 
             }
@@ -188,6 +189,27 @@ namespace TPC_Equipo5B
             }
 
             
+        }
+
+        protected void btnEliminarEvento_Click(Object sender, EventArgs e)
+        {
+            try
+            {
+                int id = int.Parse(((Button)sender).CommandArgument);
+
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                eventoNegocio.eliminarEvento(id);
+
+           
+                MostrarMensaje("Evento eliminado correctamente.", true);
+                CargarUsuarios();
+            }
+            catch (Exception)
+            {
+                Session.Add("error", "Error al intentar eliminar el evento seleccionado");
+                Response.Redirect("Error.aspx", false);
+
+            }
         }
 
         protected void dgvEventos_SelectedIndexChanged(object sender, EventArgs e)

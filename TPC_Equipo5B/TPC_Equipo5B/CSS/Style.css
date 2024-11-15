@@ -85,17 +85,16 @@
 }
 
 /*Opciones de MENU Panel Admin*/
-.admin-menu-item {
-    color: #f4f4f4;
-    transition: background-color 0.3s, color 0.3s;
-    padding: 10px;
-    border: none;
-    text-align: left;
-}
+    .list-group-item-dark:hover, .list-group-item-dark:focus {
+        background-color: #e0a800;
+        color: #f4f4f4;
+        cursor: pointer;
+        text-decoration:none;
+    }
 
-.admin-menu-item:hover {
-    background-color: #e0a800;
-    color: 333;
+.list-group-item-dark.active {
+    background-color: #495057;
+    color: #f4f4f4;
     text-decoration: none;
 }
 

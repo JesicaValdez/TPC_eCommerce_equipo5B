@@ -27,16 +27,16 @@ namespace Negocio
                     aux.Dni = (string)datos.Lector["Dni"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
-                    aux.fechaNacimiento = (DateTime)datos.Lector["fechaNacimiento"];       
+                    aux.fechaNacimiento = (DateTime)datos.Lector["fechaNacimiento"];
                     aux.Telefono = (string)datos.Lector["Telefono"];
-                   
+
                     lista.Add(aux);
                 }
 
                 return lista;
             }
             catch (Exception ex)
-            {                                
+            {
                 throw ex;
             }
             finally
@@ -52,14 +52,12 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, fechaNacimiento, Telefono) VALUES (@IDUsuario, @DNI, @Nombre, @Apellido, @fechaNacimiento, @Telefono)");
-
                 datos.setearParametro("@IDUsuario", idUsuario);
                 datos.setearParametro("@DNI", nuevo.Dni);
                 datos.setearParametro("Nombre", nuevo.Nombre);
                 datos.setearParametro("@Apellido", nuevo.Apellido);
                 datos.setearParametro("@fechaNacimiento", nuevo.fechaNacimiento);
                 datos.setearParametro("@Telefono", nuevo.Telefono);
-                
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -144,7 +142,7 @@ namespace Negocio
                 datos.setearParametro("@Dni", cliente.Dni);
                 datos.setearParametro("@Nombre", cliente.Nombre);
                 datos.setearParametro("@Apellido", cliente.Apellido);
-                datos.setearParametro("@fechaNacimiento", cliente.fechaNacimiento);                
+                datos.setearParametro("@fechaNacimiento", cliente.fechaNacimiento);
                 datos.setearParametro("@Telefono", cliente.Telefono);
                 datos.setearParametro("@IdCliente", id);
 
@@ -208,5 +206,36 @@ namespace Negocio
                 dato.cerrarConexion();
             }
         }
+
+        public Cliente buscarCliente(int id)
+        {
+            AccesoDB dato = new AccesoDB();
+            try
+            {
+                Cliente cliente = new Cliente();
+                List<Cliente> listaCliente = listar();
+                foreach (Cliente clt in listaCliente)
+                {
+                    if (clt.IdCliente == id)
+                    {
+                        cliente = clt;
+                    }
+                }
+                return cliente;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dato.cerrarConexion();
+            }
+        }
     }
 }
+
+
+
+
