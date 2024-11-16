@@ -9,10 +9,16 @@ namespace Dominio
     public class Entrada
     {
         public int IdEntrada { get; set; }
-        public int codigo { get; set; }
+        public Precio precio { get; set; }
         public Evento evento { get; set; }
-        public Cliente cliente { get; set; }
-        public DateTime fechaCompra { get; set; }
+        
+
+        public Entrada()
+        {
+            IdEntrada = 0;
+            precio =  new Precio();
+            evento = new Evento();
+        }
 
         public Evento Evento
         {

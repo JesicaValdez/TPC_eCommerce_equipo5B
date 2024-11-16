@@ -46,10 +46,12 @@
   <ItemGroup>
     <Compile Include="AccesoDB.cs" />
     <Compile Include="ClienteNegocio.cs" />
+    <Compile Include="CompraNegocio.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="ImagenNegocio.cs" />
     <Compile Include="EntradaNegocio.cs" />
     <Compile Include="EventoNegocio.cs" />
+    <Compile Include="PrecioNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoEventoNegocio.cs" />
     <Compile Include="UsuarioNegocio.cs" />

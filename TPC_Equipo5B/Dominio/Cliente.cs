@@ -16,7 +16,7 @@ namespace Dominio
         public DateTime fechaNacimiento { get; set; }
         public string Telefono {  get; set; }
 
-        internal Carrito Carrito
+        internal Compra Carrito
         {
             get => default;
             set

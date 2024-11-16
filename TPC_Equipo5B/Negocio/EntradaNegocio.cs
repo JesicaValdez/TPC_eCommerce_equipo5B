@@ -56,5 +56,27 @@ namespace Negocio
             }
         }
 
+        public void cargarEntrada(int idevento, string tipoentrada, decimal precio, int idcompra)
+        {
+            AccesoDB datos = new AccesoDB();
+            try
+            {
+                datos.setearConsulta("INSERT INTO Entrada(IdEvento, TipoEntrada, Precio, IdCompra, Estado) VALUES (@idEvento, @tipoEntrada, @precio, @idcompra, 1)");
+                datos.setearParametro("@idEvento", idevento);
+                datos.setearParametro("@tipoEntrada", tipoentrada);
+                datos.setearParametro("@precio", precio);
+                datos.setearParametro("@idcompra", idcompra);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

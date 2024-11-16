@@ -91,7 +91,7 @@ namespace Negocio
             return listaFiltrada;
         }
 
-        public Evento EventoBuscar(int id)
+        public Evento buscarEvento(int id)
         {
             try
             {
@@ -226,35 +226,32 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public List<Evento> carrito(List<int> lista)
+        public List<Entrada> carrito(List<List<int>> lista)
         {
+            PrecioNegocio precioNegocio = new PrecioNegocio();
+
             List<Evento> listaEventos = listarEventos();
-            List<Evento> carrito = new List<Evento>();
+            List<Entrada> carrito = new List<Entrada>();
+
             bool b;
-            foreach (Evento evt in listaEventos)
+            foreach (List<int> l in lista)
             {
                 b = false;
-                foreach (int id in lista)
+                foreach (Evento evt in listaEventos)
                 {
-                    if (evt.id == id)
+                    if (evt.id == l[0])
                     {
-                        foreach (Evento fav in carrito)
-                        {
-                            if (fav.id == id)
-                            {
-                                b = true;
-                            }
-                        }
-                        if (b == false)
-                            carrito.Add(evt);
+                        Entrada entrada = new Entrada();
+                        entrada.evento = evt;
+                        entrada.precio = precioNegocio.buscarPrecio(l[2]);
+                        carrito.Add(entrada);
                     }
                 }
 
             }
             return carrito;
         }
-
-        //Precios
+        /*
         public decimal buscarPrecio(int idevento, int idtipo)
         {
             decimal precio = 0;
@@ -279,24 +276,24 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-        }
+        }*/
 
-        //Favoritos
-        public List<Evento> listarFavoritos(int idusuario)
+        public List<int> listarIdFavoritos(int idusuario)
         {
             try
             {
-                List<Evento> listaEventos = listarEventos();
+                List<int> idFav = new List<int>();
                 List<Evento> favoritos = new List<Evento>();
-                datos.setearConsulta("SELECT IdEvento from Favoritos where IdUsuario = @idusu");
-                datos.setearParametro("@idusu", idusuario);
+                datos.setearConsulta("SELECT IdEvento from Favoritos where IdUsuario = @id");
+                datos.setearParametro("@id", idusuario);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                   Evento aux = EventoBuscar((int)datos.Lector["IdEvento"]);
-                    favoritos.Add(aux);
+
+                    idFav.Add((int)datos.Lector["IdEvento"]);
                 }
-                return favoritos;
+
+                return idFav;
             }
             catch (Exception ex)
             {
@@ -306,6 +303,17 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public List<Evento> listarFavoritos(List<int> lista)
+        {
+            List<Evento> eventos = new List<Evento>();
+            foreach (int id in lista)
+            {
+                Evento aux = buscarEvento(id);
+                eventos.Add(aux);
+            }
+            return eventos;
         }
 
         public void agregarFavorito(int idusuario, int idevento)

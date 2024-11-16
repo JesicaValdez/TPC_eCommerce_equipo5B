@@ -135,8 +135,26 @@ namespace TPC_Equipo5B
 
         protected void ButtonFavorite_Click(object sender, EventArgs e)
         {
+            if (Session["IdUsuario"] != null)
+            {
+                bool b = false;
+                LinkButton btnfav = (LinkButton)sender;
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                List<int> ids = eventoNegocio.listarIdFavoritos((int)Session["IdUsuario"]);
+                foreach (int id in ids)
+                {
+                    if (id == Int32.Parse(btnfav.CommandArgument))
+                    {
+                        b = true;
+                    }
+                }
+                if(b == false)
+                {
+                    eventoNegocio.agregarFavorito((int)Session["IdUsuario"], Int32.Parse(btnfav.CommandArgument));
+                }
+                
+            }
 
-            
         }
 
         

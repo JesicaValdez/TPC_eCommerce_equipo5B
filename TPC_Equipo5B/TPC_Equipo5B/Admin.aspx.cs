@@ -135,7 +135,7 @@ namespace TPC_Equipo5B
                 Evento eventoBuscado = new Evento();
 
                 int codigoEvento = int.Parse(txtBuscarEvento.Text);
-                eventoBuscado = eventoNegocio.EventoBuscar(codigoEvento);
+                eventoBuscado = eventoNegocio.buscarEvento(codigoEvento);
 
                 if (eventoBuscado != null && eventoBuscado.id != 0)
                 {

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections;
+using System.Web.Services.Description;
 
 namespace TPC_Equipo5B
 {
@@ -15,43 +16,88 @@ namespace TPC_Equipo5B
         public ImagenNegocio negocioImagen = new ImagenNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["id"] != null)
+            if (!IsPostBack)
             {
-                EventoNegocio eventoNegocio = new EventoNegocio();
-                List<Evento> evento = new List<Evento>();
-                evento.Add(eventoNegocio.EventoBuscar((int)Session["id"]));
-                detalle.DataSource = evento;
-                detalle.DataBind();
+                if (Session["id"] != null)
+                {
+                    EventoNegocio eventoNegocio = new EventoNegocio();
+                    List<Evento> evento = new List<Evento>();
+                    evento.Add(eventoNegocio.buscarEvento((int)Session["id"]));
+                    detalle.DataSource = evento;
+                    detalle.DataBind();
 
-                
-
+                    PrecioNegocio precioNegocio = new PrecioNegocio();
+                    List<Precio> precio = precioNegocio.listarporEvento((int)Session["id"]);
+                    ddlEntradas.DataSource = precio;
+                    ddlEntradas.DataTextField = "tipoEntrada";
+                    ddlEntradas.DataValueField = "idPrecio";
+                    ddlEntradas.DataBind();
+                    ddlEntradas.Items.Insert(0, new ListItem("Tipo de entrada", "0"));
+                }
             }
 
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            
-            LinkButton btn1 = (LinkButton)sender;
-            int eventId = Int32.Parse(btn1.CommandArgument);
-            List<int> carritoid = new List<int>();
-            List<string> carritotipo = new List<string>();
-            if ((List<int>)Session["carritoid"] == null)
+
+            bool b = false;
+            List<List<int>> carritoid = new List<List<int>>();
+
+            if (ddlEntradas.SelectedValue != "0")
             {
-                carritoid.Add(eventId);
-                //carritotipo.Add(ddlEntradas.SelectedItem.Text);
-                Session["carritoid"] = carritoid;
-                //Session["carritotipo"] = carritotipo;
+                if ((List<List<int>>)Session["carritoid"] == null)
+                {
+                    List<int> lista = new List<int>();
+                    lista.Add((int)Session["id"]);
+                    lista.Add(Int32.Parse(DropDownList1.SelectedValue));
+                    int idprecio = Convert.ToInt32(ddlEntradas.SelectedValue);
+                    lista.Add(idprecio);
+                    carritoid.Add(lista);
+
+                    Session["carritoid"] = carritoid;
+                    Response.Write("<script>alert(' Se agrego al exitosamente al carrito ');</script>");
+
+                }
+                else
+                {
+
+                    carritoid = (List<List<int>>)Session["carritoid"];
+                    foreach (List<int> l in carritoid)
+                    {
+                        if (l[0] == (int)Session["id"] && l[2] == Convert.ToInt32(ddlEntradas.SelectedValue))
+                        {
+                            l[1] += Int32.Parse(DropDownList1.SelectedValue);
+                            b = true;
+                        }
+                    }
+                    if (b == false)
+                    {
+
+                        List<int> lista = new List<int>();
+                        lista.Add((int)Session["id"]);
+                        lista.Add(Int32.Parse(DropDownList1.SelectedValue));
+                        lista.Add(Int32.Parse(ddlEntradas.SelectedValue));
+                        carritoid.Add(lista);
+                    }
+
+                    Session["carritoid"] = carritoid;
+                    Response.Write("<script>alert(' Se agrego exitosamente al carrito ');</script>");
+
+                }
             }
-            else
+        }
+
+        public string entradas()
+        {
+            string precios = "";
+            PrecioNegocio precioNegocio = new PrecioNegocio();
+            List<Precio> lista = precioNegocio.listarporEvento((int)Session["id"]);
+            foreach (Precio precio in lista)
             {
-                carritoid = (List<int>)Session["carritoid"];
-                //carritotipo = (List<string>)Session["carritotipo"];
-                carritoid.Add(eventId);
-                //carritotipo.Add(ddlEntradas.SelectedItem.Text);
-                Session["carritoid"] = carritoid;
-                //Session["carritotipo"] = carritotipo;
+                precios = precios + "\r\n" + precio.tipoEntrada + " " + precio.precio.ToString();
             }
+            return precios;
         }
     }
 }

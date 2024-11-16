@@ -72,37 +72,55 @@
 <h1 class="title-style">Información de tu Próximo Evento</h1>
 
 <!--Contenedor del evento -->
-<div class="card mb-3">
-  <div class="row g-0">
-      /<asp:Repeater ID="detalle" runat="server">
-        <ItemTemplate>
-            <!-- Imagen del evento -->
-            <div id="carousel" class="col-md-4">
-         <img class="card-img-top" src='<%# (Eval("imagenes") != null && ((List<Dominio.Imagen>)Eval("imagenes")).Count > 0) ? ((List<Dominio.Imagen>)Eval("imagenes"))[0].Url : "defaultImageUrl" %>'>
+<!--Contenedor del evento -->
+ <asp:Repeater ID="detalle" runat="server">
+    <ItemTemplate>
+        <div class="card mb-3">
+            <div class="row g-0">
+     
+                <!-- Imagen del evento -->
+                <div id="carousel" class="col-md-4">
+                    <img class="card-img-top" src='<%# (Eval("imagenes") != null && ((List<Dominio.Imagen>)Eval("imagenes")).Count > 0) ? ((List<Dominio.Imagen>)Eval("imagenes"))[0].Url : "defaultImageUrl" %>'>
 
+                </div>
+                <!-- Información del evento -->
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title"><%# Eval("nombre") %></h5>
+                    <p class="card-text"><i class="bi bi-ticket-perforated-fill"></i><%# Eval("descripcion") %></p>
+                    <p class="card-text"><small class="text-body-secondary"><i class="bi bi-file-plus"></i><%# entradas() %></small></p>
+                    <p class="card-text"><small class="text-body-secondary"><i class="bi bi-map"></i> <%# Eval("lugar") %>, <%# Eval("direccion") %></small></p>
+                    <p class="card-text"><small class="text-body-secondary"><i class="bi bi-bag-check"></i> Asegura tu lugar en este evento comprando tu entrada</small></p>
+                
+                  </div>
+                </div>
+                <asp:Label ID="lblFechaHora" runat="server" CssClass="fecha-hora-evento"> <i class="bi bi-clock"></i><%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></asp:Label>
+       
             </div>
-            <!-- Información del evento -->
-            <div class="col-md-8">
+        </div>
+    </ItemTemplate>
+ </asp:Repeater>
+
+<div class="card ">
+  <div class="row justify-content-center">
+            <div class="col-md-6">
               <div class="card-body">
-                <h5 class="card-title"><%# Eval("nombre") %></h5>
-                <p class="card-text"><i class="bi bi-ticket-perforated-fill"></i><%# Eval("descripcion") %></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="bi bi-file-plus"></i>Precio de las entradas</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="bi bi-map"></i> Lugar</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="bi bi-bag-check"></i> Asegura tu lugar en este evento comprando tu entrada</small></p>
-                  <asp:DropDownList ID="ddlEntradas" runat="server" CssClass="btn explore-btn dropdown-toggle"></asp:DropDownList>
-                <asp:LinkButton ID="Button1" runat="server" CommandArgument=' <%# Eval("id") %>' CssClass="btn btn-warning" OnClick="Button1_Click">
+                <asp:Label ID="Label1" runat="server" Text="Cantidad:"></asp:Label>
+                <asp:DropDownList ID="DropDownList1" CssClass="btn explore-btn dropdown-toggle" runat="server">
+                    <asp:ListItem Text="1" />
+                    <asp:ListItem Text="2" />
+                    <asp:ListItem Text="3" />
+                    <asp:ListItem Text="4" />
+                    <asp:ListItem Text="5" />
+                </asp:DropDownList>
+                <asp:DropDownList ID="ddlEntradas" runat="server" Class="btn explore-btn dropdown-toggle" data-bs-toggle="dropdown"></asp:DropDownList>
+                <asp:LinkButton ID="Button1" runat="server"  CssClass="btn btn-warning" OnClick="Button1_Click">
                     <i class="bi bi-file-plus"></i> Obtene tu Ticket
                 </asp:LinkButton>
-                
               </div>
             </div>
-            <asp:Label ID="lblFechaHora" runat="server" CssClass="fecha-hora-evento"> <i class="bi bi-clock"></i><%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></asp:Label>
-        </ItemTemplate>
-      </asp:Repeater>
   </div>
 </div>
-
-    <!-- Fecha y hora del evento-->
   
 
 </asp:Content>

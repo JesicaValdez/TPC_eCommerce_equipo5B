@@ -38,7 +38,7 @@ namespace TPC_Equipo5B
                 {
                     EventoNegocio eventoNegocio = new EventoNegocio();
                     int idEvento = int.Parse(Request.QueryString["id"].ToString());
-                    Evento seleccionado = eventoNegocio.EventoBuscar(idEvento);
+                    Evento seleccionado = eventoNegocio.buscarEvento(idEvento);
 
                     //precarga de los campos originales
                     txtCodigoEvento.Text = seleccionado.codigo;
@@ -174,7 +174,7 @@ namespace TPC_Equipo5B
             }
 
         }
-
+        /*
         protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
         {
             try
@@ -201,7 +201,7 @@ namespace TPC_Equipo5B
                 throw;
             }
         
-        }
+        }*/
 
     }
 }
