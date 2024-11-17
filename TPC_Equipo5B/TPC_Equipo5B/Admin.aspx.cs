@@ -76,26 +76,30 @@ namespace TPC_Equipo5B
         //Botones de Busqueda
         public void btnBuscarUsuario_Click(object sender, EventArgs e)
         {
-            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            Usuario usuarioBuscado = null;
-
-            string usuario = txtBuscarUsuario.Text;
-            List<Dominio.Usuario> usuariosBuscados = usuarioNegocio.buscarUsuario(usuario);
-
-            if (usuarioBuscado != null && usuariosBuscados.Count > 0)
+            try
             {
-                List<Usuario> listaUsuarios = new List<Usuario>();
-                listaUsuarios.Add(usuarioBuscado);
-                dgvUsuarios.DataSource = listaUsuarios;
-                dgvUsuarios.DataBind();
-                MostrarMensaje("Usuario encontrado.", true);
-            }
-            else
-            {
-                MostrarMensaje("Por favor, ingrese un Id de usuario válido.", false);
-            }
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                string usuario = txtBuscarUsuario.Text.Trim();
 
+                List<Dominio.Usuario> usuariosBuscados = usuarioNegocio.buscarUsuario(usuario);
+
+                if (usuariosBuscados != null && usuariosBuscados.Count > 0)
+                {
+                    dgvUsuarios.DataSource = usuariosBuscados;
+                    dgvUsuarios.DataBind();
+                    MostrarMensaje("Usuarios encontrados.", true);
+                }
+                else
+                {
+                    MostrarMensaje("No se encontraron usuarios con ese criterio.", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al buscar usuario: " + ex.Message, false);
+            }
         }
+
 
         protected void btnBuscarCliente_Click(object sender, EventArgs e)
         {
@@ -111,8 +115,8 @@ namespace TPC_Equipo5B
                 {
                     List<Cliente> listaClientes = new List<Cliente>();
                     listaClientes.Add(clienteBuscado);
-                    dgvUsuarios.DataSource = listaClientes;
-                    dgvUsuarios.DataBind();
+                    dgvClientes.DataSource = listaClientes;
+                    dgvClientes.DataBind();
                     MostrarMensaje("Usuario encontrado.", true);
                 }
                 else
@@ -157,7 +161,7 @@ namespace TPC_Equipo5B
             }
         }
 
-        // Evento
+        // Evento -  Botón de gestión de eventos
         protected void CargarEventos()
         {
             try
@@ -173,15 +177,12 @@ namespace TPC_Equipo5B
             }
         }
 
-        protected void ButtonM_Click(object sender, EventArgs e)
+        protected void btnModificar_Click(object sender, EventArgs e)
         {
             try
             {
-                   string id = ((Button)sender).CommandArgument;
-                
-                   Session.Add("EventoID", id);
-                   Response.Redirect("CrearEvento.aspx");
-
+                string id = ((Button)sender).CommandArgument;
+                Response.Redirect("CrearEvento.aspx?id=" + id);
             }
             catch (Exception ex)
             {
@@ -239,15 +240,7 @@ namespace TPC_Equipo5B
         protected void MostrarReportes(object sender, EventArgs e)
         {
             MultiViewAdmin.ActiveViewIndex = 3;
-        }
-
-        // Botón de gestión de eventos
-
-        protected void btnModificar_Click (object sender, EventArgs e)
-        {
-            //Modificar el evento con el idEvento
-            Response.Redirect("CrearEvento.aspx");
-            
+            // AGREGAR LOGICA PARA VER REPORTES / GENERARLOS
         }
 
         // Método para generar reportes

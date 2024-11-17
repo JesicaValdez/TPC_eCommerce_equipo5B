@@ -8,6 +8,7 @@ using Negocio;
 using Dominio;
 using static System.Collections.Specialized.BitVector32;
 using System.Linq.Expressions;
+using System.Diagnostics;
 
 namespace TPC_Equipo5B
 {
@@ -34,31 +35,43 @@ namespace TPC_Equipo5B
                 }
 
                 //configuración si estamos modificando un evento
-                if (Request.QueryString["id"] != null)
+                if (!IsPostBack && Request.QueryString["id"] != null)
                 {
                     EventoNegocio eventoNegocio = new EventoNegocio();
-                    int idEvento = int.Parse(Request.QueryString["id"].ToString());
-                    Evento seleccionado = eventoNegocio.buscarEvento(idEvento);
+                    ImagenNegocio imagenNegocio = new ImagenNegocio();
+                    int idEvento = int.Parse(Request.QueryString["id"]);
+                    Evento seleccionado = eventoNegocio.EventoBuscar(idEvento);
 
-                    //precarga de los campos originales
-                    txtCodigoEvento.Text = seleccionado.codigo;
-                    txtNombreEvento.Text = seleccionado.nombre;
-                    txtDescripcionEvento.Text = seleccionado.descripcion;
-                    txtLugarEvento.Text = seleccionado.lugar;
-                    txtDireccionEvento.Text = seleccionado.direccion;
-                    txtCantEntradas.Text = seleccionado.entradasDisponibles.ToString();
-                    txtFechaEvento.Text = seleccionado.fecha.ToString("yyyy-MM-dd");
-                    //imgEvento.ImageUrl = txtImagenEvento.Text;
-                    //precargo desplegable de tipos de evento   
-                    ddlTipoEvento.SelectedValue = seleccionado.tipoEvento.id.ToString();
-                    txtImagenEvento_TextChanged(sender, e);
+                    if (seleccionado != null)
+                    {
+                        //precarga de los campos originales
+                        txtCodigoEvento.Text = seleccionado.codigo;
+                        txtNombreEvento.Text = seleccionado.nombre;
+                        txtDescripcionEvento.Text = seleccionado.descripcion;
+                        txtLugarEvento.Text = seleccionado.lugar;
+                        txtDireccionEvento.Text = seleccionado.direccion;
+                        txtCantEntradas.Text = seleccionado.entradasDisponibles.ToString();
+                        txtFechaEvento.Text = seleccionado.fecha.ToString("yyyy-MM-dd");
 
-                    //precargo imagen del evento
-                    //imgEvento.ImageUrl = seleccionado.imagenes[0].Url;
-                    //txtImagenUrl_TextChanged(sender, e);
+                        //precargo desplegable de tipos de evento   
+                        ddlTipoEvento.SelectedValue = seleccionado.tipoEvento.id.ToString();
 
-                    //cambio el texto del botón
-                    btnCrearEvento.Text = "Modificar Evento";
+                        //precargo imagen del evento
+                        string imagenUrl = imagenNegocio.precargarImagen(idEvento);
+                        if (!string.IsNullOrEmpty(imagenUrl))
+                        {
+                            txtImagenEvento.Text = imagenUrl;
+                            imgEvento.ImageUrl = imagenUrl;
+                        }
+
+                        //cambio el texto del botón
+                        btnCrearEvento.Text = "Modificar Evento";
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Evento no encontrado.";
+                        lblResultado.CssClass = "alert-danger";
+                    }
                 }
 
             }
@@ -84,6 +97,11 @@ namespace TPC_Equipo5B
             //txtPrecioEvento.Text = "";
         }
 
+        protected void txtImagenEvento_TextChanged(object sender, EventArgs e)
+        {
+            imgEvento.ImageUrl = txtImagenEvento.Text;
+        }
+
         protected void btnCrearEvento_Click(object sender, EventArgs e)
         {
             try
@@ -100,41 +118,43 @@ namespace TPC_Equipo5B
                     return;
                 }
 
-                Evento evento = new Evento();
-                {
-                    evento.codigo = codigoEvento;
-                    evento.nombre = txtNombreEvento.Text;
-                    evento.descripcion = txtDescripcionEvento.Text;
-                    evento.lugar = txtLugarEvento.Text;
-                    evento.direccion = txtDireccionEvento.Text;
-                    evento.tipoEvento = new TipoEvento();
-                    evento.tipoEvento.id = int.Parse(ddlTipoEvento.SelectedValue);
-                    evento.entradasDisponibles = txtCantEntradas.Text == "" ? 0 : int.Parse(txtCantEntradas.Text);
-                    evento.fecha = DateTime.Parse(txtFechaEvento.Text);
-                    evento.imagenUrl = txtImagenEvento.Text;
-                }
 
                 //si estamos modificando un evento
                 if (Request.QueryString["id"] != null)
                 {
-                    evento.id = int.Parse(Request.QueryString["id"].ToString());
-                    eventoNegocio.ModificarEvento(evento);
-                    imagenNegocio.modificarImagen(evento);
-                    
+
+                    Evento evento = new Evento();
+                    {
+                        evento.codigo = codigoEvento;
+                        evento.nombre = txtNombreEvento.Text;
+                        evento.descripcion = txtDescripcionEvento.Text;
+                        evento.lugar = txtLugarEvento.Text;
+                        evento.direccion = txtDireccionEvento.Text;
+                        evento.tipoEvento = new TipoEvento();
+                        evento.tipoEvento.id = int.Parse(ddlTipoEvento.SelectedValue);
+                        evento.entradasDisponibles = txtCantEntradas.Text == "" ? 0 : int.Parse(txtCantEntradas.Text);
+                        evento.fecha = DateTime.Parse(txtFechaEvento.Text);
+                        evento.imagenUrl = txtImagenEvento.Text;
+                    }
+
+                    int idEvento = int.Parse(Request.QueryString["id"]);
+                    eventoNegocio.ModificarEvento(evento, idEvento);
+                    imagenNegocio.modificarImagen(evento, idEvento);
+
+
                     lblResultado.Text = "Evento modificado correctamente.";
                     lblResultado.CssClass = "alert-success";
-                    
-                    Response.Redirect("Eventos.aspx", false);
+                    Response.Redirect("Admin.aspx");
 
                 }
                 else
                 {
-                    eventoNegocio.agregar(evento);
-                    imagenNegocio.agregarImagen(evento);
+                    crearEvento();
                     lblResultado.Text = "Evento creado correctamente.";
                     lblResultado.CssClass = "alert-success";
+
                 }
-                    Response.Redirect("Eventos.aspx", false);
+
             }
             catch (Exception ex)
             {
@@ -142,21 +162,44 @@ namespace TPC_Equipo5B
                 lblResultado.CssClass = "alert-danger";
                 throw;
             }
-            finally
-            {
-                //limpiarCampos();
-            }
 
         }
 
-        protected void txtImagenEvento_TextChanged(object sender, EventArgs e)
+        private void crearEvento()
         {
-            imgEvento.ImageUrl = txtImagenEvento.Text;
+            try
+            {
+                ImagenNegocio imagenNegocio = new ImagenNegocio();
+                Evento evento = new Evento();
+                EventoNegocio eventoNegocio = new EventoNegocio();
+
+                evento.codigo = txtCodigoEvento.Text;
+                evento.nombre = txtNombreEvento.Text;
+                evento.descripcion = txtDescripcionEvento.Text;
+                evento.lugar = txtLugarEvento.Text;
+                evento.direccion = txtDireccionEvento.Text;
+                evento.tipoEvento = new TipoEvento();
+                evento.tipoEvento.id = int.Parse(ddlTipoEvento.SelectedValue);
+                evento.entradasDisponibles = txtCantEntradas.Text == "" ? 0 : int.Parse(txtCantEntradas.Text);
+                evento.fecha = DateTime.Parse(txtFechaEvento.Text);
+                evento.imagenUrl = txtImagenEvento.Text;
+
+                eventoNegocio.agregar(evento);
+                imagenNegocio.agregarImagen(evento);
+
+               
+            }
+            catch (Exception ex)
+            {
+                lblResultado.Text = "Error al crear evento: " + ex.Message;
+                lblResultado.CssClass = "alert-danger";
+                throw;
+            }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Eventos.aspx");
+            Response.Redirect("Admin.aspx");
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -174,34 +217,8 @@ namespace TPC_Equipo5B
             }
 
         }
-        /*
-        protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkConfirmaEliminacion.Checked)
-                {
-                    EventoNegocio eventoNegocio = new EventoNegocio();
-                    int idEvento = int.Parse(Request.QueryString["id"].ToString());
-                    eventoNegocio.eliminarEvento(idEvento);
-                    lblResultado.Text = "Evento eliminado correctamente.";
-                    lblResultado.CssClass = "alert-success";
-                    Response.Redirect("Eventos.aspx", false);
-                }
-                else
-                {
-                    lblResultado.Text = "Debe confirmar la eliminación del evento.";
-                    lblResultado.CssClass = "alert-danger";
-                }
-            }
-            catch (Exception ex)
-            {
-                lblResultado.Text = "Error al eliminar evento: " + ex.Message;
-                lblResultado.CssClass = "alert-danger";
-                throw;
-            }
-        
-        }*/
+
+  
 
     }
 }

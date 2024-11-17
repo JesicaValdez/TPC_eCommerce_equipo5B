@@ -65,14 +65,15 @@ namespace Negocio
             }
         }
 
-        public void modificarImagen(Evento modificado)
+        public void modificarImagen(Evento modificado, int id)
         {
             AccesoDB datos = new AccesoDB();
 
             try
             {
-                datos.setearConsulta("UPDATE INTO IMAGENES(ImagenUrl WHERE @IdEvento = IdEvento)");
+                datos.setearConsulta("UPDATE IMAGENES SET ImagenUrl = @ImagenUrl WHERE @IdEvento = IdEvento");
                 datos.setearParametro("@ImagenUrl", modificado.imagenUrl);
+                datos.setearParametro("@IdEvento", id);
                 datos.ejecutarAccion();
 
             }
@@ -86,5 +87,34 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        //precargar imagen desde base de datos:
+        public string precargarImagen(int idEvento)
+        {
+            AccesoDB datos = new AccesoDB();
+            string url = string.Empty;
+
+            try
+            {
+                datos.setearConsulta("SELECT ImagenUrl FROM IMAGENES WHERE IdEvento = @IdEvento");
+                datos.setearParametro("@IdEvento", idEvento);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    url = (string)datos.Lector["ImagenUrl"];
+                }
+                return url;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al precargar imagen: " + ex.Message, ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

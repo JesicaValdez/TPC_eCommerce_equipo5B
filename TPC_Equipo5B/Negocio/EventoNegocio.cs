@@ -112,7 +112,59 @@ namespace Negocio
             }
         }
 
-       
+        public Evento EventoBuscar(int id)
+        {
+            try
+            {
+                datos.setearConsulta("SELECT e.Id, e.Codigo, e.Nombre, e.Descripcion, e.Lugar, e.Direccion, te.Id AS TipoEventoId, te.Descripcion, e.Fecha, e.CantidadEntradas, i.ImagenUrl " +
+                                     "FROM Eventos e " +
+                                     "INNER JOIN TiposEvento te ON e.IdTipoEvento = te.Id " +
+                                     "LEFT JOIN Imagenes i ON e.Id = i.IdEvento " +
+                                     "WHERE e.Id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Evento evento = new Evento
+                    {
+                        id = (int)datos.Lector["Id"],
+                        codigo = (string)datos.Lector["Codigo"],
+                        nombre = (string)datos.Lector["Nombre"],
+                        descripcion = (string)datos.Lector["Descripcion"],
+                        lugar = (string)datos.Lector["Lugar"],
+                        direccion = (string)datos.Lector["Direccion"],
+                        tipoEvento = new TipoEvento
+                        {
+                            id = (int)datos.Lector["TipoEventoId"],
+                            descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
+                        },
+                        fecha = (DateTime)datos.Lector["Fecha"],
+                        entradasDisponibles = (int)datos.Lector["CantidadEntradas"],
+                        imagenes = new List<Imagen>()
+                    };
+                    
+                    if (datos.Lector["ImagenUrl"] != DBNull.Value)
+                    {
+                        evento.imagenes.Add(new Imagen { IdEvento = evento.id, Url = (string)datos.Lector["ImagenUrl"] });
+                    }
+
+                    return evento;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar evento: " + ex.Message);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
 
         //ABM Eventos
         public void agregar(Evento evento)
@@ -155,21 +207,21 @@ namespace Negocio
         }
 
 
-        public void ModificarEvento(Evento evento)
+        public void ModificarEvento(Evento evento, int id)
         {
             AccesoDB datos = new AccesoDB();
             try
             {
-                datos.setearConsulta("UPDATE Eventos SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Lugar = @Lugar, Direccion = @Direccion, IdTipoEvento = @IdTipoEvento, CantidadEntradas = @CantidadEntradas, Fecha = @Fecha WHERE Id = @Id");
+                datos.setearConsulta("UPDATE Eventos SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Fecha = @Fecha, IdTipoEvento = @IdTipoEvento, Lugar = @Lugar, Direccion = @Direccion, CantidadEntradas = @CantidadEntradas WHERE Id = @Id");
                 datos.setearParametro("@Codigo", evento.codigo);
                 datos.setearParametro("@Nombre", evento.nombre);
                 datos.setearParametro("@Descripcion", evento.descripcion);
+                datos.setearParametro("@Fecha", evento.fecha);
+                datos.setearParametro("@IdTipoEvento", evento.tipoEvento.id);
                 datos.setearParametro("@Lugar", evento.lugar);
                 datos.setearParametro("@Direccion", evento.direccion);
-                datos.setearParametro("@IdTipoEvento", evento.tipoEvento.id);
                 datos.setearParametro("@CantidadEntradas", evento.entradasDisponibles);
-                datos.setearParametro("@Fecha", evento.fecha);
-                datos.setearParametro("@Id", evento.id);
+                datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

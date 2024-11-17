@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="CrearEvento.aspx.cs" Inherits="TPC_Equipo5B.CrearEvento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -58,12 +57,11 @@
                 <asp:TextBox runat="server" ID="txtCantEntradas" CssClass="form-control" placeholder="Ingrese cantidad de entradas" />
             </div>
 
-            <!-- Botón de Crear Evento -->
+            <!-- Botón de Crear/Cancelar Evento -->
             <div class="mb-3">
                 <asp:Button runat="server" ID="btnCrearEvento" Text="Crear Evento" class="btn btn-success mt-3" OnClick="btnCrearEvento_Click" />
-                <a href="Admin.aspx">Cancelar</a>
+                <asp:Button runat="server" ID="Button1" Text="Cancelar" class="btn btn-warning mt-3" OnClick="btnCancelar_Click" />
             </div>
-
 
             <!-- Mensaje de Resultado -->
             <div class="mb-3">
