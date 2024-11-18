@@ -158,10 +158,11 @@ namespace Negocio
 
             try
             {
-                dato.setearConsulta("UPDATE PreciosEntradas SET TipoEntrada = @tipoEntrada, Cantidad = @cantidadEntradas, Precio = @precio WHERE IDPrecio = @idPrecio");
+                dato.setearConsulta("UPDATE PreciosEntradas SET TipoEntrada = @tipoEntrada, Precio = @precio, Cantidad = @cantidadEntradas WHERE IDPrecio = @idPrecio");
                 dato.setearParametro("@tipoEntrada", seleccionado.tipoEntrada);
                 dato.setearParametro("@cantidadEntradas", seleccionado.cantidadEntradas);
                 dato.setearParametro("@precio", seleccionado.precio);
+                dato.setearParametro("@idPrecio", seleccionado.idPrecio);
                 dato.ejecutarAccion();
             }
             catch (Exception ex)

@@ -54,9 +54,10 @@ namespace TPC_Equipo5B
                 PrecioNegocio precioNegocio = new PrecioNegocio();
                 Precio precioMod = new Precio();
                 {
+                    precioMod.idPrecio = idPrecio;
                     precioMod.tipoEntrada = txtNombreEntrada.Text;
                     precioMod.cantidadEntradas = int.Parse(txtCantidad.Text);
-                    precioMod.precio = int.Parse(txtPrecio.Text);
+                    precioMod.precio = decimal.Parse(txtPrecio.Text);
                 }
 
                 precioNegocio.modificarPrecio(precioMod);
