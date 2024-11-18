@@ -220,6 +220,7 @@ namespace TPC_Equipo5B
             Response.Redirect("CrearEvento.aspx?id=" + id);
         }
 
+
         //VENTANAS
         protected void VerListadoUsuarios(object sender, EventArgs e)
         {
@@ -237,9 +238,156 @@ namespace TPC_Equipo5B
             CargarEventos();
         }
 
-        protected void MostrarReportes(object sender, EventArgs e)
+        protected void GestionPrecios(object sender, EventArgs e)
         {
             MultiViewAdmin.ActiveViewIndex = 3;
+            CargarNombreEventos();
+            CargarPrecios();
+            MostrarMensaje("Sección precios cargado correctamente.", true);
+        }
+
+        protected void CargarNombreEventos()
+        {
+            try
+            {
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                List<Evento> lista = eventoNegocio.listarEventos();
+
+                if (lista != null && lista.Count > 0)
+                {
+                    ddlEventos.DataSource = lista;
+                    ddlEventos.DataTextField = "nombre"; 
+                    ddlEventos.DataValueField = "id";
+                    ddlEventos.DataBind();
+                }
+                else
+                {
+                    MostrarMensaje("No se encontraron eventos para cargar.", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al cargar eventos: " + ex.Message, false);
+            }
+        }
+
+        protected void ddlEventos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int eventoId = int.Parse(ddlEventos.SelectedValue); 
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                Evento eventoSeleccionado = eventoNegocio.buscarEvento(eventoId);
+
+                if (eventoSeleccionado != null)
+                {
+                    lblEntradasDisponibles.Text = "Entradas disponibles: " + eventoSeleccionado.entradasDisponibles.ToString();
+                }
+                else
+                {
+                    lblEntradasDisponibles.Text = "No se encontró el evento seleccionado.";
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al cargar entradas disponibles: " + ex.Message, false);
+            }
+        }
+
+        protected void CargarPrecios()
+        {
+            try
+            {
+                PrecioNegocio precioNegocio = new PrecioNegocio();
+                var precios = precioNegocio.listarPrecios();
+
+                if (precios != null && precios.Count > 0)
+                {
+                    dgvPrecios.DataSource = precios;
+                    dgvPrecios.DataBind();
+                }
+                else
+                {
+                    MostrarMensaje("No se encontraron precios para cargar.", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al cargar precios: " + ex.Message, false);
+            }
+        }
+
+        protected void btnPrecio_Click(object sender, EventArgs e)
+        {
+            try 
+            {
+                int idEvento = int.Parse(ddlEventos.SelectedValue);
+       
+                Precio modificado = new Precio();
+                {
+                    modificado.idEvento = idEvento;
+                    modificado.tipoEntrada = txtNombreEntrada.Text;
+                    modificado.precio = decimal.Parse(txtPrecio.Text);
+                    modificado.cantidadEntradas = int.Parse(txtCantidad.Text);
+                }
+
+                PrecioNegocio precioNegocio = new PrecioNegocio();
+                precioNegocio.agregarPrecio(modificado);
+
+                MostrarMensaje("Precio agregado con éxito", true);
+                CargarPrecios();
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al agregar el precio: " + ex.Message, false);
+            }
+        }
+
+        protected void dgvPrecios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var obtenerPrecio = dgvPrecios.SelectedRow.Cells[0].Text;
+            var id = dgvPrecios.SelectedDataKey.Value.ToString();
+
+        }
+
+        protected void btnModificarPrecio_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string id = ((Button)sender).CommandArgument;
+                Response.Redirect("ModificarPrecio.aspx?id=" + id);
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error: " + ex.ToString());
+            }
+
+        }
+
+        protected void btnEliminarPrecio_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = int.Parse(((Button)sender).CommandArgument);
+
+                PrecioNegocio precioNegocio = new PrecioNegocio();
+                precioNegocio.eliminarPrecio(id);
+
+
+                MostrarMensaje("Precio del evento eliminado correctamente.", true);
+                CargarPrecios();
+            }
+            catch (Exception)
+            {
+                Session.Add("error", "Error al intentar eliminar el precio seleccionado");
+                Response.Redirect("Error.aspx", false);
+
+            }
+        }
+
+        protected void MostrarReportes(object sender, EventArgs e)
+        {
+            MultiViewAdmin.ActiveViewIndex = 4;
             // AGREGAR LOGICA PARA VER REPORTES / GENERARLOS
         }
 

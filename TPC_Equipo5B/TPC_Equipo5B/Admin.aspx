@@ -23,6 +23,9 @@
                     <asp:LinkButton ID="lnkGestionEventos" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="MostrarGestionEventos">
                         <i class="bi bi-calendar-event-fill "></i> Gestión de Eventos
                     </asp:LinkButton>
+                    <asp:LinkButton ID="lnkGestionPrecios" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="GestionPrecios">
+                        <i class="bi bi-cash" ></i> Gestión de Precios
+                    </asp:LinkButton>
                     <asp:LinkButton ID="lnkReportes" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="MostrarReportes">
                         <i class="bi bi-graph-up"></i> Reportes y Análisis
                     </asp:LinkButton>
@@ -53,7 +56,12 @@
                             <div class="form-group">
                                 <label for="txtBuscarEvento" class="filter-container-label">ID del Usuario:</label>
                                 <asp:TextBox ID="txtBuscarUsuario" runat="server" Placeholder="Buscar usuario..." CssClass="form-control mb-2 text-style"></asp:TextBox>
-                                <asp:Button ID="btnBuscarUsuario" runat="server" Text="Buscar" OnClick="btnBuscarUsuario_Click" CssClass="btn btn-secondary mb-3 explore-btn" />
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <asp:Button ID="btnBuscarUsuario" runat="server" Text="Buscar" OnClick="btnBuscarUsuario_Click" CssClass="btn btn-secondary mb-3 explore-btn" />
+                                </div>
                             </div>
 
                             <asp:GridView ID="dgvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="IdUsuario" CssClass="table table-dark table-striped category-card">
@@ -91,8 +99,14 @@
                             <div class="form-group">
                                 <label for="txtBuscarEvento" class="filter-container-label">ID del Evento:</label>
                                 <asp:TextBox ID="txtBuscarEvento" runat="server" CssClass="form-control mb-2 text-style" placeholder="Ingresar el ID..." />
-                                <asp:Button ID="BtnBuscarEvento" runat="server" Text="Buscar" OnClick="btnBuscarEvento_Click" CssClass="btn btn-secondary explore-btn" />
                             </div>
+                            <div class="row mb-5">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <asp:Button ID="BtnBuscarEvento" runat="server" Text="Buscar" OnClick="btnBuscarEvento_Click" CssClass="btn btn-secondary explore-btn" />
+                                </div>
+                            </div>
+
+
 
                             <asp:GridView ID="dgvEventos" runat="server" CssClass="table table-dark table-striped category-card" AutoGenerateColumns="false" DataKeyNames="id">
                                 <Columns>
@@ -117,6 +131,68 @@
                             </asp:GridView>
                             <a href="CrearEvento.aspx" class="btn btn-success mt-3 explore-btn">Agregar Evento</a>
                         </asp:View>
+
+                        <!-- Vista de Gestión de Precios -->
+                        <asp:View ID="ViewGestionPrecios" runat="server">
+                            <h3 class="info-title">Gestión de Precios</h3>
+                            <p class="text-style">Seleccione un Evento de la lista para agregarle las entradas y precios </p>
+
+                            <div class="mb-3">
+                                <label for="ddlEventos" class="form-label" style="color: #F4F4F4;">Eventos: </label>
+                                <asp:DropDownList ID="ddlEventos" runat="server" CssClass="form-select mb-3 text-style" Style="z-index: 10" OnSelectedIndexChanged="ddlEventos_SelectedIndexChanged" AutoPostBack="true">
+                                </asp:DropDownList>
+                                <asp:Label ID="lblEntradasDisponibles" runat="server" Text=""></asp:Label>
+                            </div>
+
+                            <!-- Ingreso de Tipo de Entrada y Precios -->
+                            <div class="row mb-3">
+                                <div class="col-4 d-flex align-items-center">
+                                    <label for="txtNombreEntrada" class="form-label me-2" style="color: #ffb700;">Nombre:</label>
+                                    <asp:TextBox runat="server" ID="txtNombreEntrada" CssClass="form-control" placeholder="Ingrese descripción" />
+                                </div>
+                                <div class="col-4 d-flex align-items-center">
+                                    <label for="txtCantidad" class="form-label me-2" style="color: #ffb700;">Cantidad de entradas:</label>
+                                    <asp:TextBox runat="server" ID="txtCantidad" CssClass="form-control" placeholder="Entradas disponibles" />
+                                </div>
+                                <div class="col-4 d-flex align-items-center">
+                                    <label for="txtPrecio" class="form-label me-2" style="color: #ffb700;">Precio:</label>
+                                    <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" placeholder="Ingrese precio" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <asp:Button ID="BtnPrecio" runat="server" Text="Agregar Precio" CssClass="btn btn-success explore-btn" OnClick="btnPrecio_Click" />
+                                </div>
+                            </div>
+
+                            <!-- GridView -->
+                            <div class="form-group">
+                                <asp:GridView ID="dgvPrecios" runat="server" CssClass="table table-dark table-striped category-card" AutoGenerateColumns="false" DataKeyNames="idPrecio">
+                                    <Columns>
+                                        <asp:BoundField DataField="idPrecio" HeaderText="ID" />
+                                        <asp:BoundField DataField="idEvento" HeaderText="ID Evento" />
+                                        <asp:BoundField DataField="tipoEntrada" HeaderText="Sector" />
+                                        <asp:BoundField DataField="precio" HeaderText="Precio" />
+                                        <asp:BoundField DataField="cantidadEntradas" HeaderText="Cantidad" />
+                                        <asp:TemplateField HeaderText="Modificar">
+                                            <ItemTemplate>
+                                                <asp:Button ID="btnModificarPrecio" runat="server" Text="Modificar" CssClass="btn btn-warning explore-btn" CommandName="Modificar" CommandArgument='<%# Eval("idPrecio") %>' OnClick="btnModificarPrecio_Click" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Eliminar">
+                                            <ItemTemplate>
+                                                <asp:Button ID="btnEliminarPrecio" runat="server" Text="Eliminar" CssClass="btn btn-danger explore-btn" CommandName="Eliminar" CommandArgument='<%# Eval("idPrecio") %>' OnClick="btnEliminarPrecio_Click" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </asp:View>
+
+
+
+
 
                         <!-- Vista de Reportes y Análisis -->
                         <asp:View ID="ViewReportes" runat="server">
