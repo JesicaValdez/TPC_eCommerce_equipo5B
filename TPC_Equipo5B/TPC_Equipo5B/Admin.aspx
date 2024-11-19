@@ -138,35 +138,13 @@
                         <!-- Vista de Gestión de Precios -->
                         <asp:View ID="ViewGestionPrecios" runat="server">
                             <h3 class="info-title">Gestión de Precios</h3>
-                            <p class="text-style">Seleccione un Evento de la lista para agregarle las entradas y precios </p>
+                            <p class="text-style">Seleccione un Evento para listar las entradas y precios </p>
 
                             <div class="mb-3">
                                 <label for="ddlEventos" class="form-label" style="color: #F4F4F4;">Eventos: </label>
                                 <asp:DropDownList ID="ddlEventos" runat="server" CssClass="form-select mb-3 text-style" Style="z-index: 10" OnSelectedIndexChanged="ddlEventos_SelectedIndexChanged" AutoPostBack="true">
                                 </asp:DropDownList>
                                 <asp:Label ID="lblEntradasDisponibles" runat="server" Text=""></asp:Label>
-                            </div>
-
-                            <!-- Ingreso de Tipo de Entrada y Precios -->
-                            <div class="row mb-3">
-                                <div class="col-4 d-flex align-items-center">
-                                    <label for="txtNombreEntrada" class="form-label me-2" style="color: #ffb700;">Nombre:</label>
-                                    <asp:TextBox runat="server" ID="txtNombreEntrada" CssClass="form-control" placeholder="Ingrese descripción" />
-                                </div>
-                                <div class="col-4 d-flex align-items-center">
-                                    <label for="txtCantidad" class="form-label me-2" style="color: #ffb700;">Cantidad de entradas:</label>
-                                    <asp:TextBox runat="server" ID="txtCantidad" CssClass="form-control" placeholder="Entradas disponibles" />
-                                </div>
-                                <div class="col-4 d-flex align-items-center">
-                                    <label for="txtPrecio" class="form-label me-2" style="color: #ffb700;">Precio:</label>
-                                    <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" placeholder="Ingrese precio" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-5">
-                                <div class="col-12 d-flex justify-content-center">
-                                    <asp:Button ID="BtnPrecio" runat="server" Text="Agregar Precio" CssClass="btn btn-success explore-btn" OnClick="btnPrecio_Click" />
-                                </div>
                             </div>
 
                             <!-- GridView -->
@@ -191,12 +169,18 @@
                                     </Columns>
                                 </asp:GridView>
                             </div>
+
+                            <!-- Boton Agregar Precio -->
+                            <div class="row mb-5">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <asp:Button ID="BtnPrecio" runat="server" Text="Agregar Precio" CssClass="btn btn-success explore-btn" OnClick="btnPrecio_Click" CommandArgument="" />
+                                </div>
+                            </div>
+
                         </asp:View>
 
                         <asp:View ID="ViewGestioCompras" runat="server">
                             <h3 class="info-title">Gestión de Compras</h3>
-
-
 
                             <asp:GridView ID="dgvCompras" runat="server" CssClass="table table-dark table-striped category-card" AutoGenerateColumns="false" DataKeyNames="idCompra">
                                 <Columns>
@@ -210,13 +194,9 @@
                                             <asp:Button ID="btnAnular" runat="server" Text="Anular" CssClass="btn btn-warning explore-btn" CommandName="Anular" CommandArgument='<%# Eval("idCompra") %>' OnClick="btnAnular_Click" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    
                                 </Columns>
-                            </asp:GridView>
-                            
+                            </asp:GridView> 
                         </asp:View>
-
-
 
                         <!-- Vista de Reportes y Análisis -->
                         <asp:View ID="ViewReportes" runat="server">

@@ -105,6 +105,37 @@ namespace Negocio
             }
         }
 
+        public Precio obtenerPrecio(int user)
+        {
+            AccesoDB dato = new AccesoDB();
+            Precio precio = new Precio();
+
+            try
+            {
+                dato.setearConsulta("SELECT IdEvento, TipoEntrada, Precio, Cantidad FROM PreciosEntradas WHERE IDPrecio = @IDPrecio");
+                dato.setearParametro("@IDPrecio", user);
+
+                dato.ejecutarLectura();
+
+                if (dato.Lector.Read())
+                {
+                    precio.idEvento = (int)dato.Lector["IdEvento"];
+                    precio.tipoEntrada = dato.Lector["TipoEntrada"].ToString();
+                    precio.precio = (decimal)dato.Lector["Precio"];
+                    precio.cantidadEntradas = (int)dato.Lector["Cantidad"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dato.cerrarConexion();
+            }
+
+            return precio;
+        }
         public void descontarEntradas(int idprecio, int cantidad)
         {
             AccesoDB datos = new AccesoDB();
@@ -131,11 +162,11 @@ namespace Negocio
 
         public void agregarPrecio(Precio nuevo)
         {
-            AccesoDB dato = new AccesoDB();
+            AccesoDB datos = new AccesoDB();
 
             try
             {
-                dato.setearConsulta("INSERT INTO PreciosEntradas (IdEvento, TipoEntrada, Precio, Cantidad) VALUES (@idEvento, @tipoEntrada, @precio, @cantidadEntradas)");
+                datos.setearConsulta("INSERT INTO PreciosEntradas (IdEvento, TipoEntrada, Precio, Cantidad) VALUES (@idEvento, @tipoEntrada, @precio, @cantidadEntradas)");
                 datos.setearParametro("@idEvento", nuevo.idEvento);
                 datos.setearParametro("@tipoEntrada", nuevo.tipoEntrada);
                 datos.setearParametro("@precio", nuevo.precio);

@@ -216,9 +216,7 @@ namespace TPC_Equipo5B
                 Response.Redirect("Eventos.aspx", false);
             }
 
-        }
-
-  
+        }  
 
     }
 }

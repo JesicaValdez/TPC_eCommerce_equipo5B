@@ -22,17 +22,17 @@ namespace TPC_Equipo5B
 
             if (!IsPostBack)
             {
-             // Inicializamos la vista activa en Listado de Usuarios
-             MultiViewAdmin.ActiveViewIndex = 0;
-                
-             CargarUsuarios();
-             MostrarMensaje("Usuarios cargados correctamente.", true);
+                // Inicializamos la vista activa en Listado de Usuarios
+                MultiViewAdmin.ActiveViewIndex = 0;
+
+                CargarUsuarios();
+                MostrarMensaje("Usuarios cargados correctamente.", true);
             }
 
             if (Request.QueryString["id"] != null)
             {
                 int id = int.Parse(Request.QueryString["id"].ToString());
-                List<Evento> eventoTemp = (List<Evento>) Session["eventos"];
+                List<Evento> eventoTemp = (List<Evento>)Session["eventos"];
                 Evento seleccionado = eventoTemp.Find(x => x.id == id);
                 //textId.Text = seleccionado.id.ToString();
                 //txtId.ReadOnly = true;
@@ -49,7 +49,7 @@ namespace TPC_Equipo5B
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 dgvUsuarios.DataSource = usuarioNegocio.listar();
                 dgvUsuarios.DataBind();
-                
+
             }
             catch (Exception ex)
             {
@@ -151,8 +151,8 @@ namespace TPC_Equipo5B
                 }
                 else
                 {
-                    MostrarMensaje ("Por favor, ingrese un ID de evento válido.", false);
-                    
+                    MostrarMensaje("Por favor, ingrese un ID de evento válido.", false);
+
                 }
             }
             catch (Exception ex)
@@ -188,8 +188,6 @@ namespace TPC_Equipo5B
             {
                 Response.Write("Error: " + ex.ToString());
             }
-
-            
         }
 
         protected void btnEliminarEvento_Click(Object sender, EventArgs e)
@@ -201,7 +199,7 @@ namespace TPC_Equipo5B
                 EventoNegocio eventoNegocio = new EventoNegocio();
                 eventoNegocio.eliminarEvento(id);
 
-           
+
                 MostrarMensaje("Evento eliminado correctamente.", true);
                 CargarUsuarios();
             }
@@ -212,16 +210,6 @@ namespace TPC_Equipo5B
 
             }
         }
-
-        protected void dgvEventos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var obtenerDato = dgvEventos.SelectedRow.Cells[0].Text;
-            var id = dgvEventos.SelectedDataKey.Value.ToString();
-            Response.Redirect("CrearEvento.aspx?id=" + id);
-        }
-
-        
-
 
         //VENTANAS
         protected void VerListadoUsuarios(object sender, EventArgs e)
@@ -240,12 +228,11 @@ namespace TPC_Equipo5B
             CargarEventos();
         }
 
+        //Gestion Precios
         protected void GestionPrecios(object sender, EventArgs e)
         {
             MultiViewAdmin.ActiveViewIndex = 3;
             CargarNombreEventos();
-            CargarPrecios();
-            MostrarMensaje("Sección precios cargado correctamente.", true);
         }
 
         protected void CargarNombreEventos()
@@ -258,9 +245,10 @@ namespace TPC_Equipo5B
                 if (lista != null && lista.Count > 0)
                 {
                     ddlEventos.DataSource = lista;
-                    ddlEventos.DataTextField = "nombre"; 
+                    ddlEventos.DataTextField = "nombre";
                     ddlEventos.DataValueField = "id";
                     ddlEventos.DataBind();
+                    MostrarMensaje("Seleccione un evento para ver entradas y precios disponible.", false);
                 }
                 else
                 {
@@ -272,22 +260,51 @@ namespace TPC_Equipo5B
                 MostrarMensaje("Error al cargar eventos: " + ex.Message, false);
             }
         }
-
         protected void ddlEventos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                int eventoId = int.Parse(ddlEventos.SelectedValue); 
+                int eventoId = int.Parse(ddlEventos.SelectedValue);
                 EventoNegocio eventoNegocio = new EventoNegocio();
                 Evento eventoSeleccionado = eventoNegocio.buscarEvento(eventoId);
+                PrecioNegocio eventoPrecio = new PrecioNegocio();
 
                 if (eventoSeleccionado != null)
                 {
-                    lblEntradasDisponibles.Text = "Entradas disponibles: " + eventoSeleccionado.entradasDisponibles.ToString();
+                    int cantidad = eventoSeleccionado.entradasDisponibles;
+
+                    if (cantidad > 0)
+                    {
+                        // Si hay entradas disponibles
+                        lblEntradasDisponibles.Text = "Capacidad disponible: " + cantidad.ToString();
+                        var preciosLista = eventoPrecio.listarporEvento(eventoId);
+
+                        if (preciosLista != null && preciosLista.Count > 0)
+                        {
+                            dgvPrecios.DataSource = preciosLista;
+                            dgvPrecios.DataBind();
+                            MostrarMensaje("Sección precios cargado correctamente.", true);
+                        }
+                        else
+                        {
+                            MostrarMensaje("No se encontraron precios para cargar.", false);
+                        }
+
+                        BtnPrecio.Enabled = true;
+                        BtnPrecio.CommandArgument = eventoId.ToString();
+                    }
+                    else
+                    {
+                        // Si no hay entradas disponibles
+                        lblEntradasDisponibles.Text = "No hay capacidad disponibles para agregar entradas a este evento.";
+                        BtnPrecio.Enabled = false;
+                    }
                 }
                 else
                 {
+                    // Si no se encontró el evento
                     lblEntradasDisponibles.Text = "No se encontró el evento seleccionado.";
+                    BtnPrecio.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -296,74 +313,40 @@ namespace TPC_Equipo5B
             }
         }
 
-        protected void CargarPrecios()
+        protected void btnPrecio_Click(object sender, EventArgs e)
         {
             try
             {
-                PrecioNegocio precioNegocio = new PrecioNegocio();
-                var precios = precioNegocio.listarPrecios();
-
-                if (precios != null && precios.Count > 0)
-                {
-                    dgvPrecios.DataSource = precios;
-                    dgvPrecios.DataBind();
-                }
-                else
-                {
-                    MostrarMensaje("No se encontraron precios para cargar.", false);
-                }
+                //Recuperar el commandargument del boton
+                string eventoId = ((Button)sender).CommandArgument;
+                // Determinar el modo (puede ser "agregar" o "modificar")
+                string modo = "agregar";
+                // Redirigir a la página con los parámetros id y modo
+                Response.Redirect($"CrearPrecio.aspx?id={eventoId}&modo={modo}");
             }
             catch (Exception ex)
             {
-                MostrarMensaje("Error al cargar precios: " + ex.Message, false);
+                Response.Write("Error: " + ex.ToString());
             }
-        }
-
-        protected void btnPrecio_Click(object sender, EventArgs e)
-        {
-            try 
-            {
-                int idEvento = int.Parse(ddlEventos.SelectedValue);
-       
-                Precio modificado = new Precio();
-                {
-                    modificado.idEvento = idEvento;
-                    modificado.tipoEntrada = txtNombreEntrada.Text;
-                    modificado.precio = decimal.Parse(txtPrecio.Text);
-                    modificado.cantidadEntradas = int.Parse(txtCantidad.Text);
-                }
-
-                PrecioNegocio precioNegocio = new PrecioNegocio();
-                precioNegocio.agregarPrecio(modificado);
-
-                MostrarMensaje("Precio agregado con éxito", true);
-                CargarPrecios();
-            }
-            catch (Exception ex)
-            {
-                MostrarMensaje("Error al agregar el precio: " + ex.Message, false);
-            }
-        }
-
-        protected void dgvPrecios_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var obtenerPrecio = dgvPrecios.SelectedRow.Cells[0].Text;
-            var id = dgvPrecios.SelectedDataKey.Value.ToString();
-
+            //aqui falta un mensaje que se hizo correctamente
         }
 
         protected void btnModificarPrecio_Click(object sender, EventArgs e)
         {
             try
             {
-                string id = ((Button)sender).CommandArgument;
-                Response.Redirect("ModificarPrecio.aspx?id=" + id);
+                //Recuperar el commandargument del boton
+                string eventoId = ((Button)sender).CommandArgument;
+                // Determinar el modo (puede ser "agregar" o "modificar")
+                string modo = "modificar";
+                // Redirigir a la página con los parámetros id y modo
+                Response.Redirect($"CrearPrecio.aspx?id={eventoId}&modo={modo}");
             }
             catch (Exception ex)
             {
                 Response.Write("Error: " + ex.ToString());
             }
-
+            //aqui falta un mensaje que se hizo correctamente
         }
 
         protected void btnEliminarPrecio_Click(object sender, EventArgs e)
@@ -377,7 +360,6 @@ namespace TPC_Equipo5B
 
 
                 MostrarMensaje("Precio del evento eliminado correctamente.", true);
-                CargarPrecios();
             }
             catch (Exception)
             {
@@ -386,7 +368,7 @@ namespace TPC_Equipo5B
 
             }
         }
-
+        //REPORTES
         protected void MostrarReportes(object sender, EventArgs e)
         {
             MultiViewAdmin.ActiveViewIndex = 5;

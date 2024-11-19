@@ -234,6 +234,27 @@ namespace Negocio
             }
         }
 
+        public void modificarCapacidad(Evento evento, int id)
+        {
+            AccesoDB datos = new AccesoDB();
+
+            try
+            {
+                datos.setearConsulta("UPDATE Eventos SET  CantidadEntradas = CantidadEntradas - @CantidadEntradas WHERE Id = @Id");
+                datos.setearParametro("@CantidadEntradas", evento.entradasDisponibles);
+                datos.setearParametro("@Id", id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void eliminarEvento(int id)
         {
             AccesoDB dato = new AccesoDB();
