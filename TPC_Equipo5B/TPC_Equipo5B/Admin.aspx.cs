@@ -220,6 +220,8 @@ namespace TPC_Equipo5B
             Response.Redirect("CrearEvento.aspx?id=" + id);
         }
 
+        
+
 
         //VENTANAS
         protected void VerListadoUsuarios(object sender, EventArgs e)
@@ -387,7 +389,7 @@ namespace TPC_Equipo5B
 
         protected void MostrarReportes(object sender, EventArgs e)
         {
-            MultiViewAdmin.ActiveViewIndex = 4;
+            MultiViewAdmin.ActiveViewIndex = 5;
             // AGREGAR LOGICA PARA VER REPORTES / GENERARLOS
         }
 
@@ -419,6 +421,37 @@ namespace TPC_Equipo5B
             panelMessage.Visible = true;
             panelMessage.CssClass = exito ? "alert-success" : "alert-danger";
             panelMessage.Controls.Add(new LiteralControl(mensaje));
+        }
+
+
+        protected void CargarCompras()
+        {
+            try
+            {
+                CompraNegocio compraNegocio = new CompraNegocio();
+                dgvCompras.DataSource = compraNegocio.listarCompras();
+                dgvCompras.DataBind();
+                MostrarMensaje("Compras cargadas correctamente.", true);
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al cargar compras: " + ex.Message, false);
+            }
+        }
+
+        protected void btnAnular_Click(object sender, EventArgs e)
+        {
+            
+            CompraNegocio compraNegocio = new CompraNegocio();
+            compraNegocio.bajaCompra(int.Parse(((Button)sender).CommandArgument));
+            MostrarMensaje("Compra dada de baja correctamente.", true);
+            CargarCompras();
+        }
+
+        protected void GestionCompras(object sender, EventArgs e)
+        {
+            MultiViewAdmin.ActiveViewIndex = 4;
+            CargarCompras();
         }
     }
 }

@@ -51,6 +51,15 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.LinkButton lnkGestionPrecios;
 
         /// <summary>
+        /// Control lnkGestionCompras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkGestionCompras;
+
+        /// <summary>
         /// Control lnkReportes.
         /// </summary>
         /// <remarks>
@@ -274,6 +283,24 @@ namespace TPC_Equipo5B
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvPrecios;
+
+        /// <summary>
+        /// Control ViewGestioCompras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View ViewGestioCompras;
+
+        /// <summary>
+        /// Control dgvCompras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvCompras;
 
         /// <summary>
         /// Control ViewReportes.

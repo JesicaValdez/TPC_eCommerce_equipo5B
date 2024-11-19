@@ -94,7 +94,7 @@
                 
                   </div>
                 </div>
-                <asp:Label ID="lblFechaHora" runat="server" CssClass="fecha-hora-evento"> <i class="bi bi-clock"></i><%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></asp:Label>
+                <asp:Label ID="lblFechaHora" runat="server" CssClass="fecha-hora-evento"> <i class="bi bi-clock"></i><%# Eval("fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy hh:mm:ss}") %></asp:Label>
        
             </div>
         </div>

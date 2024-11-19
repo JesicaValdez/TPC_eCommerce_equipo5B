@@ -150,6 +150,33 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.TextBox TextBox3;
 
         /// <summary>
+        /// Control RadioButton1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton RadioButton1;
+
+        /// <summary>
+        /// Control RadioButton2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton RadioButton2;
+
+        /// <summary>
+        /// Control CheckBox1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+
+        /// <summary>
         /// Control Button1.
         /// </summary>
         /// <remarks>

@@ -60,7 +60,7 @@
                             <p class="card-text"><%# Eval("evento.codigo") %></p>
                             <h5 class="card-title"><%# Eval("evento.nombre") %></h5>
                             <p class="card-text"><%# Eval("evento.descripcion") %></p>
-                            <p class="card-text"><%# Eval("evento.fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy}") %></p>
+                            <p class="card-text"><%# Eval("evento.fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy  hh:mm}") %></p>
                             <p class="card-text">Cantidad: <%# cantidad( Eval("evento.id"), Eval("precio.idPrecio")) %></p>
                             <p class="card-text">Tipo de Entrada: <%# Eval("precio.tipoEntrada") %></p>
                             <p class="card-text">Precio: <%# Eval("precio.precio") %></p>

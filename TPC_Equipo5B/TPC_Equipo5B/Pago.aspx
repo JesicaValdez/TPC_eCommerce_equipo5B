@@ -74,11 +74,21 @@
         <div class="border-top my-3"></div>
         <div class="card">
             <div class="card-body">
+                <asp:RadioButton ID="RadioButton1" runat="server" Text="E-Ticket" GroupName="Entrega" Checked/>
                 <div class="card-text"><i class="bi bi-info-circle"></i> Una vez confirmada la operacion las entradas se enviaran por correo electronico a la casilla usada al registrarse</div>
+                <div class="my-3"></div>
+                <asp:RadioButton ID="RadioButton2" runat="server" Text="Retiro en punto de entrega" GroupName="Entrega" />
+                <div class="card-text"><i class="bi bi-info-circle"></i> Una vez confirmada la operacion se dispondra de 5 dias habiles para relirar las entradas por el punto de entrega de Av. Hipolito Yrigoyen 288, Gril. Pacheco, Tigre</div>
+                
             </div>
         </div>
         <div style="text-align: center; padding: 50px">
-            <asp:Button ID="Button1" class="btn btn-success btn-lg" runat="server" Text="Confirmar compra" OnClick="Button1_Click" />
+            <div>
+                <asp:CheckBox ID="CheckBox1" runat="server" Text="Acepto los terminios y condiciones de compra de TuTicket" />
+            </div>
+            <div>
+                <asp:Button ID="Button1" class="btn btn-success btn-lg" runat="server" Text="Confirmar compra" OnClick="Button1_Click" />
+            </div>
         </div>
     </div>
 </asp:Content>

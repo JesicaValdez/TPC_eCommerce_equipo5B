@@ -95,7 +95,7 @@ namespace TPC_Equipo5B
             List<Precio> lista = precioNegocio.listarporEvento((int)Session["id"]);
             foreach (Precio precio in lista)
             {
-                precios = precios + "\r\n" + precio.tipoEntrada + " " + precio.precio.ToString();
+                precios = precios + "\r\n" + precio.tipoEntrada + " " + precio.precio.ToString() + " - ";
             }
             return precios;
         }

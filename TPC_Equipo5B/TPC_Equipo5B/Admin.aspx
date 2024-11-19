@@ -26,6 +26,9 @@
                     <asp:LinkButton ID="lnkGestionPrecios" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="GestionPrecios">
                         <i class="bi bi-cash" ></i> Gestión de Precios
                     </asp:LinkButton>
+                    <asp:LinkButton ID="lnkGestionCompras" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="GestionCompras">
+                        <i class="bi bi-cash" ></i> Gestión de Compras
+                    </asp:LinkButton>
                     <asp:LinkButton ID="lnkReportes" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="MostrarReportes">
                         <i class="bi bi-graph-up"></i> Reportes y Análisis
                     </asp:LinkButton>
@@ -190,7 +193,28 @@
                             </div>
                         </asp:View>
 
+                        <asp:View ID="ViewGestioCompras" runat="server">
+                            <h3 class="info-title">Gestión de Compras</h3>
 
+
+
+                            <asp:GridView ID="dgvCompras" runat="server" CssClass="table table-dark table-striped category-card" AutoGenerateColumns="false" DataKeyNames="idCompra">
+                                <Columns>
+                                    <asp:BoundField DataField="idCompra" HeaderText="ID" />
+                                    <asp:BoundField DataField="evento.nombre" HeaderText="Evento" />
+                                    <asp:BoundField DataField="cliente.IdCliente" HeaderText="IDCliente" />
+                                    <asp:BoundField DataField="montoTotal" HeaderText="Monto Total" />
+                                    <asp:BoundField DataField="fechaCompra" HeaderText="Fecha" />
+                                    <asp:TemplateField HeaderText="Anular">
+                                        <ItemTemplate>
+                                            <asp:Button ID="btnAnular" runat="server" Text="Anular" CssClass="btn btn-warning explore-btn" CommandName="Anular" CommandArgument='<%# Eval("idCompra") %>' OnClick="btnAnular_Click" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    
+                                </Columns>
+                            </asp:GridView>
+                            
+                        </asp:View>
 
 
 
