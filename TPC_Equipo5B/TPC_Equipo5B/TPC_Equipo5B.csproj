@@ -73,6 +73,7 @@
     <Content Include="CrearEvento.aspx" />
     <Content Include="CSS\Style.css" />
     <Content Include="Error.aspx" />
+    <Content Include="Exito.aspx" />
     <Content Include="Favoritos.aspx" />
     <Content Include="icons8-user-48.png" />
     <Content Include="CrearPrecio.aspx" />
@@ -109,6 +110,13 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Exito.aspx.cs">
+      <DependentUpon>Exito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Exito.aspx.designer.cs">
+      <DependentUpon>Exito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Favoritos.aspx.cs">
       <DependentUpon>Favoritos.aspx</DependentUpon>

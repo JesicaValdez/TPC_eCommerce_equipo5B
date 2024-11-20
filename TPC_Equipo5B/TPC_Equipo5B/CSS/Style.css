@@ -55,8 +55,16 @@
     font-size: 70px;
 }
 
-/* Estilo para Botón */
-.explore-btn {
+/*icon favorito*/
+.btn-warning .bi-heart {
+    color: gray;
+}
+
+.btn-danger .bi-heart {
+    color: red;
+}
+    /* Estilo para Botón */
+    .explore-btn {
     background-color: #ffb700;
     border: none;
     color: #333;
