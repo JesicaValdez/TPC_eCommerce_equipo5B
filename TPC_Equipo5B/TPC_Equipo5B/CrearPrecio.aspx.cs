@@ -17,8 +17,10 @@ namespace TPC_Equipo5B
         {
             try
             {
+
                 if (!IsPostBack && Request.QueryString["id"] != null && Request.QueryString["modo"] != null)
                 {
+
                     string modo = Request.QueryString["modo"];
                     
                     if (modo == "agregar")
@@ -30,7 +32,8 @@ namespace TPC_Equipo5B
 
                         if (seleccionado != null)
                         {
-                            txtEventos.Text = seleccionado.nombre; // Mostrar el nombre del evento
+                            txtEventos.Text = seleccionado.nombre; // Mostrar el nombre del evento 
+                            txtEventos.ReadOnly = true; // Bloquear el campo del nombre del evento
                             lbl_Disponibilidad.Text = "Capacidad disponible: " + seleccionado.entradasDisponibles.ToString();
                             lbl_Disponibilidad.Visible = true;
                         }
@@ -45,16 +48,20 @@ namespace TPC_Equipo5B
                         if (precio != null)
                         {
                             txtEventos.Text = precio.idEvento.ToString();
+                            txtEventos.ReadOnly = true; // Bloquear el campo del nombre del evento
                             txtNombreEntrada.Text = precio.tipoEntrada;
                             txtPrecio.Text = precio.precio.ToString();
                             txtCantidad.Text = precio.cantidadEntradas.ToString();
+
+                            BtnPrecio.Text = "Modificar Precio";
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                lblResultado.Text = "Ocurrió un error: " + ex.Message;
+                lblResultado.ForeColor = System.Drawing.Color.Red;
             }
         }
 
@@ -62,6 +69,28 @@ namespace TPC_Equipo5B
         {
             try
             {
+                // Validaciones de campos vacíos
+                if (string.IsNullOrEmpty(txtNombreEntrada.Text))
+                {
+                    lblNombreEntradaError.Text = "El nombre de la entrada no puede estar vacío.";
+                    lblNombreEntradaError.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtPrecio.Text) || !decimal.TryParse(txtPrecio.Text, out decimal precio) && precio >= 0) 
+                {
+                    lblPrecioError.Text = "Debe ingresar un precio válido.";
+                    lblPrecioError.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtCantidad.Text) || !int.TryParse(txtCantidad.Text, out int cantidad) && cantidad >= 0)
+                {
+                    lblCantidadError.Text = "Debe ingresar una cantidad válida.";
+                    lblCantidadError.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
                 PrecioNegocio precioNegocio = new PrecioNegocio();
                 EventoNegocio eventoNegocio = new EventoNegocio();
 
@@ -111,11 +140,23 @@ namespace TPC_Equipo5B
                         eventoNegocio.modificarCapacidad(actualizarCapacidad, idEvento);
                     }
                 }
+
+                lblResultado.Text = "Precio guardado correctamente.";
+                lblResultado.ForeColor = System.Drawing.Color.Green;
+                Response.Redirect("Admin.aspx");
             }
             catch (Exception ex)
             {
-                throw ex;
+                lblResultado.Text = "Ocurrió un error: " + ex.Message;
+                lblResultado.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+       
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Admin.aspx");
         }
 
     }

@@ -33,6 +33,15 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.TextBox txtCodigoEvento;
 
         /// <summary>
+        /// Control lblCodigoError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCodigoError;
+
+        /// <summary>
         /// Control txtNombreEvento.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace TPC_Equipo5B
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombreEvento;
+
+        /// <summary>
+        /// Control lblNombreEventoError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreEventoError;
 
         /// <summary>
         /// Control txtLugarEvento.
@@ -51,6 +69,15 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.TextBox txtLugarEvento;
 
         /// <summary>
+        /// Control lblLugarError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLugarError;
+
+        /// <summary>
         /// Control txtDireccionEvento.
         /// </summary>
         /// <remarks>
@@ -58,6 +85,15 @@ namespace TPC_Equipo5B
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDireccionEvento;
+
+        /// <summary>
+        /// Control lblDireccionError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDireccionError;
 
         /// <summary>
         /// Control txtFechaEvento.
@@ -69,6 +105,15 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.TextBox txtFechaEvento;
 
         /// <summary>
+        /// Control lblFechaEventoError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFechaEventoError;
+
+        /// <summary>
         /// Control txtCantEntradas.
         /// </summary>
         /// <remarks>
@@ -76,6 +121,15 @@ namespace TPC_Equipo5B
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantEntradas;
+
+        /// <summary>
+        /// Control lblCantEntradasError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCantEntradasError;
 
         /// <summary>
         /// Control btnCrearEvento.
@@ -123,6 +177,15 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.TextBox txtDescripcionEvento;
 
         /// <summary>
+        /// Control lblDescripcionError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescripcionError;
+
+        /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
         /// <remarks>
@@ -139,6 +202,15 @@ namespace TPC_Equipo5B
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtImagenEvento;
+
+        /// <summary>
+        /// Control lblImagenEventoError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblImagenEventoError;
 
         /// <summary>
         /// Control imgEvento.

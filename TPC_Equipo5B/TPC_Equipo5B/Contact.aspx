@@ -8,32 +8,32 @@
             margin: 50px auto;
         }
 
-        .info-section .info-card {
-            padding: 20px;
-            border: none;
-            background-color: transparent;
-        }
+            .info-section .info-card {
+                padding: 20px;
+                border: none;
+                background-color: transparent;
+            }
 
-        .info-section .info-icon {
-            font-size: 70px;
-            color: #ffb700;
-        }
+            .info-section .info-icon {
+                font-size: 70px;
+                color: #ffb700;
+            }
 
-        .info-section .title-style {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #f4f4f4;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
+            .info-section .title-style {
+                font-size: 2.5rem;
+                font-weight: bold;
+                color: #f4f4f4;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
 
-        .info-section .info-text {
-            font-size: 16px;
-            color: #f4f4f4;
-            margin-top: 10px;
-        }
+            .info-section .info-text {
+                font-size: 16px;
+                color: #f4f4f4;
+                margin-top: 10px;
+            }
 
         /* Estilos del formulario */
         .form-section {
@@ -56,7 +56,6 @@
         .mt-5 {
             margin-top: 5rem;
         }
-
     </style>
 </asp:Content>
 
@@ -73,39 +72,55 @@
         </div>
     </div>
 
+    <!-- Alertas -->
+    <div class="alert-section my-4">
+        <!-- Mensaje de error -->
+        <asp:Label ID="lblErrorMessage" runat="server" CssClass="text-danger fw-bold" Visible="false"></asp:Label>
+
+        <!-- Mensaje de éxito -->
+        <asp:Label ID="lblSuccessMessage" runat="server" CssClass="text-success fw-bold" Visible="false"></asp:Label>
+    </div>
+
+
     <!-- Formulario -->
     <div class="container form-section">
         <div class="row md-6">
-        <div class="mb-3">
-            <label for="txtNombre" class="form-label" style="color: #ffb700;">Nombre</label>
-            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Ingrese Nombre" />
-        </div>
-        <div class="mb-3">
-            <label for="txtApellido" class="form-label" style="color: #ffb700;">Apellido</label>
-            <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" placeholder="Ingrese Apellido" />
-        </div>
-        <div class="mb-3">
-            <label for="txtEmail" class="form-label" style="color: #ffb700;">Email <i class="bi bi-envelope-at" style="color: #ffb700;"></i></label>
-            <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Ingrese Email" />
-        </div>
-        <div class="mb-3">
-            <label for="txtTelefono" class="form-label" style="color: #ffb700;">Teléfono <i class="bi bi-telephone" style="color: #ffb700;"></i></label>
-            <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Ingrese Telefono" />
-        </div>
-        <div class="mb-3">
-            <label for="txtNombreEvento" class="form-label" style="color: #ffb700;">Nombre Evento <i class="bi bi-ticket-perforated" style="color: #ffb700;"></i></label>
-            <asp:TextBox runat="server" ID="txtNombreEvento" CssClass="form-control" placeholder="Ingrese Nombre del Evento" />
-        </div>
-        <div class="mb-3">
-            <div class="form-floating">
-                <asp:TextBox runat="server" ID="txtMensaje" CssClass="form-control" TextMode="MultiLine" Rows="5" placeholder="Escribir Mensaje"></asp:TextBox>
-                <label for="txtMensaje">Escribir Mensaje <i class="bi bi-chat-square-dots" style="color: #ffb700;"></i></label>
+            <div class="mb-3">
+                <label for="txtNombre" class="form-label" style="color: #ffb700;">Nombre</label>
+                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Ingrese Nombre" />
+                <asp:Label ID="lblNombreError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
-        </div>
-        <div class="d-grid">
-            <asp:Button ID="btn_Contactar" runat="server" Text="Enviar Mensaje" class="btn btn-warning mt-5" />
-        </div>
-    
+            <div class="mb-3">
+                <label for="txtApellido" class="form-label" style="color: #ffb700;">Apellido</label>
+                <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" placeholder="Ingrese Apellido" />
+                <asp:Label ID="lblApellidoError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+            </div>
+            <div class="mb-3">
+                <label for="txtEmail" class="form-label" style="color: #ffb700;">Email <i class="bi bi-envelope-at" style="color: #ffb700;"></i></label>
+                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Ingrese Email" />
+                <asp:Label ID="lblEmailError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+            </div>
+            <div class="mb-3">
+                <label for="txtTelefono" class="form-label" style="color: #ffb700;">Teléfono <i class="bi bi-telephone" style="color: #ffb700;"></i></label>
+                <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Ingrese Telefono" />
+                <asp:Label ID="lblTelefonoError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+            </div>
+            <div class="mb-3">
+                <label for="txtNombreEvento" class="form-label" style="color: #ffb700;">Nombre Evento <i class="bi bi-ticket-perforated" style="color: #ffb700;"></i></label>
+                <asp:TextBox runat="server" ID="txtNombreEvento" CssClass="form-control" placeholder="Ingrese Nombre del Evento" />
+                <asp:Label ID="lblEventoError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                    <asp:TextBox runat="server" ID="txtMensaje" CssClass="form-control" TextMode="MultiLine" Rows="5" placeholder="Escribir Mensaje"></asp:TextBox>
+                    <label for="txtMensaje">Escribir Mensaje <i class="bi bi-chat-square-dots" style="color: #ffb700;"></i></label>
+                    <asp:Label ID="lblMensajeError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+                </div>
+            </div>
+            <div class="d-grid">
+                <asp:Button ID="btn_Contactar" runat="server" Text="Enviar Mensaje" class="btn btn-warning mt-5" OnClick="btn_ContactarClick" />
+            </div>
+
         </div>
     </div>
 </asp:Content>
