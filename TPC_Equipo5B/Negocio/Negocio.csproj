@@ -53,6 +53,7 @@
     <Compile Include="EventoNegocio.cs" />
     <Compile Include="PrecioNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReporteNegocio.cs" />
     <Compile Include="TipoEventoNegocio.cs" />
     <Compile Include="UsuarioNegocio.cs" />
   </ItemGroup>

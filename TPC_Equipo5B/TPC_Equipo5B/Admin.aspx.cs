@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -382,19 +383,16 @@ namespace TPC_Equipo5B
         // Reportes
         protected void ddlReportes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Obtén el valor seleccionado
             string selectedValue = ddlReportes.SelectedValue;
-
-            // Resetea la visibilidad de todos los paneles
+            
             pnlUsuarioFiltro.Visible = false;
             pnlEventosFiltro.Visible = false;
             pnlComprasFiltro.Visible = false;
             pnlRecaudacionFiltro.Visible = false;
-
-            // Activa el panel correspondiente
+            
             switch (selectedValue)
             {
-                case "1": // Reporte de Usuarios
+                case "1": // Reporte de Cliente
                     pnlUsuarioFiltro.Visible = true;
                     break;
                 case "2": // Reporte de Eventos
@@ -406,13 +404,253 @@ namespace TPC_Equipo5B
                 case "4": // Recaudación
                     pnlRecaudacionFiltro.Visible = true;
                     break;
-                default:
-                    // No mostrar ningún panel
+            }
+        }
+        //CLIENTE
+        protected void ddlUsuarioFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {            
+            string select = ddlUsuarioFiltro.SelectedValue;
+
+            txtMes.Visible = false;
+            txtAnio.Visible = false;
+            txtCompraCl.Visible = false;
+
+            btn_reporte1.Visible = false;
+            btn_reporte2.Visible = false;
+            btn_reporte3.Visible = false;
+
+            switch (select)
+            {
+                case "1":
+                    txtMes.Visible = true;
+                    txtAnio.Visible = true;
+                    btn_reporte1.Visible = true;
+                    break;
+                case "2":
+                    txtAnio.Visible = true;
+                    btn_reporte2.Visible = true;
+                    break;
+                case "3":
+                    txtCompraCl.Visible = true;
+                    btn_reporte3.Visible = true;
                     break;
             }
         }
 
+        protected void click_btnReporteCL1(object sender, EventArgs e)
+        {
+            ReporteNegocio reporte = new ReporteNegocio();
 
+            int mes = 0;
+            int anio = 0;
+
+            if (int.TryParse(txtMes.Text, out mes) && int.TryParse(txtAnio.Text, out anio))
+            {
+                List<Compra> compras = reporte.ReporteMes(mes, anio);
+
+                if (compras != null && compras.Count > 0)
+                {
+                    gvClientes1.DataSource = compras;
+                    gvClientes1.DataBind();
+                }
+                else
+                {
+                    lblError.Text = "No se encontraron compras para este mes y año.";
+                }
+            }
+            else
+            {
+                lblError.Text = "Por favor, ingrese un mes y un año válidos.";
+            }
+        }
+        protected void click_btnReporteCL2(object sender, EventArgs e)
+        {
+            ReporteNegocio reporte = new ReporteNegocio();
+
+            int anio = 0;
+
+            if (int.TryParse(txtAnio.Text, out anio))
+            {
+                List<Compra> compras = reporte.ReporteAnio(anio);
+
+                if (compras != null && compras.Count > 0)
+                {
+                    gvClientes2.DataSource = compras;
+                    gvClientes2.DataBind();
+                }
+                else
+                {
+                    lblError.Text = "No se encontraron compras para este año.";
+                }
+            }
+            else
+            {
+                lblError.Text = "Por favor, ingrese un año válidos.";
+            }
+        }
+
+        protected void click_btnReporteCL3(object sender, EventArgs e)
+        {
+            ReporteNegocio reporte = new ReporteNegocio();
+
+            int id = 0;
+
+            if (int.TryParse(txtCompraCl.Text, out id))
+            {
+                List<Compra> comprasCliente = reporte.CompraCliente(id);
+
+                if (comprasCliente != null && comprasCliente.Count > 0)
+                {
+                    gvClientes3.DataSource = comprasCliente;
+                    gvClientes3.DataBind();
+                }
+                else
+                {
+                    lblError.Text = "No se encontraron compras para este cliente.";
+                }
+            }
+            else
+            {
+                lblError.Text = "Por favor, ingrese un id válido.";
+            }
+        }
+
+        //COMPRAS
+        protected void ddlComprasFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string select = ddlComprasFiltro.SelectedValue;
+
+            txtDiaC.Visible = false;
+            txtMesC.Visible = false;
+            txtAnioC.Visible = false;
+            btn_reporteC1.Visible = false;
+            btn_reporteC2.Visible = false;
+            btn_reporteC3.Visible = false;
+
+            switch (select)
+            {
+                case "1":
+                    txtDiaC.Visible = true;
+                    txtMesC.Visible = true;
+                    txtAnioC.Visible = true;
+                    btn_reporteC1.Visible = true;
+                    break;
+                case "2":
+                    txtMesC.Visible = true;
+                    txtAnioC.Visible = true;
+                    btn_reporteC2.Visible = true;
+                    break;
+                case "3":
+                    txtAnioC.Visible = true;
+                    btn_reporteC3.Visible = true;
+                    break;
+            }
+        }
+
+        protected void click_btnReporteCM1(object sender, EventArgs e)
+        {
+            ReporteNegocio reporte = new ReporteNegocio();
+
+            int dia = 0;
+            int mes = 0;
+            int anio = 0;
+
+            if (int.TryParse(txtDiaC.Text, out dia) && int.TryParse(txtMesC.Text, out mes) && int.TryParse(txtAnioC.Text, out anio))
+            {
+                List<Compra> comprasCliente = reporte.CompraPorDia(dia, mes, anio);
+
+                if (comprasCliente != null && comprasCliente.Count > 0)
+                {
+                    gvCompra1.DataSource = comprasCliente;
+                    gvCompra1.DataBind();
+                }
+                else
+                {
+                    lblError.Text = "No hay compras realizada en esta fecha.";
+                }
+            }
+            else
+            {
+                lblError.Text = "Por favor, ingrese un dia, mes y año valido.";
+            }
+
+        }
+
+        protected void click_btnReporteCM2(object sender, EventArgs e)
+        {
+
+        }
+        protected void click_btnReporteCM3(object sender, EventArgs e)
+        {
+
+        }
+        //RECAUDACION
+        protected void ddlRecaudacionFiltro_Changed(object sender, EventArgs e)
+        {
+            string select = ddlRecaudacionFiltro.SelectedValue;
+
+            txtDiaR.Visible = false;
+            txtMesR.Visible = false;
+            txtAnioR.Visible = false;
+            btn_reporteR1.Visible = false;
+            btn_reporteR2.Visible = false;
+            btn_reporteR3.Visible = false;
+
+            switch (select)
+            {
+                case "1":
+                    txtDiaR.Visible = true;
+                    txtMesR.Visible = true;
+                    txtAnioR.Visible = true;
+                    btn_reporteR1.Visible = true;
+                    break;
+                case "2":                    
+                    txtMesR.Visible = true;
+                    txtAnioR.Visible = true;
+                    btn_reporteR2.Visible = true;
+                    break;
+                case "3":                    
+                    txtAnioR.Visible = true;
+                    btn_reporteR3.Visible = true;
+                    break;
+            }
+        }
+        protected void click_btnReporteR1(object sender, EventArgs e)
+        {
+            ReporteNegocio reporte = new ReporteNegocio();
+
+            int dia = 0;
+            int mes = 0;
+            int anio = 0;
+
+            if (int.TryParse(txtDiaR.Text, out dia) && int.TryParse(txtMesR.Text, out mes) && int.TryParse(txtAnioR.Text, out anio))
+            {
+                List<Compra> comprasCliente = reporte.RecaudacionPorDia(dia, mes, anio);
+
+                if (comprasCliente != null && comprasCliente.Count > 0)
+                {
+                    gvRecaudacion1.DataSource = comprasCliente;
+                    gvRecaudacion1.DataBind();
+                }
+                else
+                {
+                    lblError.Text = "No hay recaudaciones para esta fecha.";
+                }
+            }
+            else
+            {
+                lblError.Text = "Por favor, ingrese un dia, mes y año valido.";
+            }
+
+        }
+        protected void click_btnReporteR2(object sender, EventArgs e)
+        {
+
+        }
+        protected void click_btnReporteR3(object sender, EventArgs e)
+        {
+
+        }
         // Método para cerrar sesión
         protected void CerrarSesion(object sender, EventArgs e)
         {

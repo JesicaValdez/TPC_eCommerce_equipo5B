@@ -215,11 +215,71 @@
                             <!-- CLIENTE -->
                             <asp:Panel ID="pnlUsuarioFiltro" runat="server" Visible="False" CssClass="mb-3">
                                 <label for="filtroUsuario">Seleccione el filtro para cliente:</label>
-                                <asp:DropDownList ID="ddlUsuarioFiltro" runat="server" CssClass="form-select">
-                                    <asp:ListItem Text="Mes" Value="1" />
+                                <asp:DropDownList ID="ddlUsuarioFiltro" runat="server" CssClass="form-select"
+                                    OnSelectedIndexChanged="ddlUsuarioFiltro_SelectedIndexChanged" AutoPostBack="True">
+                                    <asp:ListItem Text="Seleccione un reporte" Value="0" />
+                                    <asp:ListItem Text="Mes y año" Value="1" />
                                     <asp:ListItem Text="Año" Value="2" />
-                                    <asp:ListItem Text="Compras por Cliente" Value="1" />
+                                    <asp:ListItem Text="Compras por Cliente" Value="3" />
                                 </asp:DropDownList>
+
+                                <!-- Controles para mes y año Cliente-->
+                                <div class="mb-3 mt-3">
+                                    <asp:TextBox ID="txtMes" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el mes"></asp:TextBox>
+                                </div>
+                                <div class="mb-3">
+                                    <asp:TextBox ID="txtAnio" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el año"></asp:TextBox>
+                                </div>
+                                <div class="mb-3">
+                                    <asp:TextBox ID="txtCompraCl" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el numero de id cliente"></asp:TextBox>
+                                </div>
+
+                                <!-- botones Cliente -->
+                                <div class="mb-3 mt-3">
+                                    <asp:Button ID="btn_reporte1" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteCL1" />
+                                </div>
+                                <div class="mb-3">
+                                    <asp:Button ID="btn_reporte2" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteCL2" />
+                                </div>
+                                <div class="mb-3">
+                                    <asp:Button ID="btn_reporte3" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteCL3" />
+                                </div>
+
+
+                                <!-- GV Cliente -->
+                                <asp:GridView ID="gvClientes1" CssClass="table" runat="server" AutoGenerateColumns="false">
+                                    <Columns>
+                                        <asp:BoundField DataField="cliente.IdCliente" HeaderText="ID Cliente" />
+                                        <asp:BoundField DataField="cliente.Nombre" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="cliente.Apellido" HeaderText="Apellido" />
+                                        <asp:BoundField DataField="fechaCompra" HeaderText="Fecha de Compra" />
+                                        <asp:BoundField DataField="montoTotal" HeaderText="Monto Total" />
+                                    </Columns>
+                                </asp:GridView>
+
+                                <asp:GridView ID="gvClientes2" CssClass="table" runat="server" AutoGenerateColumns="false">
+                                    <Columns>
+                                        <asp:BoundField DataField="cliente.IdCliente" HeaderText="ID Cliente" />
+                                        <asp:BoundField DataField="cliente.Nombre" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="cliente.Apellido" HeaderText="Apellido" />
+                                        <asp:BoundField DataField="fechaCompra" HeaderText="Año de Compra" DataFormatString="{0:yyyy}" />
+                                        <asp:BoundField DataField="montoTotal" HeaderText="Monto Total" />
+                                    </Columns>
+                                </asp:GridView>
+
+                                <asp:GridView ID="gvClientes3" CssClass="table" runat="server" AutoGenerateColumns="false">
+                                    <Columns>
+                                        <asp:BoundField DataField="cliente.Nombre" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="cliente.Apellido" HeaderText="Apellido" />
+                                        <asp:BoundField DataField="fechaCompra" HeaderText="ID Cliente" />
+                                        <asp:BoundField DataField="cantidadEntradas" HeaderText="Apellido" />
+                                        <asp:BoundField DataField="montoTotal" HeaderText="Monto Total" />
+                                        <asp:BoundField DataField="evento.nombre" HeaderText="Fecha de Compra" />
+                                        <asp:BoundField DataField="tipoEntrada" HeaderText="Tipo Entrada" />
+                                    </Columns>
+                                </asp:GridView>
+                                <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+
                             </asp:Panel>
 
                             <!-- EVENTO -->
@@ -233,22 +293,89 @@
                             <!-- COMPRA -->
                             <asp:Panel ID="pnlComprasFiltro" runat="server" Visible="False" CssClass="mb-3">
                                 <label for="filtroCompra">Seleccione el filtro para compras:</label>
-                                <asp:DropDownList ID="ddlComprasFiltro" runat="server" CssClass="form-select">
+                                <asp:DropDownList ID="ddlComprasFiltro" runat="server" CssClass="form-select"
+                                    OnSelectedIndexChanged="ddlComprasFiltro_SelectedIndexChanged" AutoPostBack="true">
+                                    <asp:ListItem Text="Seleccione un reporte" Value="0" />
                                     <asp:ListItem Text="Dia" Value="1" />
                                     <asp:ListItem Text="Mes" Value="2" />
                                     <asp:ListItem Text="Año" Value="3" />
                                 </asp:DropDownList>
                             </asp:Panel>
 
+                            <!-- Controles para dia, mes y año Compra-->
+                            <div class="mb-3 mt-3">
+                                <asp:TextBox ID="txtDiaC" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el dia"></asp:TextBox>
+                            </div>
+                            <div class="mb-3">
+                                <asp:TextBox ID="txtMesC" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el mes"></asp:TextBox>
+                            </div>
+                            <div class="mb-3">
+                                <asp:TextBox ID="txtAnioC" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el año"></asp:TextBox>
+                            </div>
+
+                            <!-- botones Compra -->
+                            <div class="mb-3 mt-3">
+                                <asp:Button ID="btn_reporteC1" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteCM1" />
+                            </div>
+                            <div class="mb-3">
+                                <asp:Button ID="btn_reporteC2" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteCM2" />
+                            </div>
+                            <div class="mb-3">
+                                <asp:Button ID="btn_reporteC3" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteCM3" />
+                            </div>
+
+                            <!-- GV Compra -->
+                            <asp:GridView ID="gvCompra1" CssClass="table" runat="server" AutoGenerateColumns="false">
+                                <Columns>
+                                    <asp:BoundField DataField="fechaCompra" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
+                                    <asp:BoundField DataField="cantidadEntradas" HeaderText="Total de Compras" />
+                                </Columns>
+                            </asp:GridView>
+                            <asp:Label ID="lblErorC" runat="server" Text=""></asp:Label>
+
                             <!-- RECAUDACION -->
                             <asp:Panel ID="pnlRecaudacionFiltro" runat="server" Visible="False" CssClass="mb-3">
                                 <label for="filtroRecaudacion">Seleccione el filtro para recaudación:</label>
-                                <asp:DropDownList ID="ddlRecaudacionFiltro" runat="server" CssClass="form-select">
+                                <asp:DropDownList ID="ddlRecaudacionFiltro" runat="server" CssClass="form-select"
+                                    OnSelectedIndexChanged="ddlRecaudacionFiltro_Changed" AutoPostBack="true">
+                                    <asp:ListItem Text="Seleccione un reporte" Value="0" />
                                     <asp:ListItem Text="Dia" Value="1" />
                                     <asp:ListItem Text="Mes" Value="2" />
                                     <asp:ListItem Text="Año" Value="2" />
                                 </asp:DropDownList>
                             </asp:Panel>
+
+                            <!-- Controles para dia, mes y año Recaudacion-->
+                            <div class="mb-3 mt-3">
+                                <asp:TextBox ID="txtDiaR" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el dia"></asp:TextBox>
+                            </div>
+                            <div class="mb-3">
+                                <asp:TextBox ID="txtMesR" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el mes"></asp:TextBox>
+                            </div>
+                            <div class="mb-3">
+                                <asp:TextBox ID="txtAnioR" runat="server" CssClass="form-control" Visible="False" placeholder="Ingrese el año"></asp:TextBox>
+                            </div>
+
+                            <!-- botones Compra -->
+                            <div class="mb-3 mt-3">
+                                <asp:Button ID="btn_reporteR1" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteR1" />
+                            </div>
+                            <div class="mb-3">
+                                <asp:Button ID="btn_reporteR2" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteR2" />
+                            </div>
+                            <div class="mb-3">
+                                <asp:Button ID="btn_reporteR3" runat="server" Text="Ver Reporte" Visible="false" OnClick="click_btnReporteR3" />
+                            </div>
+
+                            <!-- GV Recaudacion -->
+                            <asp:GridView ID="gvRecaudacion1" CssClass="table" runat="server" AutoGenerateColumns="false">
+                                <Columns>
+                                    <asp:BoundField DataField="fechaCompra" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
+                                    <asp:BoundField DataField="montoTotal" HeaderText="Total Recaudado" />
+                                </Columns>
+                            </asp:GridView>
+                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+
 
                         </asp:View>
                     </asp:MultiView>
