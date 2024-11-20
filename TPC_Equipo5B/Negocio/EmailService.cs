@@ -13,13 +13,16 @@ namespace Negocio
         private MailMessage email;
         private SmtpClient server;
 
-        public EmailService(string smtpHost, int smtpPort, string smtpUsername, string smtpPassword)
+        private string myEmail = "devops.codetesting@gmail.com";
+        private string myPassword = "fngv fkzp wwyq canu";
+
+        public EmailService()
         {
             server = new SmtpClient();
-            server.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+            server.Credentials = new NetworkCredential(myEmail, myPassword);
             server.EnableSsl = true;
-            server.Port = smtpPort;
-            server.Host = smtpHost;
+            server.Port = 25;
+            server.Host = "smtp.gmail.com";
         }
         public void armarCorreo(string correoDestino, string asutno, string cuerpo)
         {
