@@ -24,7 +24,8 @@ namespace TPC_Equipo5B
                 UsuarioNegocio negocioU = new UsuarioNegocio();
                 ClienteNegocio negocioC = new ClienteNegocio();
 
-                if (validarRegistroVacio())
+                // Si hay errores en el formulario, termina la ejecución
+                if (!validarRegistro())
                 {
                     return;
                 }
@@ -51,6 +52,7 @@ namespace TPC_Equipo5B
                         return;
                     }
 
+                    // Crear nuevo usuario y cliente
                     Dominio.Usuario nuevoUsuario = new Dominio.Usuario
                     {
                         NombreUsuario = txtUser.Text,
@@ -73,88 +75,82 @@ namespace TPC_Equipo5B
                 }
                 else
                 {
-                    lbl_Chek.Text = "Debe aceptar terminos y condiciones";
+                    lbl_Chek.Text = "Debe aceptar términos y condiciones";
                     lbl_Chek.Visible = true;
                 }
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
-        private bool validarRegistroVacio()
+        // Validar formulario completo
+        private bool validarRegistro()
         {
+            limpiar();
+
             bool valido = true;
-            try
+
+            // Validar DNI
+            if (!dniValido())
             {
-                limpiar();
-                //validar dni
-                if (dniValido())
-                {
-                    valido = false;
-                }
-
-                //validar nombre
-                if (string.IsNullOrEmpty(txtNombre.Text))
-                {
-                    lbl_Nombre.Text = "ingrese nombre";
-                    lbl_Nombre.Visible = true;
-                    valido = false;
-                }
-
-                //validar apellido
-                if (string.IsNullOrEmpty(txtApellido.Text))
-                {
-                    lbl_Apellido.Text = "ingrese apellido";
-                    lbl_Apellido.Visible = true;
-                    valido = false;
-                }
-
-                //validar fecha de naciemiento
-                if (string.IsNullOrEmpty(txtCalendarioFN.Text))
-                {
-                    lbl_FechaN.Text = "ingrese fecha de nacimiento";
-                    lbl_FechaN.Visible = true;
-                    valido = false;
-                }
-
-                //validar telefono
-                if (string.IsNullOrEmpty(txtTelefono.Text))
-                {
-                    lbl_tel.Text = "ingrese numero de telefono";
-                    lbl_tel.Visible = true;
-                    valido = false;
-                }
-
-                //validar email
-                if (!emailValido())
-                {
-                    valido = false;
-                }
-
-                //validar usuario
-                if (string.IsNullOrEmpty(txtUser.Text))
-                {
-                    lbl_Usuario.Text = "ingrese un usuario";
-                    lbl_Usuario.Visible = true;
-                    valido = false;
-                }
-
-                //validar contaseña
-                if (contraseniaValida())
-                {
-                    valido = false;
-                }
-
-                return valido;
+                valido = false;
             }
-            catch (Exception ex)
+
+            // Validar nombre
+            if (string.IsNullOrEmpty(txtNombre.Text))
             {
-
-                throw ex;
+                lbl_Nombre.Text = "Ingrese nombre";
+                lbl_Nombre.Visible = true;
+                valido = false;
             }
+
+            // Validar apellido
+            if (string.IsNullOrEmpty(txtApellido.Text))
+            {
+                lbl_Apellido.Text = "Ingrese apellido";
+                lbl_Apellido.Visible = true;
+                valido = false;
+            }
+
+            // Validar fecha de nacimiento
+            if (string.IsNullOrEmpty(txtCalendarioFN.Text))
+            {
+                lbl_FechaN.Text = "Ingrese fecha de nacimiento";
+                lbl_FechaN.Visible = true;
+                valido = false;
+            }
+
+            // Validar teléfono
+            if (string.IsNullOrEmpty(txtTelefono.Text))
+            {
+                lbl_tel.Text = "Ingrese número de teléfono";
+                lbl_tel.Visible = true;
+                valido = false;
+            }
+
+            // Validar email
+            if (!emailValido())
+            {
+                valido = false;
+            }
+
+            // Validar usuario
+            if (string.IsNullOrEmpty(txtUser.Text))
+            {
+                lbl_Usuario.Text = "Ingrese un usuario";
+                lbl_Usuario.Visible = true;
+                valido = false;
+            }
+
+            // Validar contraseña
+            if (!contraseniaValida())
+            {
+                valido = false;
+            }
+
+            return valido;
         }
 
         private bool dniValido()
@@ -232,12 +228,7 @@ namespace TPC_Equipo5B
 
         private bool AceptarTerminos()
         {
-            if (checkCondiciones.Checked == true)
-            {
-                return true;
-            }           
-                
-            return false;            
+            return checkCondiciones.Checked;
         }
 
         private void limpiar()

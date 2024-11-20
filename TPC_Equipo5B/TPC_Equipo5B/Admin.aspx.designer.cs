@@ -294,21 +294,75 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.DropDownList ddlReportes;
 
         /// <summary>
-        /// btnGenerarReporte control.
+        /// pnlUsuarioFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGenerarReporte;
+        protected global::System.Web.UI.WebControls.Panel pnlUsuarioFiltro;
 
         /// <summary>
-        /// panelReporte control.
+        /// ddlUsuarioFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelReporte;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUsuarioFiltro;
+
+        /// <summary>
+        /// pnlEventosFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlEventosFiltro;
+
+        /// <summary>
+        /// ddlEventosFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEventosFiltro;
+
+        /// <summary>
+        /// pnlComprasFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlComprasFiltro;
+
+        /// <summary>
+        /// ddlComprasFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlComprasFiltro;
+
+        /// <summary>
+        /// pnlRecaudacionFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlRecaudacionFiltro;
+
+        /// <summary>
+        /// ddlRecaudacionFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRecaudacionFiltro;
     }
 }

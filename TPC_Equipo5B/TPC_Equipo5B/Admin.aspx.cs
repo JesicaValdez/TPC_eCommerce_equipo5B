@@ -296,7 +296,11 @@ namespace TPC_Equipo5B
                     else
                     {
                         // Si no hay entradas disponibles
+                        var preciosLista = eventoPrecio.listarporEvento(eventoId);
+
                         lblEntradasDisponibles.Text = "No hay capacidad disponibles para agregar entradas a este evento.";
+                        dgvPrecios.DataSource = preciosLista;
+                        dgvPrecios.DataBind();
                         BtnPrecio.Enabled = false;
                     }
                 }
@@ -375,21 +379,39 @@ namespace TPC_Equipo5B
             // AGREGAR LOGICA PARA VER REPORTES / GENERARLOS
         }
 
-        // Método para generar reportes
-        protected void GenerarReporte(object sender, EventArgs e)
+        // Reportes
+        protected void ddlReportes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int reporteSeleccionado = int.Parse(ddlReportes.SelectedValue);
+            // Obtén el valor seleccionado
+            string selectedValue = ddlReportes.SelectedValue;
 
-            switch (reporteSeleccionado)
+            // Resetea la visibilidad de todos los paneles
+            pnlUsuarioFiltro.Visible = false;
+            pnlEventosFiltro.Visible = false;
+            pnlComprasFiltro.Visible = false;
+            pnlRecaudacionFiltro.Visible = false;
+
+            // Activa el panel correspondiente
+            switch (selectedValue)
             {
-                case 1:
-                    panelReporte.Controls.Add(new LiteralControl("<p>Reporte de Usuarios generado.</p>"));
+                case "1": // Reporte de Usuarios
+                    pnlUsuarioFiltro.Visible = true;
                     break;
-                case 2:
-                    panelReporte.Controls.Add(new LiteralControl("<p>Reporte de Eventos generado.</p>"));
+                case "2": // Reporte de Eventos
+                    pnlEventosFiltro.Visible = true;
+                    break;
+                case "3": // Reporte de Compras
+                    pnlComprasFiltro.Visible = true;
+                    break;
+                case "4": // Recaudación
+                    pnlRecaudacionFiltro.Visible = true;
+                    break;
+                default:
+                    // No mostrar ningún panel
                     break;
             }
         }
+
 
         // Método para cerrar sesión
         protected void CerrarSesion(object sender, EventArgs e)

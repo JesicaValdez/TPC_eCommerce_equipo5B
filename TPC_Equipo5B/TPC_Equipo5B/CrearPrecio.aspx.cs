@@ -73,9 +73,10 @@ namespace TPC_Equipo5B
                     {
                         // Lógica para modificar
                         int idPrecio = int.Parse(Request.QueryString["id"]);
+                        int evento = int.Parse(txtEventos.Text);
                         Precio precioMod = new Precio
                         {
-                            idEvento = idPrecio,
+                            idEvento = evento,
                             tipoEntrada = txtNombreEntrada.Text,
                             cantidadEntradas = int.Parse(txtCantidad.Text),
                             precio = decimal.Parse(txtPrecio.Text)
@@ -86,8 +87,8 @@ namespace TPC_Equipo5B
                             entradasDisponibles = int.Parse(txtCantidad.Text)
                         };
 
-                        precioNegocio.modificarPrecio(precioMod);
-                        eventoNegocio.modificarCapacidad(capacidadMod, idPrecio);
+                        precioNegocio.modificarPrecio(precioMod, idPrecio);
+                        eventoNegocio.modificarCapacidad(capacidadMod, evento);
                     }
                     else if (modo == "agregar")
                     {

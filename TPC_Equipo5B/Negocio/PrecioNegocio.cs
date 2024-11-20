@@ -105,7 +105,7 @@ namespace Negocio
             }
         }
 
-        public Precio obtenerPrecio(int user)
+        public Precio obtenerPrecio(int id)
         {
             AccesoDB dato = new AccesoDB();
             Precio precio = new Precio();
@@ -113,7 +113,7 @@ namespace Negocio
             try
             {
                 dato.setearConsulta("SELECT IdEvento, TipoEntrada, Precio, Cantidad FROM PreciosEntradas WHERE IDPrecio = @IDPrecio");
-                dato.setearParametro("@IDPrecio", user);
+                dato.setearParametro("@IDPrecio", id);
 
                 dato.ejecutarLectura();
 
@@ -183,17 +183,18 @@ namespace Negocio
             }
         }
 
-        public void modificarPrecio(Precio seleccionado)
+        public void modificarPrecio(Precio seleccionado, int id)
         {
             AccesoDB dato = new AccesoDB();
 
             try
             {
-                dato.setearConsulta("UPDATE PreciosEntradas SET TipoEntrada = @tipoEntrada, Precio = @precio, Cantidad = @cantidadEntradas WHERE IDPrecio = @idPrecio");
+                dato.setearConsulta("UPDATE PreciosEntradas SET IdEvento = @IdEvento, TipoEntrada = @tipoEntrada, Precio = @precio, Cantidad = @cantidadEntradas WHERE IDPrecio = @idPrecio");
+                dato.setearParametro("@IdEvento", seleccionado.idEvento);
                 dato.setearParametro("@tipoEntrada", seleccionado.tipoEntrada);
                 dato.setearParametro("@cantidadEntradas", seleccionado.cantidadEntradas);
                 dato.setearParametro("@precio", seleccionado.precio);
-                dato.setearParametro("@idPrecio", seleccionado.idPrecio);
+                dato.setearParametro("@idPrecio", id);
                 dato.ejecutarAccion();
             }
             catch (Exception ex)

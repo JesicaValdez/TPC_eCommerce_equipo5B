@@ -30,7 +30,7 @@
                         <i class="bi bi-cash" ></i> Gestión de Compras
                     </asp:LinkButton>
                     <asp:LinkButton ID="lnkReportes" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="MostrarReportes">
-                        <i class="bi bi-graph-up"></i> Reportes y Análisis
+                        <i class="bi bi-graph-up"></i> Reportes
                     </asp:LinkButton>
                     <asp:LinkButton ID="lnkCerrarSesion" runat="server" CssClass="list-group-item list-group-item-dark" OnClick="CerrarSesion">
                         <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
@@ -195,21 +195,61 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
-                            </asp:GridView> 
+                            </asp:GridView>
                         </asp:View>
 
-                        <!-- Vista de Reportes y Análisis -->
+                        <!-- Vista de Reportes -->
                         <asp:View ID="ViewReportes" runat="server">
-                            <h3 class="info-title">Reportes y Análisis</h3>
-                            <asp:DropDownList ID="ddlReportes" runat="server" CssClass="form-select mb-3 text-style">
-                                <asp:ListItem Text="Reporte de Usuarios" Value="1" />
+                            <h3 class="info-title">Reportes</h3>
+
+                            <!-- Principal -->
+                            <asp:DropDownList ID="ddlReportes" runat="server" CssClass="form-select"
+                                OnSelectedIndexChanged="ddlReportes_SelectedIndexChanged" AutoPostBack="True">
+                                <asp:ListItem Text="Seleccione un reporte" Value="0" />
+                                <asp:ListItem Text="Reporte de Cliente" Value="1" />
                                 <asp:ListItem Text="Reporte de Eventos" Value="2" />
                                 <asp:ListItem Text="Reporte de Compras" Value="3" />
+                                <asp:ListItem Text="Recaudación" Value="4" />
                             </asp:DropDownList>
-                            <asp:Button ID="btnGenerarReporte" runat="server" Text="Generar Reporte" CssClass="btn btn-success explore-btn" OnClick="GenerarReporte" />
-                            <asp:Panel ID="panelReporte" runat="server" CssClass="mt-3 text-style">
-                                <!-- Aquí se mostrarán los datos del reporte -->
+
+                            <!-- CLIENTE -->
+                            <asp:Panel ID="pnlUsuarioFiltro" runat="server" Visible="False" CssClass="mb-3">
+                                <label for="filtroUsuario">Seleccione el filtro para cliente:</label>
+                                <asp:DropDownList ID="ddlUsuarioFiltro" runat="server" CssClass="form-select">
+                                    <asp:ListItem Text="Mes" Value="1" />
+                                    <asp:ListItem Text="Año" Value="2" />
+                                    <asp:ListItem Text="Compras por Cliente" Value="1" />
+                                </asp:DropDownList>
                             </asp:Panel>
+
+                            <!-- EVENTO -->
+                            <asp:Panel ID="pnlEventosFiltro" runat="server" Visible="False" CssClass="mb-3">
+                                <label for="filtroEvento">Seleccione el filtro para eventos:</label>
+                                <asp:DropDownList ID="ddlEventosFiltro" runat="server" CssClass="form-select">
+                                    <asp:ListItem Text="Ranking por evento" Value="1" />
+                                </asp:DropDownList>
+                            </asp:Panel>
+
+                            <!-- COMPRA -->
+                            <asp:Panel ID="pnlComprasFiltro" runat="server" Visible="False" CssClass="mb-3">
+                                <label for="filtroCompra">Seleccione el filtro para compras:</label>
+                                <asp:DropDownList ID="ddlComprasFiltro" runat="server" CssClass="form-select">
+                                    <asp:ListItem Text="Dia" Value="1" />
+                                    <asp:ListItem Text="Mes" Value="2" />
+                                    <asp:ListItem Text="Año" Value="3" />
+                                </asp:DropDownList>
+                            </asp:Panel>
+
+                            <!-- RECAUDACION -->
+                            <asp:Panel ID="pnlRecaudacionFiltro" runat="server" Visible="False" CssClass="mb-3">
+                                <label for="filtroRecaudacion">Seleccione el filtro para recaudación:</label>
+                                <asp:DropDownList ID="ddlRecaudacionFiltro" runat="server" CssClass="form-select">
+                                    <asp:ListItem Text="Dia" Value="1" />
+                                    <asp:ListItem Text="Mes" Value="2" />
+                                    <asp:ListItem Text="Año" Value="2" />
+                                </asp:DropDownList>
+                            </asp:Panel>
+
                         </asp:View>
                     </asp:MultiView>
                 </div>
