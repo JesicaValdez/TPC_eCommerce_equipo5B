@@ -212,7 +212,7 @@ namespace Negocio
 
             try
             {
-                dato.setearConsulta("DELETE FROM Precios WHERE IDPrecio = @idPrecio");
+                dato.setearConsulta("DELETE FROM PreciosEntradas WHERE IDPrecio = @idPrecio");
                 dato.setearParametro("@idPrecio", id);
                 dato.ejecutarAccion();
             }

@@ -278,32 +278,17 @@ namespace TPC_Equipo5B
                     {
                         // Si hay entradas disponibles
                         lblEntradasDisponibles.Text = "Capacidad disponible: " + cantidad.ToString();
-                        var preciosLista = eventoPrecio.listarporEvento(eventoId);
-
-                        if (preciosLista != null && preciosLista.Count > 0)
-                        {
-                            dgvPrecios.DataSource = preciosLista;
-                            dgvPrecios.DataBind();
-                            MostrarMensaje("Sección precios cargado correctamente.", true);
-                        }
-                        else
-                        {
-                            MostrarMensaje("No se encontraron precios para cargar.", false);
-                        }
-
+                        CargarPrecios(eventoId);
                         BtnPrecio.Enabled = true;
                         BtnPrecio.CommandArgument = eventoId.ToString();
                     }
                     else
                     {
-                        // Si no hay entradas disponibles
-                        var preciosLista = eventoPrecio.listarporEvento(eventoId);
-
                         lblEntradasDisponibles.Text = "No hay capacidad disponibles para agregar entradas a este evento.";
-                        dgvPrecios.DataSource = preciosLista;
-                        dgvPrecios.DataBind();
+                        CargarPrecios(eventoId);
                         BtnPrecio.Enabled = false;
                     }
+
                 }
                 else
                 {
@@ -315,6 +300,32 @@ namespace TPC_Equipo5B
             catch (Exception ex)
             {
                 MostrarMensaje("Error al cargar entradas disponibles: " + ex.Message, false);
+            }
+        }
+
+        protected void CargarPrecios(int eventoId)
+        {
+            try
+            {
+                PrecioNegocio precioNegocio = new PrecioNegocio();
+                var preciosLista = precioNegocio.listarporEvento(eventoId);
+
+                if (preciosLista != null && preciosLista.Count > 0)
+                {
+                    dgvPrecios.DataSource = preciosLista;
+                    dgvPrecios.DataBind();
+                    MostrarMensaje(" Precios cargados correctamente.", true);
+                }
+                else
+                {
+                    dgvPrecios.DataSource = null;
+                    dgvPrecios.DataBind();
+                    MostrarMensaje(" No se encontraron precios para cargar.", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al cargar precios: " + ex.Message, false);
             }
         }
 
@@ -333,7 +344,8 @@ namespace TPC_Equipo5B
             {
                 Response.Write("Error: " + ex.ToString());
             }
-            //aqui falta un mensaje que se hizo correctamente
+            MostrarMensaje("Precio creado correctamente.", true);
+            Response.Redirect("Exito.aspx");
         }
 
         protected void btnModificarPrecio_Click(object sender, EventArgs e)
@@ -351,20 +363,24 @@ namespace TPC_Equipo5B
             {
                 Response.Write("Error: " + ex.ToString());
             }
-            //aqui falta un mensaje que se hizo correctamente
+            MostrarMensaje("Precio modificado correctamente.", true);
+            Response.Redirect("Exito.aspx");
         }
 
         protected void btnEliminarPrecio_Click(object sender, EventArgs e)
         {
             try
             {
-                int id = int.Parse(((Button)sender).CommandArgument);
+                int idPrecio = int.Parse(((Button)sender).CommandArgument);
+                int eventoId = int.Parse(ddlEventos.SelectedValue); //obtengo el ID del evento seleccionado
 
                 PrecioNegocio precioNegocio = new PrecioNegocio();
-                precioNegocio.eliminarPrecio(id);
+                precioNegocio.eliminarPrecio(idPrecio);
 
 
                 MostrarMensaje("Precio del evento eliminado correctamente.", true);
+                CargarPrecios(eventoId);
+
             }
             catch (Exception)
             {
@@ -373,6 +389,7 @@ namespace TPC_Equipo5B
 
             }
         }
+       
         //REPORTES
         protected void MostrarReportes(object sender, EventArgs e)
         {
@@ -380,7 +397,6 @@ namespace TPC_Equipo5B
             // AGREGAR LOGICA PARA VER REPORTES / GENERARLOS
         }
 
-        // Reportes
         protected void ddlReportes_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedValue = ddlReportes.SelectedValue;
@@ -665,7 +681,7 @@ namespace TPC_Equipo5B
             panelMessage.Controls.Add(new LiteralControl(mensaje));
         }
 
-
+        //Compras
         protected void CargarCompras()
         {
             try
@@ -683,7 +699,7 @@ namespace TPC_Equipo5B
 
         protected void btnAnular_Click(object sender, EventArgs e)
         {
-            
+
             CompraNegocio compraNegocio = new CompraNegocio();
             compraNegocio.bajaCompra(int.Parse(((Button)sender).CommandArgument));
             MostrarMensaje("Compra dada de baja correctamente.", true);

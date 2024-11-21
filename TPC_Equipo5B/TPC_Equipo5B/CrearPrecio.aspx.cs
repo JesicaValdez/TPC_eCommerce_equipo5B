@@ -3,6 +3,7 @@ using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -150,6 +151,47 @@ namespace TPC_Equipo5B
                 lblResultado.Text = "Ocurrió un error: " + ex.Message;
                 lblResultado.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+        private bool validarForm()
+        {
+            bool esValido = true; 
+
+            // Validaciones de campos vacíos
+            if (string.IsNullOrEmpty(txtNombreEntrada.Text) || !System.Text.RegularExpressions.Regex.IsMatch(txtNombreEntrada.Text, @"^[a-zA-Z\s]+$"))
+            {
+                lblNombreEntradaError.Text = "El nombre de la entrada no puede estar vacío.";
+                lblNombreEntradaError.ForeColor = System.Drawing.Color.Red;
+                esValido = false;
+            }
+            else
+                {
+                lblNombreEntradaError.Text = string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(txtPrecio.Text) || !decimal.TryParse(txtPrecio.Text, out decimal precio) || precio < 0)
+            {
+                lblPrecioError.Text = "Debe ingresar un precio válido.";
+                lblPrecioError.ForeColor = System.Drawing.Color.Red;
+                esValido = false;
+            }
+            else
+            {
+                lblPrecioError.Text = string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(txtCantidad.Text) || !int.TryParse(txtCantidad.Text, out int cantidad) || cantidad < 0)
+            {
+                lblCantidadError.Text = "Debe ingresar una cantidad válida.";
+                lblCantidadError.ForeColor = System.Drawing.Color.Red;
+                esValido = false;
+            }
+            else
+            {
+                lblCantidadError.Text = string.Empty;
+            }
+
+            return esValido;
         }
 
        

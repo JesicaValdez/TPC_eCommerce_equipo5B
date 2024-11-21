@@ -223,9 +223,10 @@ namespace TPC_Equipo5B
                 lblNombreEventoError.Visible = true;
                 valido = false;
             }
+            
 
             // Validar descripción de evento
-            if (string.IsNullOrEmpty(txtDescripcionEvento.Text))
+            if (string.IsNullOrEmpty(txtDescripcionEvento.Text)  || !System.Text.RegularExpressions.Regex.IsMatch(txtDescripcionEvento.Text, @"^[a-zA-Z\s]+$"))
             {
                 lblDescripcionError.Text = "Ingrese una descripción del evento.";
                 lblDescripcionError.Visible = true;
@@ -233,7 +234,7 @@ namespace TPC_Equipo5B
             }
 
             // Validar lugar de evento
-            if (string.IsNullOrEmpty(txtLugarEvento.Text))
+            if (string.IsNullOrEmpty(txtLugarEvento.Text)  || !System.Text.RegularExpressions.Regex.IsMatch(txtLugarEvento.Text, @"^[a-zA-Z\s]+$"))
             {
                 lblLugarError.Text = "Ingrese el lugar del evento.";
                 lblLugarError.Visible = true;
@@ -241,7 +242,7 @@ namespace TPC_Equipo5B
             }
 
             // Validar fecha del evento
-            if (string.IsNullOrEmpty(txtFechaEvento.Text) || !DateTime.TryParse(txtFechaEvento.Text, out _)) ;
+            if (string.IsNullOrEmpty(txtFechaEvento.Text) || !DateTime.TryParse(txtFechaEvento.Text, out _));
             {
                 lblFechaEventoError.Text = "Ingrese una fecha válida.";
                 lblFechaEventoError.Visible = true;
@@ -255,6 +256,7 @@ namespace TPC_Equipo5B
                 lblCantEntradasError.Visible = true;
                 valido = false;
             }
+
         }
 
 

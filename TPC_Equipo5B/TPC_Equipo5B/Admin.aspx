@@ -57,7 +57,7 @@
                             <h3 class="info-title">Lista de Usuarios</h3>
 
                             <div class="form-group">
-                                <label for="txtBuscarEvento" class="filter-container-label">ID del Usuario:</label>
+                                <label for="txtBuscarEvento" class="filter-container-label">Ingrese nombre:</label>
                                 <asp:TextBox ID="txtBuscarUsuario" runat="server" Placeholder="Buscar usuario..." CssClass="form-control mb-2 text-style"></asp:TextBox>
                             </div>
 
