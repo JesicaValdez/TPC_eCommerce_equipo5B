@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using System.Diagnostics;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 
 namespace TPC_Equipo5B
 {
@@ -130,58 +131,59 @@ namespace TPC_Equipo5B
 
                 limpiarMensajes();
 
-                // Realiza la validación del formulario
-                if (validarFormulario())
+                if (!validarFormulario())
                 {
-
-
-                    //si estamos modificando un evento
-                    if (Request.QueryString["id"] != null)
-                    {
-
-                        Evento evento = new Evento();
-                        {
-                            evento.codigo = codigoEvento;
-                            evento.nombre = txtNombreEvento.Text;
-                            evento.descripcion = txtDescripcionEvento.Text;
-                            evento.lugar = txtLugarEvento.Text;
-                            evento.direccion = txtDireccionEvento.Text;
-                            evento.tipoEvento = new TipoEvento();
-                            evento.tipoEvento.id = int.Parse(ddlTipoEvento.SelectedValue);
-                            evento.entradasDisponibles = txtCantEntradas.Text == "" ? 0 : int.Parse(txtCantEntradas.Text);
-                            evento.fecha = DateTime.Parse(txtFechaEvento.Text);
-                            evento.imagenUrl = txtImagenEvento.Text;
-                        }
-
-                        int idEvento = int.Parse(Request.QueryString["id"]);
-                        eventoNegocio.ModificarEvento(evento, idEvento);
-                        imagenNegocio.modificarImagen(evento, idEvento);
-
-
-                        lblResultado.Text = "Evento modificado correctamente.";
-                        lblResultado.CssClass = "alert-success";
-                        Response.Redirect("Admin.aspx");
-
-
-                    }
-
-                    else
-                    {
-                        crearEvento();
-                        lblResultado.Text = "Evento creado correctamente.";
-                        lblResultado.CssClass = "alert-success";
-
-                    }
-                    limpiarCampos();
-                    Response.Redirect("Admin.aspx");
+                    return;
                 }
+
+                //si estamos modificando un evento
+                if (Request.QueryString["id"] != null)
+                {
+                    if (!validarFormulario())
+                    {
+                        return;
+                    }
+
+                    Evento evento = new Evento();
+                    {
+                        evento.codigo = codigoEvento;
+                        evento.nombre = txtNombreEvento.Text;
+                        evento.descripcion = txtDescripcionEvento.Text;
+                        evento.lugar = txtLugarEvento.Text;
+                        evento.direccion = txtDireccionEvento.Text;
+                        evento.tipoEvento = new TipoEvento();
+                        evento.tipoEvento.id = int.Parse(ddlTipoEvento.SelectedValue);
+                        evento.entradasDisponibles = txtCantEntradas.Text == "" ? 0 : int.Parse(txtCantEntradas.Text);
+                        evento.fecha = DateTime.Parse(txtFechaEvento.Text);
+                        evento.imagenUrl = txtImagenEvento.Text;
+                    }
+
+                    int idEvento = int.Parse(Request.QueryString["id"]);
+                    eventoNegocio.ModificarEvento(evento, idEvento);
+                    imagenNegocio.modificarImagen(evento, idEvento);
+
+
+                    Session.Add("exito", "Evento modificado correctamente.");
+                    Response.Redirect("Exito.aspx");
+
+
+                }
+
+                else
+                {
+                    crearEvento();
+                    Session.Add("exito", "Evento creado correctamente.");
+                    Response.Redirect("Exito.aspx");
+
+                }
+
             }
             catch (Exception ex)
             {
                 lblResultado.Text = "Error al crear o modificar evento: " + ex.Message;
                 lblResultado.CssClass = "alert-danger";
                 lblResultado.Visible = true;
-                
+
             }
 
         }
@@ -190,6 +192,11 @@ namespace TPC_Equipo5B
         {
             try
             {
+                if (!validarFormulario())
+                {
+                    return;
+                }
+
                 ImagenNegocio imagenNegocio = new ImagenNegocio();
                 Evento evento = new Evento();
                 EventoNegocio eventoNegocio = new EventoNegocio();
@@ -208,7 +215,7 @@ namespace TPC_Equipo5B
                 eventoNegocio.agregar(evento);
                 imagenNegocio.agregarImagen(evento);
 
-               
+
             }
             catch (Exception ex)
             {
@@ -224,36 +231,56 @@ namespace TPC_Equipo5B
             bool valido = true;
 
             // Validar nombre de evento
-            if (string.IsNullOrEmpty(txtNombreEvento.Text))
+            if (string.IsNullOrEmpty(txtNombreEvento.Text) || !System.Text.RegularExpressions.Regex.IsMatch(txtNombreEvento.Text, @"^[a-zA-Z\s]+$"))
             {
-                lblNombreEventoError.Text = "Ingrese el nombre del evento.";
-                lblNombreEventoError.Visible = true;
+                lblNombreError.Text = "Ingrese el nombre del evento.";
+                lblNombreError.Visible = true;
                 valido = false;
             }
-            
+            else
+            {
+                lblNombreError.Text = string.Empty;
+                lblNombreError.Visible = false;
+            }
+
 
             // Validar descripción de evento
-            if (string.IsNullOrEmpty(txtDescripcionEvento.Text)  || !System.Text.RegularExpressions.Regex.IsMatch(txtDescripcionEvento.Text, @"^[a-zA-Z\s]+$"))
+            if (string.IsNullOrEmpty(txtDescripcionEvento.Text) || !System.Text.RegularExpressions.Regex.IsMatch(txtDescripcionEvento.Text, @"^[a-zA-Z\s]+$") || txtDescripcionEvento.Text.Length > 150)
             {
                 lblDescripcionError.Text = "Ingrese una descripción del evento.";
                 lblDescripcionError.Visible = true;
                 valido = false;
             }
+            else
+            {
+                lblDescripcionError.Text = string.Empty;
+                lblDescripcionError.Visible = false;
+            }
 
             // Validar lugar de evento
-            if (string.IsNullOrEmpty(txtLugarEvento.Text)  || !System.Text.RegularExpressions.Regex.IsMatch(txtLugarEvento.Text, @"^[a-zA-Z\s]+$"))
+            if (string.IsNullOrEmpty(txtLugarEvento.Text) || !System.Text.RegularExpressions.Regex.IsMatch(txtLugarEvento.Text, @"^[a-zA-Z\s]+$"))
             {
                 lblLugarError.Text = "Ingrese el lugar del evento.";
                 lblLugarError.Visible = true;
                 valido = false;
             }
+            else
+            {
+                lblLugarError.Text = string.Empty;
+                lblLugarError.Visible = false;
+            }
 
             // Validar fecha del evento
-            if (string.IsNullOrEmpty(txtFechaEvento.Text) || !DateTime.TryParse(txtFechaEvento.Text, out _));
+            if (string.IsNullOrEmpty(txtFechaEvento.Text) || !DateTime.TryParse(txtFechaEvento.Text, out _))
             {
                 lblFechaEventoError.Text = "Ingrese una fecha válida.";
                 lblFechaEventoError.Visible = true;
-                return false;
+                valido = false;
+            }
+            else
+            {
+                lblFechaEventoError.Text = string.Empty;
+                lblFechaEventoError.Visible = false;
             }
 
             // Validar cantidad de entradas
@@ -263,12 +290,19 @@ namespace TPC_Equipo5B
                 lblCantEntradasError.Visible = true;
                 valido = false;
             }
+            else
+            {
+                lblCantEntradasError.Text = string.Empty;
+                lblCantEntradasError.Visible = false;
+            }
+
+            return valido;
 
         }
 
 
-            // Validar imagen de evento
-            private bool validarImagen(TextBox txtImagen, Label lblError)
+        // Validar imagen de evento
+        private bool validarImagen(TextBox txtImagen, Label lblError)
         {
             if (!string.IsNullOrEmpty(txtImagen.Text) && !validarUrl(txtImagen.Text))
             {
@@ -278,7 +312,7 @@ namespace TPC_Equipo5B
             }
 
 
-            return true; 
+            return true;
         }
 
         //validar URL
@@ -287,7 +321,7 @@ namespace TPC_Equipo5B
             Uri uriResult;
             return Uri.TryCreate(url, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
         }
-       
+
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -309,18 +343,18 @@ namespace TPC_Equipo5B
                     lblResultado.CssClass = "alert-success";
                     Response.Redirect("Eventos.aspx", false);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     lblResultado.Text = "Error al eliminar el evento: " + ex.Message;
                     lblResultado.CssClass = "alert-danger";
                 }
             }
 
-        }  
+        }
 
         private void limpiarMensajes()
         {
-            lblNombreEventoError.Visible = false;
+            lblNombreError.Visible = false;
             lblDescripcionError.Visible = false;
             lblLugarError.Visible = false;
             lblFechaEventoError.Visible = false;

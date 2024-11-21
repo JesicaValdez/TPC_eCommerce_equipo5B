@@ -76,25 +76,8 @@ namespace TPC_Equipo5B
         {
             try
             {
-                // Validaciones de campos vacíos
-                if (string.IsNullOrEmpty(txtNombreEntrada.Text))
+                if(!validarForm())
                 {
-                    lblNombreEntradaError.Text = "El nombre de la entrada no puede estar vacío.";
-                    lblNombreEntradaError.ForeColor = System.Drawing.Color.Red;
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtPrecio.Text) || !decimal.TryParse(txtPrecio.Text, out decimal precio) && precio >= 0)
-                {
-                    lblPrecioError.Text = "Debe ingresar un precio válido.";
-                    lblPrecioError.ForeColor = System.Drawing.Color.Red;
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtCantidad.Text) || !int.TryParse(txtCantidad.Text, out int cantidad) && cantidad >= 0)
-                {
-                    lblCantidadError.Text = "Debe ingresar una cantidad válida.";
-                    lblCantidadError.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
 
@@ -131,6 +114,18 @@ namespace TPC_Equipo5B
                     {
                         // Lógica para agregar
                         int idEvento = int.Parse(Request.QueryString["id"]);
+                        Evento evento = eventoNegocio.EventoBuscar(idEvento);
+
+                        int cantidadDisponible = evento.entradasDisponibles;
+                        int cantidadIngresada = int.Parse(txtCantidad.Text);
+
+                        if (cantidadIngresada > cantidadDisponible)
+                        {
+                            lblResultado.Text = "No hay suficientes entradas disponibles.";
+                            lblResultado.ForeColor = System.Drawing.Color.Red;
+                            return;
+                        }
+
                         Precio nuevoPrecio = new Precio
                         {
                             idEvento = idEvento,
@@ -147,19 +142,21 @@ namespace TPC_Equipo5B
                         precioNegocio.agregarPrecio(nuevoPrecio);
                         eventoNegocio.modificarCapacidad(actualizarCapacidad, idEvento);
                         Session.Add("exito", "EL precio se agrego con exito");
+                        Response.Redirect("Exito.aspx");
                     }
                 }
 
-                lblResultado.Text = "Precio guardado correctamente.";
-                lblResultado.ForeColor = System.Drawing.Color.Green;
+                Session.Add("exito", "Precio guardado correctamente.");
                 Response.Redirect("Exito.aspx");
             }
             catch (Exception ex)
             {
                 lblResultado.Text = "Ocurrió un error: " + ex.Message;
                 lblResultado.ForeColor = System.Drawing.Color.Red;
+                lblResultado.Visible = true;
             }
         }
+
 
         private bool validarForm()
         {
@@ -170,33 +167,41 @@ namespace TPC_Equipo5B
             {
                 lblNombreEntradaError.Text = "El nombre de la entrada no puede estar vacío.";
                 lblNombreEntradaError.ForeColor = System.Drawing.Color.Red;
+                lblNombreEntradaError.Visible = true;
+
                 esValido = false;
             }
             else
             {
                 lblNombreEntradaError.Text = string.Empty;
+                lblNombreEntradaError.Visible = false;
             }
 
             if (string.IsNullOrEmpty(txtPrecio.Text) || !decimal.TryParse(txtPrecio.Text, out decimal precio) || precio < 0)
             {
                 lblPrecioError.Text = "Debe ingresar un precio válido.";
                 lblPrecioError.ForeColor = System.Drawing.Color.Red;
+                lblPrecioError.Visible = true;
                 esValido = false;
             }
             else
             {
                 lblPrecioError.Text = string.Empty;
+                lblPrecioError.Visible = false;
             }
 
+            
             if (string.IsNullOrEmpty(txtCantidad.Text) || !int.TryParse(txtCantidad.Text, out int cantidad) || cantidad < 0)
             {
                 lblCantidadError.Text = "Debe ingresar una cantidad válida.";
                 lblCantidadError.ForeColor = System.Drawing.Color.Red;
+                lblCantidadError.Visible = true;
                 esValido = false;
             }
             else
             {
                 lblCantidadError.Text = string.Empty;
+                lblCantidadError.Visible = false;
             }
 
             return esValido;

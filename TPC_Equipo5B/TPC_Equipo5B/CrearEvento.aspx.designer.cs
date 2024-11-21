@@ -51,13 +51,13 @@ namespace TPC_Equipo5B
         protected global::System.Web.UI.WebControls.TextBox txtNombreEvento;
 
         /// <summary>
-        /// Control lblNombreEventoError.
+        /// Control lblNombreError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreEventoError;
+        protected global::System.Web.UI.WebControls.Label lblNombreError;
 
         /// <summary>
         /// Control txtLugarEvento.

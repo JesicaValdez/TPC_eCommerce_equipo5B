@@ -22,7 +22,8 @@ namespace TPC_Equipo5B
             limpiarMensajes();
             if (validarFormulario())
             {
-                MostrarMensaje(lblSuccessMessage, "Mensaje enviado con éxito.");
+                Session.Add("exito", "Mensaje enviado con éxito.");
+                Response.Redirect("Exito.aspx");
                 limpiarCampos();
             }
         }

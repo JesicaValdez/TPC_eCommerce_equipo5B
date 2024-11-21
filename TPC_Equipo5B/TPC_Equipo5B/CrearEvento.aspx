@@ -32,7 +32,7 @@
             <div class="mb-3">
                 <label for="txtNombreEvento" class="form-label" style="color: #F4F4F4;">Nombre:</label>
                 <asp:TextBox runat="server" ID="txtNombreEvento" CssClass="form-control" placeholder="Ingrese nombre del evento" />
-                <asp:Label ID="lblNombreEventoError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+                <asp:Label ID="lblNombreError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
             </div>
 
             <!-- Lugar del Evento -->
