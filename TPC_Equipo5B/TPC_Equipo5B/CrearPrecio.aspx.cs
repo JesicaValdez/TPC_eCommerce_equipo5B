@@ -19,11 +19,17 @@ namespace TPC_Equipo5B
             try
             {
 
+                if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN))
+                {
+                    Session.Add("error", "No tiene nivel admin para acceder a esta pagina.");
+                    Response.Redirect("Error.aspx", false);
+                }
+
                 if (!IsPostBack && Request.QueryString["id"] != null && Request.QueryString["modo"] != null)
                 {
 
                     string modo = Request.QueryString["modo"];
-                    
+
                     if (modo == "agregar")
                     {
                         // Lógica para agregar entrada
@@ -78,7 +84,7 @@ namespace TPC_Equipo5B
                     return;
                 }
 
-                if (string.IsNullOrEmpty(txtPrecio.Text) || !decimal.TryParse(txtPrecio.Text, out decimal precio) && precio >= 0) 
+                if (string.IsNullOrEmpty(txtPrecio.Text) || !decimal.TryParse(txtPrecio.Text, out decimal precio) && precio >= 0)
                 {
                     lblPrecioError.Text = "Debe ingresar un precio válido.";
                     lblPrecioError.ForeColor = System.Drawing.Color.Red;
@@ -134,7 +140,7 @@ namespace TPC_Equipo5B
 
                         Evento actualizarCapacidad = new Evento
                         {
-                           entradasDisponibles = int.Parse(txtCantidad.Text)
+                            entradasDisponibles = int.Parse(txtCantidad.Text)
                         };
 
                         precioNegocio.agregarPrecio(nuevoPrecio);
@@ -155,7 +161,7 @@ namespace TPC_Equipo5B
 
         private bool validarForm()
         {
-            bool esValido = true; 
+            bool esValido = true;
 
             // Validaciones de campos vacíos
             if (string.IsNullOrEmpty(txtNombreEntrada.Text) || !System.Text.RegularExpressions.Regex.IsMatch(txtNombreEntrada.Text, @"^[a-zA-Z\s]+$"))
@@ -165,7 +171,7 @@ namespace TPC_Equipo5B
                 esValido = false;
             }
             else
-                {
+            {
                 lblNombreEntradaError.Text = string.Empty;
             }
 
@@ -194,7 +200,7 @@ namespace TPC_Equipo5B
             return esValido;
         }
 
-       
+
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {

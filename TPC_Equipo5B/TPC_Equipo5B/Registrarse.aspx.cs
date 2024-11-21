@@ -72,6 +72,9 @@ namespace TPC_Equipo5B
                     };
 
                     negocioC.agregarCliente(nuevoCliente, idUsuario);
+
+                    Session.Add("exito", "Ha creado su cuenta con exito.");
+                    Response.Redirect("Exito.aspx", false);
                 }
                 else
                 {

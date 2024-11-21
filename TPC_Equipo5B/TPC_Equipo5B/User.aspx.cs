@@ -89,6 +89,9 @@ namespace TPC_Equipo5B
                         };
 
                         negocio.modificarCliente(clienteModificado, nroCliente);
+
+                        Session.Add("exito", "Ha editado su cuenta con exito.");
+                        Response.Redirect("Exito.aspx", false);
                     }
                     else
                     {
@@ -137,6 +140,10 @@ namespace TPC_Equipo5B
                     };
 
                     negocio.ModificarPass(pasModificado, id);
+
+                    Session.Add("exito", "Ha cambiado su contraseña con exito.");
+                    Response.Redirect("Exito.aspx", false);
+
                 }
                 else
                 {
@@ -146,10 +153,39 @@ namespace TPC_Equipo5B
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
+
+        protected void click_elimarUser(object sender, EventArgs e)
+        {
+            ClienteNegocio negocioCliente = new ClienteNegocio();
+            UsuarioNegocio negocioUser = new UsuarioNegocio();
+
+            try
+            {
+                if (Session["IdUsuario"] != null)
+                {
+                    int id = int.Parse(Session["IdUsuario"].ToString());
+
+                    negocioCliente.BajaCliente(id);
+                    negocioUser.eliminarUser(id);
+
+                    Session.Add("exito", "Ha borrado su cuenta con exito.");
+                    Response.Redirect("Exito.aspx", false);
+                }
+                else
+                {
+                    Session.Add("error", "No se encontró el usuario");
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; 
+            }
+        }
+
         protected void Desconectarse(object sender, EventArgs e)
         {
             if (Session["usuario"] != null)

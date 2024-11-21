@@ -400,7 +400,11 @@ namespace TPC_Equipo5B
         protected void ddlReportes_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedValue = ddlReportes.SelectedValue;
-            
+
+            ResetUserControls();
+            ResetCompraControls();
+            ResetRecaudacionControls();
+
             pnlUsuarioFiltro.Visible = false;
             pnlEventosFiltro.Visible = false;
             pnlComprasFiltro.Visible = false;
@@ -409,16 +413,16 @@ namespace TPC_Equipo5B
             switch (selectedValue)
             {
                 case "1": // Reporte de Cliente
-                    pnlUsuarioFiltro.Visible = true;
+                    pnlUsuarioFiltro.Visible = true;                    
                     break;
                 case "2": // Reporte de Eventos
                     pnlEventosFiltro.Visible = true;
                     break;
                 case "3": // Reporte de Compras
-                    pnlComprasFiltro.Visible = true;
+                    pnlComprasFiltro.Visible = true;                    
                     break;
                 case "4": // Recaudación
-                    pnlRecaudacionFiltro.Visible = true;
+                    pnlRecaudacionFiltro.Visible = true;                    
                     break;
             }
         }
@@ -666,6 +670,44 @@ namespace TPC_Equipo5B
         protected void click_btnReporteR3(object sender, EventArgs e)
         {
 
+        }
+        private void ResetUserControls()
+        {
+            ddlUsuarioFiltro.SelectedValue = "0";
+
+            txtMes.Visible = false;
+            txtAnio.Visible = false;
+            txtCompraCl.Visible = false;
+
+            btn_reporte1.Visible = false;
+            btn_reporte2.Visible = false;
+            btn_reporte3.Visible = false;
+        }
+
+        private void ResetCompraControls()
+        {
+            ddlComprasFiltro.SelectedValue = "0";
+
+            txtDiaC.Visible = false;
+            txtMesC.Visible = false;
+            txtAnioC.Visible = false;
+
+            btn_reporteC1.Visible = false;
+            btn_reporteC2.Visible = false;
+            btn_reporteC3.Visible = false;
+        }
+
+        private void ResetRecaudacionControls()
+        {
+            ddlRecaudacionFiltro.SelectedValue = "0";
+
+            txtDiaR.Visible = false;
+            txtMesR.Visible = false;
+            txtAnioR.Visible = false;
+
+            btn_reporteR1.Visible = false;
+            btn_reporteR2.Visible = false;
+            btn_reporteR3.Visible = false;
         }
         // Método para cerrar sesión
         protected void CerrarSesion(object sender, EventArgs e)

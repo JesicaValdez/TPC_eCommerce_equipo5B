@@ -142,7 +142,7 @@
                         Esta acción es irreversible. Si eliminas tu cuenta, perderás toda la información asociada.
                     </p>
                     <div class="d-grid col-6 mx-auto">
-                        <asp:Button ID="btnEliminarCuenta" runat="server" Text="Eliminar Cuenta" CssClass="btn btn-danger" />
+                        <asp:Button ID="btnEliminarCuenta" runat="server" Text="Eliminar Cuenta" CssClass="btn btn-danger" OnClick="click_elimarUser"/>
                     </div>
                 </asp:View>
 

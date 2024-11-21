@@ -10,7 +10,7 @@ namespace TPC_Equipo5B
     public partial class Exito : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {           
             if (Session["exito"] != null)
             {
                 lblMensaje.Text = Session["exito"].ToString();

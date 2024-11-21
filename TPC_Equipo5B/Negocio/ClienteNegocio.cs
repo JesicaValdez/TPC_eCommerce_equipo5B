@@ -158,13 +158,13 @@ namespace Negocio
             }
         }
 
-        public void eliminarCliente(int id)
+        public void BajaCliente(int id)
         {
             AccesoDB datos = new AccesoDB();
 
             try
             {
-                datos.setearConsulta("DELETE FROM Clientes WHERE IdCliente = @id");
+                datos.setearConsulta("UPDATE Clientes set Estado = 0 WHERE IDUsuario = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
             }

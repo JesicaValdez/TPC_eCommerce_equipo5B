@@ -19,6 +19,13 @@ namespace TPC_Equipo5B
         public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "No tiene nivel admin para acceder a esta pagina.");
+                Response.Redirect("Error.aspx", false);
+            }
+
+
             ConfirmaEliminacion = false;
 
             try

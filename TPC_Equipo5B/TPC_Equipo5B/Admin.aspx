@@ -285,7 +285,7 @@
                             <!-- EVENTO -->
                             <asp:Panel ID="pnlEventosFiltro" runat="server" Visible="False" CssClass="mb-3">
                                 <label for="filtroEvento">Seleccione el filtro para eventos:</label>
-                                <asp:DropDownList ID="ddlEventosFiltro" runat="server" CssClass="form-select">
+                                <asp:DropDownList ID="ddlEventosFiltro" runat="server" CssClass="form-select" AutoPostBack="true">
                                     <asp:ListItem Text="Ranking por evento" Value="1" />
                                 </asp:DropDownList>
                             </asp:Panel>
@@ -341,7 +341,7 @@
                                     <asp:ListItem Text="Seleccione un reporte" Value="0" />
                                     <asp:ListItem Text="Dia" Value="1" />
                                     <asp:ListItem Text="Mes" Value="2" />
-                                    <asp:ListItem Text="Año" Value="2" />
+                                    <asp:ListItem Text="Año" Value="3" />
                                 </asp:DropDownList>
                             </asp:Panel>
 
