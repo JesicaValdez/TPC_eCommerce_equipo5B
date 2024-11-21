@@ -70,7 +70,7 @@ CREATE TABLE Compra (
     TipoEntrada VARCHAR(25) NOT NULL,
 	CantidadEntradas INT NOT NULL,
     FechaCompra DATETIME DEFAULT GETDATE(),
-    Estado NVARCHAR(50),
+    Estado BIT DEFAULT 1,
 	MontoTotal DECIMAL
     FOREIGN KEY (IdCliente) REFERENCES Clientes(IdCliente),
 	FOREIGN KEY (IdEvento) REFERENCES Eventos(Id)
