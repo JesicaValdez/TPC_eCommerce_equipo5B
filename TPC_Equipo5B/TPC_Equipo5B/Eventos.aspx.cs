@@ -151,6 +151,7 @@ namespace TPC_Equipo5B
                 if(b == false)
                 {
                     eventoNegocio.agregarFavorito((int)Session["IdUsuario"], Int32.Parse(btnfav.CommandArgument));
+                    Response.Redirect("Favoritos.aspx");
                 }
                 
             }

@@ -39,6 +39,9 @@
                             <label for="txtTarjeta" class="form-label">Numero de la tarjeta</label>
                             <asp:TextBox runat="server" ID="txtTarjeta" CssClass="form-control" />
                             <asp:RequiredFieldValidator ErrorMessage="Campo obligatorio" style="color:crimson" ControlToValidate="txtTarjeta" runat="server" />
+                            <div>
+                                <asp:Label ID="lblTarjeta" runat="server" Text="Ingrese los 16 digitos de la tarjeta" Visible="false" ForeColor="Red"></asp:Label>
+                            </div>
                             
                         </div>
 
@@ -71,6 +74,9 @@
                                 <label for="txtDNI" class="form-label">DNI del titular</label>
                                 <asp:TextBox runat="server" ID="txtDNI" CssClass="form-control" />
                                 <asp:RequiredFieldValidator ErrorMessage="Campo obligatorio" style="color:crimson" ControlToValidate="txtDNI" runat="server" />
+                                <div>
+                                    <asp:Label ID="lblDNI" runat="server" Text="Ingrese un DNI de 8 dígitos" Visible="false" ForeColor="Red"></asp:Label>
+                                </div>
                             </div>
                         </div>
                     </div>

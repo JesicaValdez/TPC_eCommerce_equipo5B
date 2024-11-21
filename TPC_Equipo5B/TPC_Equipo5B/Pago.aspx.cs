@@ -28,6 +28,10 @@ namespace TPC_Equipo5B
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            if (!validarRegistro())
+            {
+                return;
+            }
             EventoNegocio eventoNegocio = new EventoNegocio();
             PrecioNegocio precioNegocio = new PrecioNegocio();
             CompraNegocio compraNegocio = new CompraNegocio();
@@ -77,6 +81,44 @@ namespace TPC_Equipo5B
                 ids = ids + " - " + l[i].ToString();
             }
             return ids;
+        }
+
+        private bool dniValido()
+        {
+            
+            if (txtDNI.Text.Length != 8 || !txtDNI.Text.All(char.IsDigit))
+            {
+                lblDNI.Visible = true;
+                return false;
+            }
+            return true;
+        }
+
+        private bool tarjetaValido()
+        {
+
+            if (txtTarjeta.Text.Length != 16 || !txtDNI.Text.All(char.IsDigit))
+            {
+                lblTarjeta.Visible = true;
+                return false;
+            }
+            return true;
+        }
+
+        private bool validarRegistro()
+        {
+            bool valido = true;
+
+            if (!dniValido())
+            {
+                valido = false;
+            }
+            if (!tarjetaValido())
+            {
+                valido = false;
+            }
+
+            return valido;
         }
     }
 }

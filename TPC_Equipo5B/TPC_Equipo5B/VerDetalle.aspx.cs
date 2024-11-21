@@ -43,51 +43,69 @@ namespace TPC_Equipo5B
 
             bool b = false;
             List<List<int>> carritoid = new List<List<int>>();
+            PrecioNegocio precioNegocio = new PrecioNegocio();
+            Precio p = precioNegocio.buscarPrecio(Convert.ToInt32(ddlEntradas.SelectedValue));
 
             if (ddlEntradas.SelectedValue != "0")
             {
-                if ((List<List<int>>)Session["carritoid"] == null)
+                if (p.cantidadEntradas - Int32.Parse(DropDownList1.SelectedValue) >= 0)
                 {
-                    List<int> lista = new List<int>();
-                    lista.Add((int)Session["id"]);
-                    lista.Add(Int32.Parse(DropDownList1.SelectedValue));
-                    int idprecio = Convert.ToInt32(ddlEntradas.SelectedValue);
-                    lista.Add(idprecio);
-                    carritoid.Add(lista);
-
-                    Session["carritoid"] = carritoid;
-                    Session.Add("exito", "Se agrego con exito al carrito");
-                    Response.Redirect("Exito.aspx");
-                    //Response.Write("<script>alert(' Se agrego al exitosamente al carrito ');</script>");
-
-                }
-                else
-                {
-
-                    carritoid = (List<List<int>>)Session["carritoid"];
-                    foreach (List<int> l in carritoid)
+                    if ((List<List<int>>)Session["carritoid"] == null)
                     {
-                        if (l[0] == (int)Session["id"] && l[2] == Convert.ToInt32(ddlEntradas.SelectedValue))
-                        {
-                            l[1] += Int32.Parse(DropDownList1.SelectedValue);
-                            b = true;
-                        }
-                    }
-                    if (b == false)
-                    {
-
                         List<int> lista = new List<int>();
                         lista.Add((int)Session["id"]);
                         lista.Add(Int32.Parse(DropDownList1.SelectedValue));
-                        lista.Add(Int32.Parse(ddlEntradas.SelectedValue));
+                        int idprecio = Convert.ToInt32(ddlEntradas.SelectedValue);
+                        lista.Add(idprecio);
                         carritoid.Add(lista);
+
+                        Session["carritoid"] = carritoid;
+                        Session.Add("exito", "Se agrego con exito al carrito");
+                        Response.Redirect("Exito.aspx");
+                        //Response.Write("<script>alert(' Se agrego al exitosamente al carrito ');</script>");
+
                     }
+                    else
+                    {
 
-                    Session["carritoid"] = carritoid;
-                    Session.Add("exito", "Se agrego con exito al carrito");
-                    Response.Redirect("Exito.aspx");
-                    //Response.Write("<script>alert(' Se agrego exitosamente al carrito ');</script>");
+                        carritoid = (List<List<int>>)Session["carritoid"];
+                        foreach (List<int> l in carritoid)
+                        {
+                            if (l[0] == (int)Session["id"] && l[2] == Convert.ToInt32(ddlEntradas.SelectedValue))
+                            {
+                                if (p.cantidadEntradas - (l[1] + Int32.Parse(DropDownList1.SelectedValue)) >= 0)
+                                {
+                                    l[1] += Int32.Parse(DropDownList1.SelectedValue);
+                                    b = true;
+                                }
+                                else
+                                {
+                                    Session.Add("error", "No se pudo agregar al carrito, no quedan suficientes entradas de este tipo para este evento");
+                                    Response.Redirect("Error.aspx");
+                                }
+                            }
+                        }
+                        if (b == false)
+                        {
 
+                            List<int> lista = new List<int>();
+                            lista.Add((int)Session["id"]);
+                            lista.Add(Int32.Parse(DropDownList1.SelectedValue));
+                            lista.Add(Int32.Parse(ddlEntradas.SelectedValue));
+                            carritoid.Add(lista);
+                        }
+
+                        Session["carritoid"] = carritoid;
+                        Session.Add("exito", "Se agrego con exito al carrito");
+                        Response.Redirect("Exito.aspx");
+                        //Response.Write("<script>alert(' Se agrego exitosamente al carrito ');</script>");
+
+                    }
+                }
+                else
+                {
+                    Session.Add("error", "No se pudo agregar al carrito, no quedan suficientes entradas de este tipo para este evento");
+                    Response.Redirect("Error.aspx");
                 }
             }
         }

@@ -15,14 +15,6 @@ namespace TPC_Equipo5B
         {
             if (Session["usuario"] == null)
             {
-
-                EventoNegocio eventoNegocio = new EventoNegocio();
-                List<int> favs = eventoNegocio.listarIdFavoritos((int)Session["IdUsuario"]);
-                List<Evento> favoritos = eventoNegocio.listarFavoritos(favs);
-                rptArticulos.DataSource = favoritos;
-                rptArticulos.DataBind();
-
-
                 Session.Add("error", "Debe iniciar sesion para ver sus eventos favoritos");
                 Response.Redirect("Error.aspx");
             }
