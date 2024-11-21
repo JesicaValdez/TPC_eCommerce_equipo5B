@@ -15,17 +15,26 @@ namespace TPC_Equipo5B
         {
             if (Session["usuario"] == null)
             {
-                Session.Add("error", "Debes logearte para poder entrar a favorito.");
-                Response.Redirect("Error.aspx", false);
-                return;
+
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                List<int> favs = eventoNegocio.listarIdFavoritos((int)Session["IdUsuario"]);
+                List<Evento> favoritos = eventoNegocio.listarFavoritos(favs);
+                rptArticulos.DataSource = favoritos;
+                rptArticulos.DataBind();
+
+
+                Session.Add("error", "Debe iniciar sesion para ver sus eventos favoritos");
+                Response.Redirect("Error.aspx");
+            }
+            else
+            {
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                List<int> favs = eventoNegocio.listarIdFavoritos((int)Session["IdUsuario"]);
+                List<Evento> favoritos = eventoNegocio.listarFavoritos(favs);
+                rptArticulos.DataSource = favoritos;
+                rptArticulos.DataBind();
             }
 
-            EventoNegocio eventoNegocio = new EventoNegocio();
-            List<int> favs = eventoNegocio.listarIdFavoritos((int)Session["IdUsuario"]);
-            List<Evento> favoritos = eventoNegocio.listarFavoritos(favs);
-            rptArticulos.DataSource = favoritos;
-            rptArticulos.DataBind();
-            
         }
 
         protected void Button2_Click(object sender, EventArgs e)

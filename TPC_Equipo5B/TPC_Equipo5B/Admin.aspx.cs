@@ -249,6 +249,7 @@ namespace TPC_Equipo5B
                     ddlEventos.DataTextField = "nombre";
                     ddlEventos.DataValueField = "id";
                     ddlEventos.DataBind();
+                    ddlEventos.Items.Insert(0, new ListItem("Eventos", "0"));
                     MostrarMensaje("Seleccione un evento para ver entradas y precios disponible.", false);
                 }
                 else

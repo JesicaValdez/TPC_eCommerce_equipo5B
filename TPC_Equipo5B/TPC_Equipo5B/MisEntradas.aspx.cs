@@ -101,10 +101,13 @@ namespace TPC_Equipo5B
             decimal sub = subtotal();
             decimal cds = subtotal() / 10;
             decimal total = sub + cds;
-            Session.Add("subtotal", sub);
-            Session.Add("costoservicio", cds);
-            Session.Add("total", total);
-            Response.Redirect("Pago.aspx");
+            if (sub != 0)
+            {
+                Session.Add("subtotal", sub);
+                Session.Add("costoservicio", cds);
+                Session.Add("total", total);
+                Response.Redirect("Pago.aspx");
+            }
         }
 
     }

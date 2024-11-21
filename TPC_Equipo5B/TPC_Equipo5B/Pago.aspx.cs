@@ -28,27 +28,55 @@ namespace TPC_Equipo5B
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            EventoNegocio eventoNegocio = new EventoNegocio();
+            PrecioNegocio precioNegocio = new PrecioNegocio();
+            CompraNegocio compraNegocio = new CompraNegocio();
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            EntradaNegocio entradaNegocio = new EntradaNegocio();
+            EmailService emailService = new EmailService();
             if (CheckBox1.Checked)
             {
-                EventoNegocio eventoNegocio = new EventoNegocio();
-                PrecioNegocio precioNegocio = new PrecioNegocio();
-                CompraNegocio compraNegocio = new CompraNegocio();
-                ClienteNegocio clienteNegocio = new ClienteNegocio();
-                EntradaNegocio entradaNegocio = new EntradaNegocio();
-                foreach (List<int> l in (List<List<int>>)Session["carritoid"])
+                if ((List<List<int>>)Session["carritoid"] != null)
                 {
-                    int idcliente = clienteNegocio.obtenerIdClientePorUsuario((int)Session["IdUsuario"]);
-                    Evento evt = eventoNegocio.buscarEvento(l[0]);
-                    Precio prc = precioNegocio.buscarPrecio(l[2]);
-                    int idcompra = compraNegocio.cargarCompra(evt.id, idcliente, prc.tipoEntrada, l[1], prc.precio * l[1] * 110 / 100);
-                    for (int i = 0; i < l[1]; i++)
+                    foreach (List<int> l in (List<List<int>>)Session["carritoid"])
                     {
-                        entradaNegocio.cargarEntrada(evt.id, prc.tipoEntrada, prc.precio, idcompra);
+                        int idcliente = clienteNegocio.obtenerIdClientePorUsuario((int)Session["IdUsuario"]);
+                        Evento evt = eventoNegocio.buscarEvento(l[0]);
+                        Precio prc = precioNegocio.buscarPrecio(l[2]);
+                        decimal total = prc.precio * l[1] * 110 / 100;
+                        int idcompra = compraNegocio.cargarCompra(evt.id, idcliente, prc.tipoEntrada, l[1], total);
+                        List<int> lista = new List<int>();
+                        for (int i = 0; i < l[1]; i++)
+                        {
+                            int id = entradaNegocio.cargarEntrada(evt.id, prc.tipoEntrada, prc.precio, idcompra);
+                            lista.Add(id);
+                        }
+                        precioNegocio.descontarEntradas(l[2], l[1]);
+                        string ids = idsEntradas(lista);
+                        string cuerpo = "Felicidades! \r\nSe concreto la compra de tus entradas para " + evt.nombre + "\r\nEl id de tu compra es: " + idcompra + "\r\nLos id de tus entradas son: " + ids + "\r\nPrecio total: " + total.ToString() + "\r\nFecha: " + evt.fecha.ToString();
+                        emailService.armarCorreo((string)Session["email"], "Compra Exitosa", cuerpo);
+                        emailService.enviarEmail();
+                        
+                        //Response.Write("<script>alert(' ¡LA COMPRA SE REALIZO CON EXITO! ');</script>");
                     }
-                    precioNegocio.descontarEntradas(l[2], l[1]);
-                    Response.Write("<script>alert(' ¡LA COMPRA SE REALIZO CON EXITO! ');</script>");
+                    Session.Add("exito", "¡LA COMPRA SE REALIZO CON EXITO!");
+                    Response.Redirect("Exito.aspx");
                 }
             }
+            else
+            {
+                lblTerminos.Visible = true;
+            }
+        }
+
+        public string idsEntradas(List<int> l)
+        {
+            string ids = "";
+            for(int i = 0; i < l.Count(); i++)
+            {
+                ids = ids + " - " + l[i].ToString();
+            }
+            return ids;
         }
     }
 }

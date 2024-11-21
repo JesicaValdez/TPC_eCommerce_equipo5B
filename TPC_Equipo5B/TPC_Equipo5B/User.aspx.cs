@@ -328,6 +328,19 @@ namespace TPC_Equipo5B
         protected void MostrarMisTikets(object sender, EventArgs e)
         {
             MultiView1.ActiveViewIndex = 0; // Mostrar vista de Mis Tikets
+            EntradaNegocio entradaNegocio = new EntradaNegocio();
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            try
+            {
+                int idcliente = clienteNegocio.obtenerIdClientePorUsuario((int)Session["IdUsuario"]);
+                List<Entrada> listaEntradas = entradaNegocio.entradasporCliente(idcliente);
+                rptEntradas.DataSource = listaEntradas;
+                rptEntradas.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
         }
 
         protected void MostrarEditarCuenta(object sender, EventArgs e)

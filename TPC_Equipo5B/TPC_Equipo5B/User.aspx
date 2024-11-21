@@ -60,6 +60,36 @@
                 <asp:View ID="ViewMisTikets" runat="server">
                     <h3 style="color: #F4F4F4; margin-top: 10px;">Mis Tikets</h3>
                     <p>Aquí puedes ver tus tikets.</p>
+                        <div class="mx-auto">
+                            <asp:Repeater ID="rptEntradas" runat="server">
+                                <ItemTemplate>
+                                    <div class="col">
+                                        <div class="card-group">
+                                            <div class="card mb-3 mx-auto" style="max-width: 540px;">
+                                                <div class="row g-0">
+                                                <div class="col-md-4">
+                                                    <img src="<%# Eval("evento.imagenes[0].Url") %>" class="img-fluid rounded-start" alt="...">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                    <p class="card-text"><%# Eval("evento.codigo") %></p>
+                                                    <h5 class="card-title"><%# Eval("evento.nombre") %></h5>
+                                                    
+                                                    <p class="card-text"><%# Eval("evento.fecha", "{0:dddd, dd 'de' MMMM 'de' yyyy  hh:mm}") %></p>
+                                                    <p class="card-text">Entrada: <%# Eval("precio.tipoEntrada") %></p>
+                                                    <p class="card-text">Precio: <%# Eval("precio.precio") %></p>
+                                                    
+                                                    
+                                                    
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
                 </asp:View>
 
                 <!-- Vista de Editar Cuenta -->

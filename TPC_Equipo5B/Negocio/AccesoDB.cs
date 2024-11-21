@@ -20,7 +20,6 @@ namespace Negocio
         public AccesoDB()
         {
             conexion = new SqlConnection("Server=localhost; Database=ENTRADAS_DB; User Id=sa; Password=Qqmelo#13;");
-
             comando = new SqlCommand();
         }
 
