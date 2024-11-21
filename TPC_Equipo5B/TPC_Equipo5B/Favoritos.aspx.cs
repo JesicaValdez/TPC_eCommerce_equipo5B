@@ -13,13 +13,19 @@ namespace TPC_Equipo5B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            EventoNegocio eventoNegocio = new EventoNegocio();
-            List<int> favs = eventoNegocio.listarIdFavoritos((int)Session["IdUsuario"]);
-            List<Evento> favoritos = eventoNegocio.listarFavoritos(favs);
-            rptArticulos.DataSource = favoritos;
-            rptArticulos.DataBind();
-            
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debe iniciar sesion para ver sus eventos favoritos");
+                Response.Redirect("Error.aspx");
+            }
+            else
+            {
+                EventoNegocio eventoNegocio = new EventoNegocio();
+                List<int> favs = eventoNegocio.listarIdFavoritos((int)Session["IdUsuario"]);
+                List<Evento> favoritos = eventoNegocio.listarFavoritos(favs);
+                rptArticulos.DataSource = favoritos;
+                rptArticulos.DataBind();
+            }
         }
 
         protected void Button2_Click(object sender, EventArgs e)

@@ -79,7 +79,7 @@
                         <!-- Vista de Clientes -->
                         <asp:View ID="View1" runat="server">
                             <h3 class="info-title">Lista de Clientes</h3>
-                            <asp:TextBox ID="txtClientes" runat="server" Placeholder="Buscar Cliente..." CssClass="form-control mb-2 text-style"></asp:TextBox>
+                            <asp:TextBox ID="txtClientes" runat="server" Placeholder="Buscar Cliente por ID..." CssClass="form-control mb-2 text-style"></asp:TextBox>
                             <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" OnClick="btnBuscarCliente_Click" CssClass="btn btn-secondary mb-3 explore-btn" />
                             <asp:GridView ID="dgvClientes" runat="server" AutoGenerateColumns="False" DataKeyNames="IdCliente" CssClass="table table-dark table-striped category-card">
                                 <Columns>

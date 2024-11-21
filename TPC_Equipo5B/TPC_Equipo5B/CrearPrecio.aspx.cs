@@ -119,6 +119,7 @@ namespace TPC_Equipo5B
 
                         precioNegocio.modificarPrecio(precioMod, idPrecio);
                         eventoNegocio.modificarCapacidad(capacidadMod, evento);
+                        Session.Add("exito", "EL precio se modifico con exito");
                     }
                     else if (modo == "agregar")
                     {
@@ -139,12 +140,13 @@ namespace TPC_Equipo5B
 
                         precioNegocio.agregarPrecio(nuevoPrecio);
                         eventoNegocio.modificarCapacidad(actualizarCapacidad, idEvento);
+                        Session.Add("exito", "EL precio se agrego con exito");
                     }
                 }
 
                 lblResultado.Text = "Precio guardado correctamente.";
                 lblResultado.ForeColor = System.Drawing.Color.Green;
-                Response.Redirect("Admin.aspx");
+                Response.Redirect("Exito.aspx");
             }
             catch (Exception ex)
             {

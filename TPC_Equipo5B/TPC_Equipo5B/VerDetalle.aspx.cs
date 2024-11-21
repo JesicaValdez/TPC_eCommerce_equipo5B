@@ -56,7 +56,9 @@ namespace TPC_Equipo5B
                     carritoid.Add(lista);
 
                     Session["carritoid"] = carritoid;
-                    Response.Write("<script>alert(' Se agrego al exitosamente al carrito ');</script>");
+                    Session.Add("exito", "Se agrego con exito al carrito");
+                    Response.Redirect("Exito.aspx");
+                    //Response.Write("<script>alert(' Se agrego al exitosamente al carrito ');</script>");
 
                 }
                 else
@@ -82,7 +84,9 @@ namespace TPC_Equipo5B
                     }
 
                     Session["carritoid"] = carritoid;
-                    Response.Write("<script>alert(' Se agrego exitosamente al carrito ');</script>");
+                    Session.Add("exito", "Se agrego con exito al carrito");
+                    Response.Redirect("Exito.aspx");
+                    //Response.Write("<script>alert(' Se agrego exitosamente al carrito ');</script>");
 
                 }
             }

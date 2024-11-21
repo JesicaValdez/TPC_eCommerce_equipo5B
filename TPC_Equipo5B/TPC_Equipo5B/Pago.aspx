@@ -37,34 +37,40 @@
                         </div>
                         <div class="mb-3">
                             <label for="txtTarjeta" class="form-label">Numero de la tarjeta</label>
-                            <asp:TextBox runat="server" ID="txtdni" CssClass="form-control" />
-                            <asp:Label ID="lblResultado" runat="server"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtTarjeta" CssClass="form-control" />
+                            <asp:RequiredFieldValidator ErrorMessage="Campo obligatorio" style="color:crimson" ControlToValidate="txtTarjeta" runat="server" />
+                            
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-6">
                                 <label for="txtCodigo" class="form-label">Codigo de seguridad</label>
-                                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control" />
+                                <asp:RequiredFieldValidator ErrorMessage="Campo obligatorio" style="color:crimson" ControlToValidate="txtCodigo" runat="server" />
                             </div>
 
                             <div class="col-3">
                                 <label for="txtMes" class="form-label">Mes de vencimiento</label>
-                                <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="txtMes" CssClass="form-control" />
+                                <asp:RequiredFieldValidator ErrorMessage="Campo obligatorio" style="color:crimson" ControlToValidate="txtMes" runat="server" />
                             </div>
                             <div class="col-3">
                                 <label for="txtAño" class="form-label">Año de vencimiento</label>
-                                <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="txtAño" CssClass="form-control" />
+                                <asp:RequiredFieldValidator ErrorMessage="Campo obligatorio" style="color:crimson" ControlToValidate="txtAño" runat="server" />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-8">
                                 <label for="txtTitular" class="form-label">Nombre completo del titular</label>
-                                <asp:TextBox runat="server" ID="TextBox2" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="txtTitular" CssClass="form-control" />
+                                <asp:RequiredFieldValidator ErrorMessage="Campo obligatorio" style="color:crimson" ControlToValidate="txtTitular" runat="server" />
                             </div>
 
                             <div class="col-4">
                                 <label for="txtDNI" class="form-label">DNI del titular</label>
-                                <asp:TextBox runat="server" ID="TextBox3" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="txtDNI" CssClass="form-control" />
+                                <asp:RequiredFieldValidator ErrorMessage="Campo obligatorio" style="color:crimson" ControlToValidate="txtDNI" runat="server" />
                             </div>
                         </div>
                     </div>
@@ -85,7 +91,9 @@
         <div style="text-align: center; padding: 50px">
             <div>
                 <asp:CheckBox ID="CheckBox1" runat="server" Text="Acepto los terminios y condiciones de compra de TuTicket" />
+                
             </div>
+            <asp:Label runat="server" ID="lblTerminos" Text="Debe aceptar los terminos y condiciones para continuar" Visible="false" ForeColor="Red"/>
             <div>
                 <asp:Button ID="Button1" class="btn btn-success btn-lg" runat="server" Text="Confirmar compra" OnClick="Button1_Click" />
             </div>
