@@ -9,6 +9,8 @@
 ## 📋 Descripción del Proyecto
 Este es el Trabajo Final desarrollado para la materia **Programación 3**. Consiste en una plataforma de E-Commerce completa dedicada a la preventa y venta de tickets para eventos, desarrollada bajo una arquitectura de capas en **C# y .NET Framework**.
 
+<img width="477" height="671" alt="image" src="https://github.com/user-attachments/assets/10df3b88-cc0a-4f2a-a8ca-ca6c2f34d7ec" />
+
 ## 🚀 Funcionalidades Principales
 - **Gestión de Eventos:** CRUD completo para administradores (creación, edición y baja de tickets).
 - **Carrito de Compras:** Sistema de selección de entradas con persistencia de datos.
